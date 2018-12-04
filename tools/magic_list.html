@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<style type="text/css">
+    .magic_list {
+        display: table;
+    }
+    
+    .list_header div {
+        display: table-cell;
+        width: 60px;
+        text-align: center;
+    }
+    
+    .list_data div {
+        display: table-cell;
+        width: 60px;
+        text-align: center;
+    }
+</style>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script>
+$(function(){
+    jobs = {
+        whitemage: {
+            stone:  ['#action__01', '#action__07', '#action__18', '#action__23'],
+            aero:   ['#action__03', '#action__14', '#action__20'],
+            cure:   ['#action__02', '#action__09', '#action__12'],
+            medica: ['#action__04', '#action__15']
+        }
+    };
+    
+    for (var key in jobs) {
+        getJobActions(key, jobs[key]);
+    }
+
+    function getJobActions(job_name, actions) {
+        $.ajax({
+            url: '/php/ldst_access.php?url=https://jp.finalfantasyxiv.com/jobguide/'+job_name,
+            type: 'GET',
+            dataType: 'json',
+        })
+        .then(
+            function(res){
+                //alert('success!');
+                $content = $(res.data);
+                for (var key in actions) {
+                    $('.magic_list').append('<div id="actions__'+key+'" class="list_data"></div>');
+                    for (var i = 0; i < actions[key].length; i++) {
+                        var $action = $content.find(actions[key][i]);
+                        var action_image = $action.find('.job__skill_icon').html();
+                        $('#actions__'+key).append('<div>'+action_image+'</div>');
+                    }
+                }
+            },
+            function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('error!');
+                console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+                console.log("textStatus: " + textStatus);
+                console.log("errorThrown: " + errorThrown.message);
+            }
+        );
+    }
+});
+</script>
+</head>
+<body>
+<div class="magic_list">
+    <div class="list_header">
+        <div>I</div>
+        <div>II</div>
+        <div>III</div>
+        <div>IV</div>
+    </div>
+</div>
+</body>
+</html>
