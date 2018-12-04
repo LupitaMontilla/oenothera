@@ -23,7 +23,6 @@ $(function() {
 				url: '/php/ldst_access.php?url='+LODESTONE_URL+'/freecompany/'+freecompany_id+'/member/',
 				type: 'GET',
 				dataType: 'json',
-				async: true
 			})
 			.then(
 				function(res){
