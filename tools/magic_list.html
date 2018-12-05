@@ -8,12 +8,18 @@
     
     .list_header div {
         display: table-cell;
-        width: 60px;
-        text-align: center;
     }
     
     .list_data div {
         display: table-cell;
+    }
+    
+    .magic_name {
+        vertical-align: middle;
+        width: 100px;
+    }
+    
+    .level1, .level2, .level3, .level4 {
         width: 60px;
         text-align: center;
     }
@@ -23,10 +29,34 @@
 $(function(){
     jobs = {
         whitemage: {
-            stone:  ['#action__01', '#action__07', '#action__18', '#action__23'],
-            aero:   ['#action__03', '#action__14', '#action__20'],
-            cure:   ['#action__02', '#action__09', '#action__12'],
-            medica: ['#action__04', '#action__15']
+            Stone:  ['#action__01', '#action__07', '#action__18', '#action__23'],
+            Aero:   ['#action__03', '#action__14', '#action__20'],
+            Cure:   ['#action__02', '#action__09', '#action__12'],
+            Medica: ['#action__04', '#action__15']
+        },
+        scholar: {
+            Ruin:   ['#action__01', '#action__14'],
+            Bio:    ['#action__02', '#action__10'],
+            Miasma: ['#action__07', '#action__16_02'],
+            Broil:  ['#action__20', '#action__25']
+        },
+        astrologian: {
+            Malefic: ['#action__01', '#action__21', '#action__27'],
+            Benefic: ['#action__02', '#action__08'],
+            Combust: ['#action__03', '#action__17']
+        },
+        blackmage: {
+            Blizzard: ['#action__01', '#action__06', '#action__14', '#action__21'],
+            Fire:     ['#action__02', '#action__08', '#action__12', '#action__22'],
+            Thunder:  ['#action__04', '#action__09', '#action__15', '#action__24']
+        },
+        summoner: {
+            Ruin:   ['#action__01', '#action__14', '#action__20', '#action__24'],
+            Bio:    ['#action__02', '#action__10', '#action__27'],
+            Miasma: ['#action__07', '', '#action__28']
+        },
+        redmage: {
+            Jolt: ['#action__02', '#action__20']
         }
     };
     
@@ -45,11 +75,18 @@ $(function(){
                 //alert('success!');
                 $content = $(res.data);
                 for (var key in actions) {
-                    $('.magic_list').append('<div id="actions__'+key+'" class="list_data"></div>');
+                    if (!($('#actions__'+key).length)) {
+                        $('.magic_list').append('<div id="actions__'+key+'" class="list_data"></div>');
+                        $('#actions__'+key).append('<div class="magic_name">'+key+'</div>');
+                        $('#actions__'+key).append('<div class="level1">');
+                        $('#actions__'+key).append('<div class="level2">');
+                        $('#actions__'+key).append('<div class="level3">');
+                        $('#actions__'+key).append('<div class="level4">');
+                    }
                     for (var i = 0; i < actions[key].length; i++) {
                         var $action = $content.find(actions[key][i]);
                         var action_image = $action.find('.job__skill_icon').html();
-                        $('#actions__'+key).append('<div>'+action_image+'</div>');
+                        $('#actions__'+key).find('.level'+(i+1)+':empty').append(action_image);
                     }
                 }
             },
@@ -67,10 +104,11 @@ $(function(){
 <body>
 <div class="magic_list">
     <div class="list_header">
-        <div>I</div>
-        <div>II</div>
-        <div>III</div>
-        <div>IV</div>
+        <div class="magic_name"></div>
+        <div class="level1">I</div>
+        <div class="level2">II</div>
+        <div class="level3">III</div>
+        <div class="level4">IV</div>
     </div>
 </div>
 </body>
