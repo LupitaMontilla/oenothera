@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+.job_info {
+    display: none;
+}
+
+.status li .label {
+    display: inline-block;
+    width: 100px;
+}
+</style>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script>
+const LODESTONE_URL = 'https://na.finalfantasyxiv.com/lodestone';
+const LODESTONE_ITEMICON_URL = 'https://img.finalfantasyxiv.com/lds/pc/global/images/itemicon';
+
+$(function(){
+    $('#search').on('click', function(){
+        var character_id = $('#character_id').val();
+        //alert(character_id);
+        addCharaData(character_id);
+    });
+});
+
+function addCharaData(chara_id) {
+	$.ajax({
+		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+chara_id,
+		type: 'GET',
+		dataType: 'json'
+	})
+	.then(
+		function(res){
+			$content = $(res.data);
+			
+			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face"></li><li id="chara_name_'+chara_id+'" class="chara_name"></li>');
+			
+			var user_face_image = $content.find('.frame__chara__face').html();
+			var user_name_text  = $content.find('.frame__chara__name').text();
+			
+			$('#chara_face_'+chara_id).append(user_face_image);
+			$('#chara_name_'+chara_id).append(user_name_text);
+            
+            // STR, DEX, VIT, INT, MIN, ???
+            var job_list = {
+                'Gladiator':        [0,0,1,0,0,0],
+                'Paladin':          [0,0,1,1,0,0],
+                'Marauder':         [0,0,1,0,0,0],
+                'Warrior':          [1,0,1,0,0,0],
+                'Dark Knight':      [0,0,1,1,0,0],
+                'Pugilist':         [1,0,0,0,0,0],
+                'Monk':             [1,1,0,0,0,0],
+                'Lancer':           [1,0,0,0,0,0],
+                'Dragoon':          [1,0,1,0,0,0],
+                'Rogue':            [1,0,0,0,0,0],
+                'Ninja':            [1,1,0,0,0,0],
+                'Samurai':          [2,0,0,0,0,0],
+                'Conjurer':         [0,0,0,0,1,0],
+                'White Mage':       [0,0,0,0,2,0],
+                'Scholar':          [0,0,0,1,1,0],
+                'Astrologian':      [0,0,0,0,2,0],
+                'Archer':           [0,1,0,0,0,0],
+                'Bard':             [0,1,0,0,1,0],
+                'Machinist':        [1,1,0,0,0,0],
+                'Thaumaturge':      [0,0,0,1,0,0],
+                'Black Mage':       [0,0,0,2,0,0],
+                'Arcanist':         [0,0,0,1,0,0],
+                'Summoner':         [0,0,0,2,0,0],
+                'Red Mage':         [0,0,0,1,1,0],
+                'Carpenter':        [0,0,0,0,0,1],
+                'Blacksmith':       [0,0,0,0,0,1],
+                'Armorer':          [0,0,0,0,0,1],
+                'Goldsmith':        [0,0,0,0,0,1],
+                'Leatherworker':    [0,0,0,0,0,1],
+                'Weaver':           [0,0,0,0,0,1],
+                'Alchemist':        [0,0,0,0,0,1],
+                'Culinarian':       [0,0,0,0,0,1],
+                'Miner':            [0,0,0,0,0,1],
+                'Botanist':         [0,0,0,0,0,1],
+                'Fisher':           [0,0,0,0,0,1]
+            };
+            
+            /*
+            var status = {
+                'STR': 0,
+                'DEX': 0,
+                'VIT': 0,
+                'INT': 0,
+                'MND': 0,
+                '-': 0
+            }
+            */
+            var status = {
+                'ちから': 0,
+                'すばやさ': 0,
+                'たいりょく': 0,
+                'ちせい': 0,
+                'せいしん': 0,
+                'うん': 0
+            }
+            
+            $('.list').append('<ul class="job_info">');
+            $content.find('.character__job__level').each(function(index){
+                job_name = $(this).siblings('.character__job__name').text();
+                job_level = $(this).text();
+                $('.job_info').append('<li><span class="job_name">'+job_name+': </span><span class="job_level">'+job_level+'</span></li>');
+                var job_status = job_list[job_name];
+                var cnt = 0;
+                for (var key in status) {
+                    if (!isNaN(job_level)) {
+                        status[key] = status[key] + job_status[cnt] * job_level;
+                    }
+                    cnt++;
+                }
+            });
+            
+            $('.list').append('<ul class="status">');
+            for (var key in status) {
+                console.log(status[key]);
+                $('.status').append('<li><span class="label">'+key+'</span>:<span>'+status[key]+'</span></li>');
+            }
+
+		},
+		function(XMLHttpRequest, textStatus, errorThrown) {
+			alert('キャラクターの情報が取得できませんでした。');
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
+		}
+	);
+}
+</script>
+</head>
+<body>
+<div>
+    <input type="text" id="character_id">
+    <a href="javascript:void(0);" id="search">search</a>
+</div>
+<div class="list"></div>
+</body>
+</html>
