@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>みんな？</title>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="FF14,FFXIV">
+<meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
+<link href="/css/common.css" rel="stylesheet" type="text/css">
+<link href="/css/mobile.css" rel="stylesheet" type="text/css">
+<link href="/css/arrow.css" rel="stylesheet" type="text/css">
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery.xdomainajax.js"></script>
+<script src="/js/const.js"></script>
+<script src="/js/primals_mount.js"></script>
+<script src="/js/list_common.js"></script>
+<script src="/js/acordion.js"></script>
+</head>
+<body>
+<header>
+<h1>みんな？</h1>
+</header>
+<div class="bg">
+    <div class="main">
+        <!--
+        <div id="my_character">
+            <div class="search">
+                <input type="text" id="my_character_name" placeholder="キャラクター名を入力">
+                <select name="worldname">
+                    <option value="">DC/ワールドを選択</option>
+                </select>
+                <a href="javascript:void(0);" class="search_btn button">キャラクターを検索</a>
+            </div>
+            <div class="result">
+            </div>
+        </div>
+        -->
+        <div id="freecompany" class="acordion">
+            <div class="trigger arrow active">フリーカンパニー</div>
+            <div class="acordion_tree">
+                <div class="search">
+                    <input type="text" id="my_character_name" placeholder="キャラクター名を入力してください。">
+                    <div class="selectbox">
+                        <select name="worldname">
+                            <option value="">DC/ワールドを選択</option>
+                        </select>
+                    </div>
+                    <a href="javascript:void(0);" class="chara_search search_btn button">キャラクターを検索</a>
+                </div>
+                <div class="result">
+                </div>
+                <input type="text" id="freecompany_id" placeholder="FCのID、またはURLを入力してください。"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
+                <span id="freecompany_name"></span>
+            </div>
+        </div>
+        <div id="linkshell" class="acordion">
+            <div class="trigger arrow active">リンクシェル</div>
+            <div class="acordion_tree">
+                <input type="text" id="linkshell_id" placeholder="LSのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">LSのIDで一覧を表示</a>
+                <div class="icon"></div><span id="linkshell_name"></span>
+            </div>
+        </div>
+        <div id="character" class="acordion">
+            <div class="trigger arrow active">キャラクター</div>
+            <div class="acordion_tree">
+                <input type="text" class="chara_id" placeholder="キャラのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">キャラクターのIDで一覧に追加</a>
+            </div>
+        </div>
+        <div id="reset">
+            <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
+        </div>
+        <div id="other">
+            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
+        </div>
+        <div id="mount_list">
+            <ul class="list">
+            </ul>
+        </div>
+    </div>
+    <div id="change_log">
+        <h2>更新履歴</h2>
+        <ul>
+            <li>
+                <dl>
+                    <dt>2018/12/01:</dt>
+                    <dd>ツールを公開。</dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+(C) 2010 - 2018 SQUARE ENIX CO., LTD.<br>
+(C) 2018 oenothera.jp
+</footer>
+
+</body>
+</html>

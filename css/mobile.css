@@ -1,7 +1,7 @@
 @media screen and (max-width: 640px){
 	body {
 		background-color: #999;
-		font-family: "ÉÅÉCÉäÉI", Meiryo, "Hiragino Kaku Gothic Pro", "ÉqÉâÉMÉmäpÉS Pro W3", "ÇlÇr ÇoÉSÉVÉbÉN", Arial, Verdana, sans-serif;
+		font-family: "„É°„Ç§„É™„Ç™", Meiryo, "Hiragino Kaku Gothic Pro", "„Éí„É©„ÇÆ„ÉéËßí„Ç¥ Pro W3", "Ôº≠Ôº≥ Ôº∞„Ç¥„Ç∑„ÉÉ„ÇØ", Arial, Verdana, sans-serif;
 	}
 
 	.bg {
@@ -13,11 +13,11 @@
 		border-radius: 6px;
 		padding: 10px 2px;
 	}
-	
+
 	header {
 		background-color: #1b1b1b;
 	}
-	
+
 	h1 {
 		color: #fff;
 		font-size: 16px;
@@ -31,7 +31,7 @@
 		font-size: 14px;
 		padding: 5px;
 	}
-	
+
 	input[type="text"] {
 		font-size: 16px;
 		height: 48px;
@@ -41,14 +41,40 @@
         text-indent: 1em;
 		margin: 10px auto;
 	}
-	
+
+	.selectbox {
+		width: 92%;
+		background-color: #fff;
+		position: relative;
+		border: 1px solid #999;
+		margin: 10px auto;
+	}
+
+	.selectbox::after {
+		position: absolute;
+		top: 35%;
+		right: 3%;
+		margin-top: -8px;
+		content: "‚ñº";
+		color: #333;
+		pointer-events: none;
+	}
+
+	select {
+		width: 100%;
+		height: 48px;
+		border: none;
+		-webkit-appearance: none;
+		text-indent: 1em;
+	}
+
 	ul,
 	li {
 		list-style-type: none;
 		padding: 0;
 		display: inline-block;
 	}
-	
+
 	#freecompany,
 	#linkshell,
 	#character,
@@ -56,14 +82,14 @@
 		margin: 6px 0;
 		padding: 0 5px;
 	}
-	
+
 	#freecompany_name {
 		display: inline-block;
 		width: 100%;
 		margin: 10px 0 20px;
 		font-weight: bold;
 	}
-	
+
 	#linkshell_name {
 		display: inline-block;
 		width: 80%;
@@ -75,7 +101,7 @@
 		display: inline-block;
 		vertical-align: middle;
 	}
-	
+
 	.chara_face {
 		width: 15%;
 		padding-left: 4px;
@@ -87,11 +113,11 @@
 		width: 75%;
         margin-left: 10px;
 	}
-	
+
 	.chara_name, .chara_face {
 		margin-top: 10px;
 	}
-	
+
 	.button {
 		display: block;
 		color: #fff;
@@ -106,16 +132,16 @@
 		padding: 1px 6px;
 		margin: 0 auto;
 	}
-	
+
 	.search_btn {
 		background-color: #5990ff;
 	}
-	
+
 	.delete_btn {
 		position: relative;
 		margin-top: 20px;
 	}
-	
+
 	.delete_btn::before {
 		content: "";
 		position: absolute;
@@ -125,25 +151,25 @@
 		width: 100%;
 		border-top: 3px solid #a5a5a5;
 	}
-	
+
 	.delete_btn,
 	.reset_btn {
 		background-color: #e67e17;
 	}
-	
+
 	#other {
 		padding: 0 20px;
 	}
-	
+
 	#mount_list {
 		padding: 0 5px;
 	}
-	
+
 	#mount_list .mount_image {
 		position: relative;
 		margin: 2px;
 	}
-    
+
     #change_log {
         display :none;
     }

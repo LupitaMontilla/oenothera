@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>�݂�Ȃ��̃~�j�I����ꂽ�H</title>
+<title>みんなあのミニオン取れた？</title>
 <meta name="description" content="">
 <meta name="keywords" content="FF14,FFXIV">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
 <link href="/css/common.css" rel="stylesheet" type="text/css">
 <link href="/css/mobile.css" rel="stylesheet" type="text/css">
@@ -16,42 +17,53 @@
 </head>
 <body>
 <header>
-<h1>�݂�Ȃ��̃~�j�I����ꂽ�H</h1>
+<h1>みんなあのミニオン取れた？</h1>
 </header>
 <div class="bg">
     <div class="main">
         <div id="minion">
-            <div><input type="text" placeholder="�~�j�I��������͂��Ă��������B"></div>
-            <div><input type="text" placeholder="�~�j�I��������͂��Ă��������B"></div>
-            <div><input type="text" placeholder="�~�j�I��������͂��Ă��������B"></div>
-            <div><input type="text" placeholder="�~�j�I��������͂��Ă��������B"></div>
-            <div><input type="text" placeholder="�~�j�I��������͂��Ă��������B"></div>
+            <div><input type="text" placeholder="ミニオン名を入力してください。"></div>
+            <div><input type="text" placeholder="ミニオン名を入力してください。"></div>
+            <div><input type="text" placeholder="ミニオン名を入力してください。"></div>
+            <div><input type="text" placeholder="ミニオン名を入力してください。"></div>
+            <div><input type="text" placeholder="ミニオン名を入力してください。"></div>
         </div>
         <div id="freecompany" class="acordion">
-            <div class="trigger arrow active">�t���[�J���p�j�[</div>
+            <div class="trigger arrow active">フリーカンパニー</div>
             <div class="acordion_tree">
-                <input type="text" id="freecompany_id" placeholder="FC��ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">FC��ID�ňꗗ��\��</a>
+                <div class="search">
+                    <input type="text" id="my_character_name" placeholder="キャラクター名を入力してください。">
+                    <div class="selectbox">
+                        <select name="worldname">
+                            <option value="">DC/ワールドを選択</option>
+                        </select>
+                    </div>
+                    <a href="javascript:void(0);" class="chara_search search_btn button">キャラクターを検索</a>
+                </div>
+                <div class="result">
+                </div>
+                <input type="text" id="freecompany_id" placeholder="FCのID、またはURLを入力してください。"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
                 <span id="freecompany_name"></span>
             </div>
         </div>
         <div id="linkshell" class="acordion">
-            <div class="trigger arrow active">�����N�V�F��</div>
+            <div class="trigger arrow active">リンクシェル</div>
             <div class="acordion_tree">
-                <input type="text" id="linkshell_id" placeholder="LS��ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">LS��ID�ňꗗ��\��</a>
+                <input type="text" id="linkshell_id" placeholder="LSのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">LSのIDで一覧を表示</a>
                 <div class="icon"></div><span id="linkshell_name"></span>
             </div>
         </div>
         <div id="character" class="acordion">
-            <div class="trigger arrow active">�L�����N�^�[</div>
+            <div class="trigger arrow active">キャラクター</div>
             <div class="acordion_tree">
-                <input type="text" class="chara_id" placeholder="�L������ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">�L�����N�^�[��ID�ňꗗ�ɒǉ�</a>
+                <input type="text" class="chara_id" placeholder="キャラのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">キャラクターのIDで一覧に追加</a>
             </div>
         </div>
         <div id="reset">
-            <a href="javascript:void(0);" class="reset_btn button">�ꗗ�����Z�b�g</a>
+            <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
         </div>
         <div id="other">
-            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">�L�����N�^�[���ꗗ��������ۂɊm�F��\������</label>
+            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
         </div>
         <div id="mount_list">
             <ul class="list">
@@ -59,12 +71,18 @@
         </div>
     </div>
     <div id="change_log">
-        <h2>�X�V����</h2>
+        <h2>更新履歴</h2>
         <ul>
             <li>
                 <dl>
+                    <dt>2018/12/13:</dt>
+                    <dd>キャラクター検索結果からFCのIDを入力する機能を追加。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
                     <dt>2018/12/12:</dt>
-                    <dd>�c�[�������J�B</dd>
+                    <dd>ツールを公開。</dd>
                 </dl>
             </li>
         </ul>

@@ -38,7 +38,7 @@ function addCharaData(chara_id) {
 			}
 			
 			$('.list').append('<br id="break_'+chara_id+'">');
-			$('.list').append('<a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">ˆê——‚©‚çÁ‚·</a>');
+			$('.list').append('<a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">ä¸€è¦§ã‹ã‚‰æ¶ˆã™</a>');
 			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face"></li><li id="chara_name_'+chara_id+'" class="chara_name"></li>');
 			for (i = 0; i < mounts.length; i++) {
 				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
@@ -55,7 +55,7 @@ function addCharaData(chara_id) {
 			}
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
-			alert('ƒLƒƒƒ‰ƒNƒ^[‚Ìî•ñ‚ªæ“¾‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B');
+			alert('ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®æƒ…å ±ãŒå–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚');
 			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
 			console.log("textStatus: " + textStatus);
 			console.log("errorThrown: " + errorThrown.message);

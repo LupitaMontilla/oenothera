@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<title>�݂�ȋɔؐ_�}�E���g��ꂽ�H</title>
+<title>みんな極蛮神マウント取れた？</title>
+<meta charset="utf-8">
 <meta name="description" content="">
 <meta name="keywords" content="FF14,FFXIV">
 <meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,40 +18,46 @@
 </head>
 <body>
 <header>
-<h1>�݂�ȋɔؐ_�}�E���g��ꂽ�H</h1>
+<h1>みんな極蛮神マウント取れた？</h1>
 </header>
 <div class="bg">
     <div class="main">
-        <div id="my_character">
-            <div>
-                <input type="text" id="my_character_name" placeholder="�L�����N�^�[�������"><a href="javascript:void(0);" class="search_btn button">�L�����N�^�[�����擾</a>
-            </div>
-        </div>
         <div id="freecompany" class="acordion">
-            <div class="trigger arrow active">�t���[�J���p�j�[</div>
+            <div class="trigger arrow active">フリーカンパニー</div>
             <div class="acordion_tree">
-                <input type="text" id="freecompany_id" placeholder="FC��ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">FC��ID�ňꗗ��\��</a>
+                <div class="search">
+                    <input type="text" id="my_character_name" placeholder="キャラクター名を入力してください。">
+                    <div class="selectbox">
+                        <select name="worldname">
+                            <option value="">DC/ワールドを選択</option>
+                        </select>
+                    </div>
+                    <a href="javascript:void(0);" class="chara_search search_btn button">キャラクターを検索</a>
+                </div>
+                <div class="result">
+                </div>
+                <input type="text" id="freecompany_id" placeholder="FCのID、またはURLを入力してください。"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
                 <span id="freecompany_name"></span>
             </div>
         </div>
         <div id="linkshell" class="acordion">
-            <div class="trigger arrow active">�����N�V�F��</div>
+            <div class="trigger arrow active">リンクシェル</div>
             <div class="acordion_tree">
-                <input type="text" id="linkshell_id" placeholder="LS��ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">LS��ID�ňꗗ��\��</a>
+                <input type="text" id="linkshell_id" placeholder="LSのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">LSのIDで一覧を表示</a>
                 <div class="icon"></div><span id="linkshell_name"></span>
             </div>
         </div>
         <div id="character" class="acordion">
-            <div class="trigger arrow active">�L�����N�^�[</div>
+            <div class="trigger arrow active">キャラクター</div>
             <div class="acordion_tree">
-                <input type="text" class="chara_id" placeholder="�L������ID�A�܂���URL����͂��Ă��������B"><a href="javascript:void(0);" class="search_btn button">�L�����N�^�[��ID�ňꗗ�ɒǉ�</a>
+                <input type="text" class="chara_id" placeholder="キャラのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">キャラクターのIDで一覧に追加</a>
             </div>
         </div>
         <div id="reset">
-            <a href="javascript:void(0);" class="reset_btn button">�ꗗ�����Z�b�g</a>
+            <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
         </div>
         <div id="other">
-            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">�L�����N�^�[���ꗗ��������ۂɊm�F��\������</label>
+            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
         </div>
         <div id="mount_list">
             <ul class="list">
@@ -58,35 +65,41 @@
         </div>
     </div>
     <div id="change_log">
-        <h2>�X�V����</h2>
+        <h2>更新履歴</h2>
         <ul>
             <li>
                 <dl>
+                    <dt>2018/12/13:</dt>
+                    <dd>キャラクター検索結果からFCのIDを入力する機能を追加。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
                     <dt>2018/12/12:</dt>
-                    <dd>�ꗗ�����Z�b�g���Ă���񂪎c���Ă��܂��A��FC�ALS�̈ꗗ�ĕ\�����ł��Ȃ��s����C���B</dd>
+                    <dd>一覧をリセットしても情報が残ってしまい、同FC、LSの一覧再表示ができない不具合を修正。</dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>2018/12/03:</dt>
-                    <dd>�X�V������ǉ��B</dd>
-                    <dd>���łɕ\�����Ă���FC�ALS�A�L�����͓ǂݍ��܂Ȃ��悤�ɏC���B</dd>
-                    <dd>FC�ALS�ňꗗ��\������ۂ́A���݂̈ꗗ����������m�F���b�Z�[�W��\������悤�ɏC���B</dd>
+                    <dd>更新履歴を追加。</dd>
+                    <dd>すでに表示しているFC、LS、キャラは読み込まないように修正。</dd>
+                    <dd>FC、LSで一覧を表示する際は、現在の一覧を消去する確認メッセージを表示するように修正。</dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>2018/12/02:</dt>
-                    <dd>���e�̂킩��G���[���b�Z�[�W�ɏC���B</dd>
-                    <dd>�ꗗ��������{�^�����������ۂɊm�F���b�Z�[�W��\������悤�ɏC���B</dd>
-                    <dd>�ꗗ��������ۂɊm�F��\�����邩�̃`�F�b�N��ǉ��B</dd>
-                    <dd>�X�}�z�\���Ɍ������̐܂肽���݋@�\��ǉ��B</dd>
+                    <dd>内容のわかるエラーメッセージに修正。</dd>
+                    <dd>一覧から消すボタンを押した際に確認メッセージを表示するように修正。</dd>
+                    <dd>一覧から消す際に確認を表示するかのチェックを追加。</dd>
+                    <dd>スマホ表示に検索欄の折りたたみ機能を追加。</dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>2018/12/01:</dt>
-                    <dd>�c�[�������J�B</dd>
+                    <dd>ツールを公開。</dd>
                 </dl>
             </li>
         </ul>
