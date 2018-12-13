@@ -1,4 +1,9 @@
 $(function() {
+    $('#my_character').on('click', '.search_btn', function(){
+        var my_character_name = $('#my_character_name').val();;
+        getMyCharacterData(my_character_name);
+    });
+    
 	$('#freecompany').on('click', '.search_btn', function(){
 		var freecompany_id = $('#freecompany_id').val();
 		if (!freecompany_id) {
@@ -157,4 +162,45 @@ function resetList() {
 	$('#linkshell_name').empty();
 	$('#linkshell .icon').empty();
     $('#linkshell_name').attr('data-id', '');
+}
+
+function getMyCharacterData(name) {
+	$.ajax({
+		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/?q='+name+'&worldname=Typhon&blog_lang=ja',
+		type: 'GET',
+		dataType: 'json'
+	})
+	.then(
+		function(res){
+			$content = $(res.data);
+            
+            var character_name = $content.find('.entry__name').text();
+            console.log(character_name);
+			
+            /*
+			$('.list').append('<br id="break_'+chara_id+'">');
+			$('.list').append('<a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a>');
+			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face"></li><li id="chara_name_'+chara_id+'" class="chara_name"></li>');
+			for (i = 0; i < mounts.length; i++) {
+				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
+			}
+			
+			var user_face_image = $content.find('.frame__chara__face').html();
+			var user_name_text  = $content.find('.frame__chara__name').text();
+			
+			$('#chara_face_'+chara_id).append(user_face_image);
+			$('#chara_name_'+chara_id).append(user_name_text);
+
+			for (i = 0; i < mounts.length; i++) {
+				$('#mount'+i+'_'+chara_id).append(mounts[i]);
+			}
+            */
+		},
+		function(XMLHttpRequest, textStatus, errorThrown) {
+			alert('キャラクターの情報が取得できませんでした。');
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
+		}
+	);
 }
