@@ -1,6 +1,31 @@
 $(function() {
     addWorldNameList();
 
+    $('#freecompany').show();
+    $('#linkshell').hide();
+    $('#character').hide();
+
+    $('input[name="means"]:radio').on('change', function(){
+        console.log($(this).val());
+        switch ($(this).val()) {
+            case 'fc':
+                $('#freecompany').show();
+                $('#linkshell').hide();
+                $('#character').hide();
+                break;
+            case 'ls':
+                $('#freecompany').hide();
+                $('#linkshell').show();
+                $('#character').hide();
+                break;
+            case 'cr':
+                $('#freecompany').hide();
+                $('#linkshell').hide();
+                $('#character').show();
+                break;
+        }
+    });
+
     $('#freecompany .search').on('click', '.search_btn', function(){
         var my_charactername = $('#my_character_name').val();
         var my_worldname = $('select[name="worldname"]').val();
