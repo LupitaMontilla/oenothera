@@ -62,6 +62,7 @@
 		color: #999;
 		font-size: 14px;
 		padding: 5px;
+    text-align: center;
 	}
 
 	input[type="text"] {
@@ -70,9 +71,40 @@
 		margin-bottom: 5px;
 		display: block;
 		width: 92%;
-        text-indent: 1em;
+    text-indent: 1em;
 		margin: 10px auto;
 	}
+
+  input[type="radio"] {
+    display: inline-block;
+  }
+
+  #search_means {
+    display: block;
+    padding: 10px 10px 0;
+    margin-bottom: 20px;
+  }
+
+  #search_means .enclosure {
+    display: block;
+    position: relative;
+    border: solid 2px #edd3a1;
+    border-radius: 5px;
+    padding: 10px 10px 0;
+  }
+
+  #search_means .caption {
+    position: absolute;
+    top: -0.5em;
+    font-weight: bold;
+    background-color: #f8f4e6;
+    padding: 0 5px;
+  }
+
+  #search_means .enclosure label {
+    display: block;
+    margin: 15px 0;
+  }
 
 	.selectbox {
 		width: 92%;

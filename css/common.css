@@ -74,6 +74,28 @@
 		width: 300px;
 	}
 
+  input[type="radio"] {
+    display: inline-block;
+  }
+
+  #search_means {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #search_means .enclosure {
+    display: block;
+  }
+
+  #search_means .caption {
+    font-weight: bold;
+  }
+
+  #search_means .enclosure label {
+    display: inline-block;
+    margin: 10px 0;
+  }
+
   #my_character_name {
     width: 200px;
   }
@@ -100,6 +122,10 @@
 	#delete_confirm {
 		vertical-align: text-bottom;
 	}
+
+  #minion {
+    margin-bottom: 20px;
+  }
 
 	#freecompany,
 	#linkshell,
