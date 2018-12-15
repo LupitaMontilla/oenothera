@@ -30,7 +30,7 @@ $(function() {
         var freecompanyname = $('#freecompany .search_freecompany .freecompany_name').val();
         var worldname = $('#freecompany select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean').find('.search_freecompany');
-        searchFreecompanyList($area, freecompanyname, worldname);
+        searchFreecompanyList($area, freecompanyname.trim(), worldname);
     });
 
     $('#freecompany .result').on('change', 'select[name="freecompanys"]', function(){
@@ -46,7 +46,7 @@ $(function() {
         var charactername = $('#freecompany .search_freecompany .character_name').val();
         var worldname = $('#freecompany select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean').find('.search_freecompany');
-        searchCharacterList($area, charactername, worldname);
+        searchCharacterList($area, charactername.trim(), worldname);
     });
 
     $('#freecompany .result').on('change', 'select[name="characters"]', function(){
@@ -119,7 +119,7 @@ $(function() {
         var linkshellname = $('#linkshell .search_name').val();
         var worldname = $('#linkshell select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean');
-        searchLinkshellList($area, linkshellname, worldname);
+        searchLinkshellList($area, linkshellname.trim(), worldname);
     });
 
     $('#linkshell .result').on('change', 'select[name="linkshells"]', function(){
@@ -192,7 +192,7 @@ $(function() {
         var charactername = $('#character .character_name').val();
         var worldname = $('#character select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean').find('.search_character');
-        searchCharacterList($area, charactername, worldname);
+        searchCharacterList($area, charactername.trim(), worldname);
     });
 
     $('#character .result').on('change', 'select[name="characters"]', function(){
@@ -354,7 +354,8 @@ $(document).on('ajaxSend', function(e, jqXHR, obj){
 });
 
 function searchFreecompanyList($area, name, world) {
-    var encoded_url = encodeURIComponent(LODESTONE_URL+'/freecompany/?q='+name+'&worldname='+world);
+    var name_string = name.replace(' ', '+');
+    var encoded_url = encodeURIComponent(LODESTONE_URL+'/freecompany/?q='+name_string+'&worldname='+world);
 	$.ajax({
 		url: '/php/ldst_access.php?url='+encoded_url,
 		type: 'GET',
@@ -393,7 +394,8 @@ function searchFreecompanyList($area, name, world) {
 }
 
 function searchLinkshellList($area, name, world) {
-    var encoded_url = encodeURIComponent(LODESTONE_URL+'/linkshell/?q='+name+'&worldname='+world);
+    var name_string = name.replace(' ', '+');
+    var encoded_url = encodeURIComponent(LODESTONE_URL+'/linkshell/?q='+name_string+'&worldname='+world);
 	$.ajax({
 		url: '/php/ldst_access.php?url='+encoded_url,
 		type: 'GET',
