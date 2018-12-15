@@ -113,35 +113,6 @@
     max-width: 33%;
   }
 
-  /*
-  #search_means {
-    display: block;
-    padding: 10px 10px 0;
-    margin-bottom: 20px;
-  }
-
-  #search_means .enclosure {
-    display: block;
-    position: relative;
-    border: solid 2px #edd3a1;
-    border-radius: 5px;
-    padding: 10px 10px 0;
-  }
-
-  #search_means .caption {
-    position: absolute;
-    top: -0.5em;
-    font-weight: bold;
-    background-color: #f8f4e6;
-    padding: 0 5px;
-  }
-
-  #search_means .enclosure label {
-    display: block;
-    margin: 15px 0;
-  }
-  */
-
 	.selectbox {
 		width: 92%;
 		background-color: #fff;
@@ -183,22 +154,63 @@
 		padding: 0 5px;
 	}
 
-	#freecompany_name {
-		display: inline-block;
-		width: 100%;
-		margin: 10px 0 20px;
+  .freecompany_title,
+  .linkshell_title {
+    margin-top: 20px;
+  }
+
+  .freecompany_title .freecompany_name,
+	.linkshell_title .linkshell_name {
 		font-weight: bold;
+    font-size: 1.5em;
 	}
 
-	#linkshell_name {
+  .freecompany_title .crest {
+    display: inline-block;
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: 20px 10px 0;
+    vertical-align: middle;
+  }
+
+  .freecompany_title .crest .entry__freecompany__crest__image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: 2px;
+    left: 2px;
+  }
+
+  .freecompany_title .crest .entry__freecompany__crest__image img {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .freecompany_title .crest img {
+    position: absolute;
+    left: 0;
+  }
+
+  .linkshell_title::before {
+		content: "";
+		position: absolute;
+		top: -16px;
+		left: -4%;
+		right: 0;
+		width: 108%;
+		border-top: 3px solid #bed3ca;
+  }
+
+	.linkshell_title .icon {
 		display: inline-block;
-		width: 80%;
-		margin: 10px 0 20px;
-		font-weight: bold;
+    margin: 20px 10px 0;
 	}
 
-	#linkshell .icon {
-		display: inline-block;
+	.icon img {
 		vertical-align: middle;
 	}
 
@@ -286,6 +298,7 @@
 
   .list {
     width: 100%;
+    margin-top: 0;
   }
 
   #change_log {

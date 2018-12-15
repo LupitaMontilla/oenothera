@@ -5,6 +5,8 @@ $(function() {
     $('#freecompany').show();
     $('#linkshell').hide();
     $('#character').hide();
+    $('.freecompany_title').hide();
+    $('.linkshell_title').hide();
 
     $('input[name="means"]:radio').on('change', function(){
         switch ($(this).val()) {
@@ -90,14 +92,17 @@ $(function() {
 					}
 					resetList();
 
-					$content = $(res.data);
+					var $content = $(res.data);
 					var freecompany_name = $content.find('.entry__freecompany__name').text();
-					$('#freecompany_name').text(freecompany_name);
-					$('#freecompany_name').attr('data-id', freecompany_id);
+                    var freecompany_crest = $content.find('.entry__freecompany__crest--position').html();
+					$('.freecompany_title .freecompany_name').text(freecompany_name);
+					$('.freecompany_title .freecompany_name').attr('data-id', freecompany_id);
+                    $('.freecompany_title .crest').append(freecompany_crest);
+                    $('.freecompany_title').show();
 
 					$content.find('.entry__bg').each(function(index){
-						href = $(this).attr('href');
-						chara_id = href.split('/')[3];
+						var href = $(this).attr('href');
+						var chara_id = href.split('/')[3];
 						chara_id_list.push(chara_id);
 					});
 				},
@@ -162,15 +167,17 @@ $(function() {
 					}
 					resetList();
 
-					$content = $(res.data);
+					var $content = $(res.data);
 					var linkshell_name = $content.find('.heading__linkshell__name').text();
-					$('#linkshell_name').text(linkshell_name);
-					$('#linkshell_name').attr('data-id', linkshell_id);
-					$('#linkshell .icon').append($content.find('.heading__linkshell__icon').html());
+                    var linkshell_icon = $content.find('.heading__linkshell__icon').html()
+					$('.linkshell_title .linkshell_name').text(linkshell_name);
+					$('.linkshell_title .linkshell_name').attr('data-id', linkshell_id);
+					$('.linkshell_title .icon').append(linkshell_icon);
+                    $('.linkshell_title').show();
 
 					$content.find('.entry__link').each(function(index){
-						href = $(this).attr('href');
-						chara_id = href.split('/')[3];
+						var href = $(this).attr('href');
+						var chara_id = href.split('/')[3];
 						chara_id_list.push(chara_id);
 					});
 				},
@@ -240,11 +247,14 @@ $(function() {
 
 function resetList() {
 	$('.list').empty();
-	$('#freecompany_name').empty();
-    $('#freecompany_name').attr('data-id', '');
-	$('#linkshell_name').empty();
-	$('#linkshell .icon').empty();
-    $('#linkshell_name').attr('data-id', '');
+    $('.freecompany_title .crest').empty();
+	$('.freecompany_title .freecompany_name').empty();
+    $('.freecompany_title .freecompany_name').attr('data-id', '');
+    $('.freecompany_title').hide();
+    $('.linkshell_title .icon').empty();
+	$('.linkshell_title .linkshell_name').empty();
+    $('.linkshell_title .linkshell_name').attr('data-id', '');
+    $('.linkshell_title').hide();
 }
 
 function addWorldNameList() {
@@ -338,7 +348,6 @@ function addWorldNameList() {
 }
 
 $(document).on('ajaxSend', function(e, jqXHR, obj){
-    console.log(new Date());
     var $loading = $('.loading');
     $loading.removeClass('is-hide');
     setTimeout(function(){

@@ -172,18 +172,48 @@
 		margin: 0 0 6px;
 	}
 
-	#freecompany_name,
-	#linkshell_name {
+	.freecompany_title .freecompany_name,
+	.linkshell_title .linkshell_name {
 		font-weight: bold;
+    font-size: 1.5em;
 	}
 
-	#linkshell .icon {
+  .freecompany_title .crest {
+    display: inline-block;
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: 20px 10px 0;
+    vertical-align: middle;
+  }
+
+  .freecompany_title .crest .entry__freecompany__crest__image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: 2px;
+    left: 2px;
+  }
+
+  .freecompany_title .crest .entry__freecompany__crest__image img {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .freecompany_title .crest img {
+    position: absolute;
+    left: 0;
+  }
+
+	.linkshell_title .icon {
 		display: inline-block;
+    margin: 20px 10px 0;
 	}
 
 	.icon img {
-		width: 30px;
-		height: 30px;
 		vertical-align: middle;
 	}
 
