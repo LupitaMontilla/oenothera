@@ -1,5 +1,6 @@
 $(function() {
     addWorldNameList();
+    $('.loading').addClass('is-hide');
 
     $('#freecompany').show();
     $('#linkshell').hide();
@@ -34,6 +35,10 @@ $(function() {
 
     $('#freecompany .result').on('change', 'select[name="freecompanys"]', function(){
         var freecompany_id = $(this).val();
+        if (!freecompany_id) {
+            $(this).parents('.search_mean').find('.input_id').val('');
+            return false;
+        }
         $(this).parents('.search_mean').find('.input_id').val(freecompany_id);
     });
 
@@ -46,6 +51,10 @@ $(function() {
 
     $('#freecompany .result').on('change', 'select[name="characters"]', function(){
         var character_id = $(this).val();
+        if (!character_id) {
+            $('#freecompany_id').val('');
+            return false;
+        }
         getMyCharacterData(character_id);
     });
 
@@ -70,6 +79,7 @@ $(function() {
 				url: '/php/ldst_access.php?url='+LODESTONE_URL+'/freecompany/'+freecompany_id+'/member/',
 				type: 'GET',
 				dataType: 'json',
+                loadingHide: function(data){}
 			})
 			.then(
 				function(res){
@@ -114,6 +124,9 @@ $(function() {
 
     $('#linkshell .result').on('change', 'select[name="linkshells"]', function(){
         var linkshell_id = $(this).parents('.search_mean').find('select[name="linkshells"]').val();
+        if (!linkshell_id) {
+            $(this).parents('.search_mean').find('.input_id').val('');
+        }
         $(this).parents('.search_mean').find('.input_id').val(linkshell_id);
     });
 
@@ -137,7 +150,8 @@ $(function() {
 			$.ajax({
 				url: '/php/ldst_access.php?url='+LODESTONE_URL+'/linkshell/'+linkshell_id,
 				type: 'GET',
-				dataType: 'json'
+				dataType: 'json',
+                loadingHide: function(data){}
 			})
 			.then(
 				function(res){
@@ -182,7 +196,6 @@ $(function() {
     });
 
     $('#character .result').on('change', 'select[name="characters"]', function(){
-        //var character_id = $(this).parents('.search_mean').find('select[name="characters"]').val();
         var character_id = $(this).val();
         $(this).parents('.search_mean').find('.input_id').val(character_id);
     });
@@ -324,12 +337,25 @@ function addWorldNameList() {
     $('select[name="worldname"]').append(worldnames);
 }
 
+$(document).on('ajaxSend', function(e, jqXHR, obj){
+    console.log(new Date());
+    var $loading = $('.loading');
+    $loading.removeClass('is-hide');
+    setTimeout(function(){
+        $.when(jqXHR).done(function(data){
+            $loading.addClass('is-hide');
+            obj.loadingHide(data);
+        });
+    }, 400);
+});
+
 function searchFreecompanyList($area, name, world) {
     var encoded_url = encodeURIComponent(LODESTONE_URL+'/freecompany/?q='+name+'&worldname='+world);
 	$.ajax({
 		url: '/php/ldst_access.php?url='+encoded_url,
 		type: 'GET',
-		dataType: 'json'
+		dataType: 'json',
+        loadingHide: function(data){}
 	})
 	.then(
 		function(res){
@@ -352,7 +378,6 @@ function searchFreecompanyList($area, name, world) {
                 var world = $(freecompany_worlds[index*2+1]).text();
                 $result.find('select[name="freecompanys"]').append('<option value="'+id+'">'+name+' ('+world+')</option>');
             });
-            //$result.append('<a href="javascript:void(0);" class="search_btn button">'+area_name+'のIDを取得</a>');
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('フリーカンパニーの情報が取得できませんでした。');
@@ -368,7 +393,8 @@ function searchLinkshellList($area, name, world) {
 	$.ajax({
 		url: '/php/ldst_access.php?url='+encoded_url,
 		type: 'GET',
-		dataType: 'json'
+		dataType: 'json',
+        loadingHide: function(data){}
 	})
 	.then(
 		function(res){
@@ -391,7 +417,6 @@ function searchLinkshellList($area, name, world) {
                 var world = $(linkshell_worlds[index]).text();
                 $result.find('select[name="linkshells"]').append('<option value="'+id+'">'+name+' ('+world+')</option>');
             });
-            //$result.append('<a href="javascript:void(0);" class="search_btn button">'+area_name+'のIDを取得</a>');
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('リンクシェルの情報が取得できませんでした。');
@@ -408,7 +433,8 @@ function searchCharacterList($area, name, world) {
 	$.ajax({
 		url: '/php/ldst_access.php?url='+encoded_url,
 		type: 'GET',
-		dataType: 'json'
+		dataType: 'json',
+        loadingHide: function(data){}
 	})
 	.then(
 		function(res){
@@ -431,7 +457,6 @@ function searchCharacterList($area, name, world) {
                 var world = $(character_worlds[index]).text();
                 $result.find('select[name="characters"]').append('<option value="'+id+'">'+name+' ('+world+')</option>');
             });
-            //$result.append('<a href="javascript:void(0);" class="search_btn button">'+area_name+'のIDを取得</a>');
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('キャラクターの情報が取得できませんでした。');
@@ -446,7 +471,8 @@ function getMyCharacterData(character_id) {
     $.ajax({
 		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+character_id,
 		type: 'GET',
-		dataType: 'json'
+		dataType: 'json',
+        loadingHide: function(data){}
 	})
 	.then(
 		function(res){
@@ -462,8 +488,13 @@ function getMyCharacterData(character_id) {
             });
             $('#my_character .result').append('</select>');
             */
-            var freecompany_id = $(freecompany_name).attr('href').split('/')[3];
-            //$('#freecompany .acordion_tree').append('<input id="freecompany_id" type="text" value="'+freecompany_id+'"><a href="javascript:void(0);" class="search_btn button">FCのIDで一覧を表示</a>');
+            var freecompany_path = $(freecompany_name).attr('href');
+            if (freecompany_path == null) {
+                alert('フリーカンパニー未所属のキャラクターです。');
+                $('#freecompany_id').val('');
+                return false;
+            }
+            var freecompany_id = freecompany_path.split('/')[3];
             $('#freecompany_id').val(freecompany_id);
         }
 	);
