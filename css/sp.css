@@ -214,9 +214,23 @@
         margin-left: 10px;
 	}
 
-	.chara_name, .chara_face {
+	.chara_name,
+  .chara_face {
 		margin-top: 10px;
 	}
+
+  .chara_name .character_world {
+    font-weight: normal;
+  }
+
+  .chara_name .character_world::before {
+    content: "(";
+    margin-left: 5px;
+  }
+
+  .chara_name .character_world::after {
+    content: ")";
+  }
 
 	.button {
 		display: block;

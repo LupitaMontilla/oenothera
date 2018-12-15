@@ -342,9 +342,13 @@ $(document).on('ajaxSend', function(e, jqXHR, obj){
     var $loading = $('.loading');
     $loading.removeClass('is-hide');
     setTimeout(function(){
-        $.when(jqXHR).done(function(data){
+        $.when(jqXHR)
+        .done(function(data){
             $loading.addClass('is-hide');
             obj.loadingHide(data);
+        })
+        .fail(function(){
+            $loading.addClass('is-hide');
         });
     }, 400);
 });

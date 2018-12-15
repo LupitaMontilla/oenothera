@@ -47,9 +47,11 @@ function addCharaData(chara_id) {
 
 			var user_face_image = $content.find('.frame__chara__face').html();
 			var user_name_text  = $content.find('.frame__chara__name').text();
+			var user_world_text = $content.find('.frame__chara__world').text();
 
 			$('#chara_face_'+chara_id).append(user_face_image);
 			$('#chara_name_'+chara_id).append(user_name_text);
+			$('#chara_name_'+chara_id).append('<span class="character_world">'+user_world_text+'</span>');
 
 			for (i = 0; i < mounts.length; i++) {
 				$('#mount'+i+'_'+chara_id).append(mounts[i]);

@@ -194,6 +194,12 @@
 		width: 200px;
 	}
 
+  .chara_name .character_world {
+    display: block;
+    font-weight: normal;
+    font-size: 0.9em;
+  }
+
 	.button {
 		color: #fff;
 		line-height: 1.2;
@@ -234,6 +240,10 @@
 	#mount_list th {
 		font-size: 20px;
 	}
+
+  .list li {
+    margin-bottom: 10px;
+  }
 
   #change_log {
       font-size: 12px;
