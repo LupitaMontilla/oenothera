@@ -245,6 +245,21 @@ $(function() {
 	});
 });
 
+$(document).on('ajaxSend', function(e, jqXHR, obj){
+    var $loading = $('.loading');
+    $loading.removeClass('is-hide');
+    setTimeout(function(){
+        $.when(jqXHR)
+        .done(function(data){
+            $loading.addClass('is-hide');
+            obj.loadingHide(data);
+        })
+        .fail(function(){
+            $loading.addClass('is-hide');
+        });
+    }, 400);
+});
+
 function resetList() {
 	$('.list').empty();
     $('.freecompany_title .crest').empty();
@@ -347,20 +362,37 @@ function addWorldNameList() {
     $('select[name="worldname"]').append(worldnames);
 }
 
-$(document).on('ajaxSend', function(e, jqXHR, obj){
-    var $loading = $('.loading');
-    $loading.removeClass('is-hide');
-    setTimeout(function(){
-        $.when(jqXHR)
-        .done(function(data){
-            $loading.addClass('is-hide');
-            obj.loadingHide(data);
+function sortByCharacterName() {
+    $('#mount_list .list').html(
+        $('li.list_item').sort(function(a, b){
+            var id_string_a = $(a).attr('id');
+            var id_a_array = id_string_a.split('_');
+            var id_a = id_a_array[id_a_array.length-1];
+            var name_a = $('#chara_name_'+id_a).children('em').text();
+            var world_a = $('#chara_name_'+id_a).children('.character_world').text();
+            var first_name_a = name_a.split(' ')[0];
+            var last_name_a = name_a.split(' ')[1];
+
+            var id_string_b = $(b).attr('id');
+            var id_b_array = id_string_b.split('_');
+            var id_b = id_b_array[id_b_array.length-1];
+            var name_b = $('#chara_name_'+id_b).children('em').text();
+            var world_b = $('#chara_name_'+id_b).children('.character_world').text();
+            var first_name_b = name_b.split(' ')[0];
+            var last_name_b = name_b.split(' ')[1];
+
+            if (first_name_a > first_name_b) return 1;
+            if (first_name_a < first_name_b) return -1;
+            if (last_name_a > last_name_b) return 1;
+            if (last_name_a < last_name_b) return -1;
+            if (world_a > world_b) return 1;
+            if (world_a < world_b) return -1;
+            if (Number($(a).attr('data-sortkey')) > Number($(b).attr('data-sortkey'))) return 1;
+            if (Number($(a).attr('data-sortkey')) < Number($(b).attr('data-sortkey'))) return -1;
+            return 0;
         })
-        .fail(function(){
-            $loading.addClass('is-hide');
-        });
-    }, 400);
-});
+    );
+}
 
 function searchFreecompanyList($area, name, world) {
     var name_string = name.replace(' ', '+');

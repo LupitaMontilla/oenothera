@@ -218,10 +218,15 @@
 	}
 
 	.chara_name {
+		font-style: normal;
 		margin-left: 6px;
 		vertical-align: top;
 		font-weight: bold;
 		width: 200px;
+	}
+
+	.chara_name em {
+		font-style: normal;
 	}
 
   .chara_name .character_world {
@@ -274,6 +279,11 @@
   .list li {
     margin-bottom: 10px;
   }
+
+	#mount_list .list .break {
+		display: block;
+		margin: 0;
+	}
 
   #change_log {
       font-size: 12px;

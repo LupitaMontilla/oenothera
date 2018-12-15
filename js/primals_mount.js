@@ -3,7 +3,9 @@ function addCharaData(chara_id) {
 		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+chara_id,
 		type: 'GET',
 		dataType: 'json',
-		loadingHide: function(data){}
+		loadingHide: function(data){
+			sortByCharacterName();
+		}
 	})
 	.then(
 		function(res){
@@ -38,11 +40,13 @@ function addCharaData(chara_id) {
 				mount_names.push($(mounts[i]).parent('.character__item_icon.js__tooltip').attr('data-tooltip'));
 			}
 
-			$('.list').append('<br id="break_'+chara_id+'">');
-			$('.list').append('<a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a>');
-			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face"></li><li id="chara_name_'+chara_id+'" class="chara_name"></li>');
+			var key_number = 0;
+			$('.list').append('<li id="break_'+chara_id+'" class="break list_item" data-sortkey="'+(key_number++)+'"></li>');
+			$('.list').append('<li id="delete_'+chara_id+'" class="delete list_item" data-sortkey="'+(key_number++)+'"><a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a></li>');
+			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face list_item" data-sortkey="'+(key_number++)+'"></li><li id="chara_name_'+chara_id+'" class="chara_name list_item" data-sortkey="'+(key_number++)+'"></li>');
 			for (i = 0; i < mounts.length; i++) {
-				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
+				//$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
+				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
 			}
 
 			var user_face_image = $content.find('.frame__chara__face').html();
@@ -50,7 +54,7 @@ function addCharaData(chara_id) {
 			var user_world_text = $content.find('.frame__chara__world').text();
 
 			$('#chara_face_'+chara_id).append(user_face_image);
-			$('#chara_name_'+chara_id).append(user_name_text);
+			$('#chara_name_'+chara_id).append('<em>'+user_name_text+'</em>');
 			$('#chara_name_'+chara_id).append('<span class="character_world">'+user_world_text+'</span>');
 
 			for (i = 0; i < mounts.length; i++) {

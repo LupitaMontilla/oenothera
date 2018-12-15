@@ -226,6 +226,10 @@
         margin-left: 10px;
 	}
 
+	.chara_name em {
+		font-style: normal;
+	}
+
 	.chara_name,
   .chara_face {
 		margin-top: 10px;
@@ -300,6 +304,10 @@
     width: 100%;
     margin-top: 0;
   }
+
+	.list .delete.list_item {
+		display: inline;
+	}
 
   #change_log {
       display :none;
