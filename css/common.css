@@ -72,15 +72,48 @@
 
 	input[type="text"] {
 		width: 300px;
+    text-indent: 0.5em;
 	}
 
   input[type="radio"] {
     display: inline-block;
   }
 
+  .tabmenu {
+    position: relative;
+    width: 80%;
+    font-size: 0;
+  }
+
+  .tabmenu input[type="radio"] {
+    display: none;
+  }
+
+  .tabmenu input[type="radio"] + em {
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    margin: 0 4px 0 0;
+    padding: 4px 10px 0;
+    min-width: 80px;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+    background: #97a791;
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 30px;
+    cursor: pointer;
+  }
+
+  .tabmenu input[type="radio"]:checked + em {
+    background-color: #028760;
+    color: #fff;
+  }
+
   #search_means {
     display: block;
-    margin-bottom: 10px;
   }
 
   #search_means .enclosure {
@@ -93,7 +126,16 @@
 
   #search_means .enclosure label {
     display: inline-block;
-    margin: 10px 0;
+    margin: 10px 0 0;
+  }
+
+  .search_mean {
+    min-height: 100px;
+    padding: 10px 3px 10px;
+    background-color: #ede4cd;
+    border: solid 6px #ede4cd;
+    -webkit-border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 6px 6px;
   }
 
   #my_character_name {
@@ -129,8 +171,9 @@
 
 	#freecompany,
 	#linkshell,
+  #character,
 	#reset {
-		margin: 6px 0;
+		margin: 0 0 6px;
 	}
 
 	#freecompany_name,

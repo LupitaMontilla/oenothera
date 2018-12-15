@@ -79,6 +79,45 @@
     display: inline-block;
   }
 
+  .tabmenu {
+    position: relative;
+    text-align: center;
+    font-size: 0;
+  }
+
+  .tabmenu input[type="radio"] {
+    display: none;
+  }
+
+  .tabmenu input[type="radio"] + em {
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    margin: 0 2px 0;
+    padding: 4px 10px 0;
+    min-width: 80px;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+    background: #97a791;
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 30px;
+    cursor: pointer;
+  }
+
+  .tabmenu input[type="radio"]:checked + em {
+    background-color: #028760;
+    color: #fff;
+  }
+
+  .tabmenu label {
+    display: inline-block;
+    max-width: 33%;
+  }
+
+  /*
   #search_means {
     display: block;
     padding: 10px 10px 0;
@@ -105,6 +144,7 @@
     display: block;
     margin: 15px 0;
   }
+  */
 
 	.selectbox {
 		width: 92%;
@@ -194,7 +234,7 @@
 		text-decoration: none;
 		border-radius: 4px;
 		padding: 1px 6px;
-		margin: 0 auto;
+		margin: 10px auto;
 	}
 
 	.search_btn {
@@ -209,11 +249,11 @@
 	.delete_btn::before {
 		content: "";
 		position: absolute;
-		top: -6px;
-		left: 0;
+		top: -16px;
+		left: -20%;
 		right: 0;
-		width: 100%;
-		border-top: 3px solid #a5a5a5;
+		width: 200%;
+		border-top: 3px solid #bed3ca;
 	}
 
 	.delete_btn,
@@ -234,9 +274,13 @@
 		margin: 2px;
 	}
 
-    #change_log {
-        display :none;
-    }
+  .list {
+    width: 100%;
+  }
+
+  #change_log {
+      display :none;
+  }
 
 	.tooltip {
 		visibility: hidden;
