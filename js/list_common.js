@@ -39,8 +39,15 @@ $(function() {
             var tooltips = new Array();
             var minions = new Array();
             $(target_name).each(function(index){
-                tooltips.push($(this).val());
-                minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).val()+'"]'));
+                if ($(this).val().indexOf('job:') === 0) {
+                    var job_name = $(this).val().split(':')[1];
+                    tooltips.push(job_name);
+                    var $job_name = $content.find('.character__job__name[data-tooltip="'+job_name+'"]');
+                    minions.push($job_name.siblings('.character__job__icon'));
+                } else {
+                    tooltips.push($(this).val());
+                    minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).val()+'"]'));
+                }
             });
 
             for (var i = 0; i < minions.length; i++) {
@@ -149,6 +156,7 @@ $(function() {
                 deffered_list.push($ajax);
 			}
             $.when.apply($, deffered_list).done(function(){
+                sortByCharacterName();
                 getCharacterData();
             });
 		});
@@ -235,6 +243,7 @@ $(function() {
                 deffered_list.push($ajax);
 			}
             $.when.apply($, deffered_list).done(function(){
+                sortByCharacterName();
                 getCharacterData();
             });
 		});

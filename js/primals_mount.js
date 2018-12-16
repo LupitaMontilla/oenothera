@@ -60,6 +60,7 @@ function addCharaData(chara_id) {
 				$('#mount'+i+'_'+chara_id).append(mounts[i]);
 			}
 
+			$content.find('script').remove();
 			var cahara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
 			addCharacterData(cahara_data);
 		},

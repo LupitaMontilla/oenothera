@@ -4,7 +4,7 @@ function addCharaData(chara_id) {
 		type: 'GET',
 		dataType: 'json',
 		loadingHide: function(res){
-			sortByCharacterName();
+			//sortByCharacterName();
 		}
 	})
 	.then(
@@ -41,6 +41,7 @@ function addCharaData(chara_id) {
 				$minion.appendTo('#mount'+i+'_'+chara_id);
 			}
 
+			$content.find('script').remove();
 			var chara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
 			addCharacterData(chara_data);
 		},

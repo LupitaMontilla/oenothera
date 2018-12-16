@@ -161,6 +161,7 @@
 
   .freecompany_title .freecompany_name,
 	.linkshell_title .linkshell_name {
+		display: inline-block;
 		font-weight: bold;
     font-size: 1.5em;
 	}
