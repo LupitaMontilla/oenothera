@@ -165,6 +165,10 @@
     margin-bottom: 20px;
   }
 
+	#minion .search {
+		margin-top: 10px;
+	}
+
 	#freecompany,
 	#linkshell,
   #character,

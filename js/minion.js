@@ -1,9 +1,9 @@
 function addCharaData(chara_id) {
-	$.ajax({
+	return $.ajax({
 		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+chara_id,
 		type: 'GET',
 		dataType: 'json',
-		loadingHide: function(data){
+		loadingHide: function(res){
 			sortByCharacterName();
 		}
 	})
@@ -37,8 +37,12 @@ function addCharaData(chara_id) {
 			$('#chara_name_'+chara_id).append('<span class="character_world">'+user_world_text+'</span>');
 
 			for (i = 0; i < minions.length; i++) {
-				$('#mount'+i+'_'+chara_id).append(minions[i]);
+				var $minion = $(minions[i]).clone();
+				$minion.appendTo('#mount'+i+'_'+chara_id);
 			}
+
+			var chara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
+			addCharacterData(chara_data);
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('キャラクターの情報が取得できませんでした。');

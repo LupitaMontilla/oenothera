@@ -1,5 +1,5 @@
 function addCharaData(chara_id) {
-	$.ajax({
+	return $.ajax({
 		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+chara_id,
 		type: 'GET',
 		dataType: 'json',
@@ -45,7 +45,6 @@ function addCharaData(chara_id) {
 			$('.list').append('<li id="delete_'+chara_id+'" class="delete list_item" data-sortkey="'+(key_number++)+'"><a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a></li>');
 			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face list_item" data-sortkey="'+(key_number++)+'"></li><li id="chara_name_'+chara_id+'" class="chara_name list_item" data-sortkey="'+(key_number++)+'"></li>');
 			for (i = 0; i < mounts.length; i++) {
-				//$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
 				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
 			}
 
@@ -60,6 +59,9 @@ function addCharaData(chara_id) {
 			for (i = 0; i < mounts.length; i++) {
 				$('#mount'+i+'_'+chara_id).append(mounts[i]);
 			}
+
+			var cahara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
+			addCharacterData(cahara_data);
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('キャラクターの情報が取得できませんでした。');

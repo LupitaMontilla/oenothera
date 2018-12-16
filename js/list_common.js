@@ -28,6 +28,29 @@ $(function() {
         }
     });
 
+    $('#minion').on('click', '.search_btn', function(){
+        $('.mount_image.list_item').empty();
+
+        $('.chara_name.list_item').each(function(){
+            var chara_id = $(this).attr('id').split('_')[2];
+            var $content = $('#ldst_main_'+chara_id);
+
+            var target_name = $('#minion').children('div').find('input[type="text"]');
+            var tooltips = new Array();
+            var minions = new Array();
+            $(target_name).each(function(index){
+                tooltips.push($(this).val());
+                minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).val()+'"]'));
+            });
+
+            for (var i = 0; i < minions.length; i++) {
+                $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
+                var $minion = $(minions[i]).clone();
+                $minion.appendTo('#mount'+i+'_'+chara_id);
+			}
+        });
+    });
+
     $('#freecompany .search').on('click', '.freecompany_search.search_btn', function(){
         var freecompanyname = $('#freecompany .search_freecompany .freecompany_name').val();
         var worldname = $('#freecompany select[name="worldname"]').val();
@@ -114,9 +137,20 @@ $(function() {
 				}
 			)
 		).done(function(){
-			for (var i = 0; i < chara_id_list.length; i++) {
-				addCharaData(chara_id_list[i]);
+            resetCharacterData();
+            var deffered_list = [];
+            var char_list_length = chara_id_list.length;
+			for (var i = 0; i < char_list_length; i++) {
+                var $ajax;
+                (function(j){
+                    var chara_id = chara_id_list[j];
+                    $ajax = addCharaData(chara_id);
+                })(i);
+                deffered_list.push($ajax);
 			}
+            $.when.apply($, deffered_list).done(function(){
+                getCharacterData();
+            });
 		});
 	});
 
@@ -189,9 +223,20 @@ $(function() {
 				}
 			)
 		).done(function(){
-			for (var i = 0; i < chara_id_list.length; i++) {
-				addCharaData(chara_id_list[i]);
+            resetCharacterData();
+            var deffered_list = [];
+            var char_list_length = chara_id_list.length;
+			for (var i = 0; i < char_list_length; i++) {
+                var $ajax;
+                (function(j){
+                    var chara_id = chara_id_list[j];
+                    $ajax = addCharaData(chara_id);
+                })(i);
+                deffered_list.push($ajax);
 			}
+            $.when.apply($, deffered_list).done(function(){
+                getCharacterData();
+            });
 		});
 	});
 
@@ -222,7 +267,10 @@ $(function() {
             alert('すでに一覧に表示しているキャラクターです。');
             return false;
         }
-		addCharaData(chara_id);
+        $ajax = addCharaData(chara_id);
+        $ajax.done(function(){
+            getCharacterData();
+        });
 	});
 
 	$('#reset').on('click', '.reset_btn', function(){
@@ -270,6 +318,7 @@ function resetList() {
 	$('.linkshell_title .linkshell_name').empty();
     $('.linkshell_title .linkshell_name').attr('data-id', '');
     $('.linkshell_title').hide();
+    $('.back_list').empty();
 }
 
 function addWorldNameList() {
@@ -360,6 +409,20 @@ function addWorldNameList() {
         $select_worldname.append('</optgroup>');
     });
     $('select[name="worldname"]').append(worldnames);
+}
+
+var ldst = '';
+function resetCharacterData() {
+    ldst = '';
+}
+
+function addCharacterData(chara_data) {
+    ldst += chara_data;
+}
+
+function getCharacterData() {
+    $('.back_list').append(ldst);
+    $('.back_list').hide();
 }
 
 function sortByCharacterName() {
