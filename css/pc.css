@@ -66,9 +66,14 @@
 		text-align: center;
 	}
 
-	input[type="text"] {
+  input[type="text"] {
+		font-size: 14px;
+		height: 30px;
+		margin-bottom: 5px;
+		display: inline-block;
 		width: 300px;
     text-indent: 0.5em;
+    border: solid 1px silver;
 	}
 
   input[type="radio"] {
@@ -106,7 +111,7 @@
   .tabmenu input[type="radio"]:checked + em {
     background-color: #028760;
     color: #fff;
-		transition: all 300ms 50ms ease;
+		-webkit-transition: all 300ms 50ms ease;
   }
 
   #search_means {
@@ -141,6 +146,115 @@
 
   .selectbox {
     display: inline-block;
+    overflow: hidden;
+    width: 200px;
+    height: 32px;
+    /*margin: 2em auto;*/
+    position: relative;
+    border: solid 1px #bbb;
+    border-radius: 2px;
+    background: #fff;
+    margin-bottom: 5px;
+    vertical-align: top;
+    /*
+    width: 200px;
+    height: 32px;
+		background-color: #fff;
+		border: 1px solid silver;
+    margin-bottom: 5px;
+    */
+	}
+
+  .selectbox::before {
+    position: absolute;
+    top: 0.8em;
+    right: 0.9em;
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: "";
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #028760;
+  }
+
+  /*
+  .selectbox::before {
+    content: attr(data-text)"";
+    position: relative;
+    width: 200px;
+    display: inline-block;
+    text-indent: 0.5em;
+    text-align: left;
+    font-size: 14px;
+    padding: 5px;
+    background-color: #fff;
+    border: solid 1px silver;
+    margin-bottom: 5px;
+  }
+  */
+
+  /*
+	.selectbox::after {
+		position: absolute;
+		top: 35%;
+		right: 5%;
+		margin-top: -8px;
+		content: "▼";
+		color: #028760;
+		pointer-events: none;
+	}
+  */
+
+  .selectbox select {
+    position: absolute;
+    top: 6px;
+    width: 100%;
+    height: 20px;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    cursor: pointer;
+    text-indent: 0.5em;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    /*padding: 8px 38px 8px 8px;*/
+    color: #666;
+    vertical-align: bottom;
+    /*
+    opacity: 0;
+    width: 200px;
+		height: 32px;
+		border: none;
+		-webkit-appearance: none;
+		text-indent: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    */
+	}
+
+  .move_in {
+    /* openSpace -> moveIn */
+    -webkit-transform: translateX(-320px);
+    -webkit-animation: openSpace 0.2s ease forwards, moveIn 0.2s ease forwards;
+  }
+
+  @-webkit-keyframes openSpace {
+    to {
+      max-height: 42px;
+    }
+  }
+
+  @-webkit-keyframes moveIn {
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+    }
   }
 
 	ul,
@@ -242,12 +356,12 @@
 
 	.button {
 		color: #fff;
-		line-height: 1.2;
+		line-height: 1.2em;
 		text-align: center;
 		font-size: 14px;
 		text-decoration: none;
-		border-radius: 4px;
-		padding: 1px 6px;
+		-webkit-border-radius: 4px;
+		padding: 5px 10px;
 		margin-left: 5px;
 	}
 
@@ -261,6 +375,10 @@
 		vertical-align: super;
 		margin-right: 6px;
 	}
+
+  #reset {
+    margin-top: 14px;
+  }
 
 	#reset .reset_btn {
 		vertical-align: middle;

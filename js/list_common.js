@@ -489,7 +489,7 @@ function searchFreecompanyList($area, name, world) {
 
             var freecompany_ids = $content.find('.ldst__main').find('.entry__block');
             var freecompany_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox"><select name="freecompanys"><option value="">フリーカンパニーを選択</option></select></div>');
+            $result.append('<div class="selectbox move_in"><select name="freecompanys"><option value="">フリーカンパニーを選択</option></select></div>');
             $.each(freecompany_names, function(index, val){
                 var id = $(freecompany_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
@@ -529,7 +529,7 @@ function searchLinkshellList($area, name, world) {
 
             var linkshell_ids = $content.find('.ldst__main').find('.entry__link--line');
             var linkshell_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox"><select name="linkshells"><option value="">リンクシェルを選択</option></select></div>');
+            $result.append('<div class="selectbox move_in"><select name="linkshells"><option value="">リンクシェルを選択</option></select></div>');
             $.each(linkshell_names, function(index, val){
                 var id = $(linkshell_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
@@ -569,7 +569,7 @@ function searchCharacterList($area, name, world) {
 
             var character_ids = $content.find('.ldst__main').find('.entry__link');
             var character_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox"><select name="characters"><option value="">キャラクターを選択</option></select></div>');
+            $result.append('<div class="selectbox move_in"><select name="characters"><option value="">キャラクターを選択</option></select></div>');
             $.each(character_names, function(index, val){
                 var id = $(character_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
