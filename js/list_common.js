@@ -101,7 +101,7 @@ $(function() {
 			var freecompany_path = freecompany_id.slice(index);
 			freecompany_id = freecompany_path.split('/')[3];
 		}
-		if ($('#freecompany_name').attr('data-id') == freecompany_id) {
+		if ($('.freecompany_title .freecompany_name').attr('data-id') == freecompany_id) {
 			alert('現在表示しているフリーカンパニーです。');
 			return false;
 		}
@@ -115,9 +115,11 @@ $(function() {
 			})
 			.then(
 				function(res){
-					if (!$('.list:empty')) {
-						if (($('#freecompany_name').attr('data-id') !=null || $('#freecompany_name').attr('data-id') !=null) && !confirm('現在の一覧を消去してからフリーカンパニーを読み込みますがよろしいですか？')) {
-							return false;
+                    if (!$.isEmptyObject('.list')) {
+						if ($('.freecompany_title .freecompany_name').attr('data-id') != null || $('.linkshell_title .linkshell_name').attr('data-id') != null) {
+                            if (!confirm('現在の一覧を消去してからフリーカンパニーを読み込みますがよろしいですか？')) {
+                                return false;
+                            }
 						}
 					}
 					resetList();
@@ -188,7 +190,7 @@ $(function() {
 			var linkshell_path = linkshell_id.slice(index);
 			linkshell_id = linkshell_path.split('/')[3];
 		}
-		if ($('#linkshell_name').attr('data-id') == linkshell_id) {
+		if ($('.linkshell_title .linkshell_name').attr('data-id') == linkshell_id) {
 			alert('現在表示しているリンクシェルです。');
 			return false;
 		}
@@ -202,9 +204,11 @@ $(function() {
 			})
 			.then(
 				function(res){
-					if (!$('.list:empty')) {
-						if (($('#freecompany_name').attr('data-id') !=null || $('#freecompany_name').attr('data-id') !=null) && !confirm('現在の一覧を消去してからリンクシェルを読み込みますがよろしいですか？')) {
-							return false;
+					if (!$.isEmptyObject('.list')) {
+						if ($('.freecompany_title .freecompany_name').attr('data-id') != null || $('.linkshell_title .linkshell_name').attr('data-id') != null) {
+                            if (!confirm('現在の一覧を消去してからリンクシェルを読み込みますがよろしいですか？')) {
+                                return false;
+                            }
 						}
 					}
 					resetList();
