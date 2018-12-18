@@ -31,23 +31,39 @@ $(function() {
 
     $('#minion .minion_search input[type="text"]').on('focusout', function(){
         var search_string = $(this).val();
-        $('select[name="minion"] option').show();
+        $('select[name="minion"] option').removeClass('searched');
         $('select[name="minion"] option').filter(function(index){
             if (index !== 0) {
                 var name = $(this).val();
                 return !name.match(search_string);
             }
             return false;
-        }).hide();
+        }).addClass('searched');
     });
 
     $('#minion .minion_search .add.search_btn').on('click', function(){
         var selected = $('#minion .minion_search select[name="minion"]').val();
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly></div>');
+        console.log(selected);
+        if (selected == null || selected === '') {
+            alert('ミニオン名を選択してください。');
+            return false;
+        }
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly><a href="javascript:void(0);" class="delete_btn button">X</a></div>');
+        var $select = $('#minion .minion_search select[name="minion"]');
+        $select.find('option[value="'+selected+'"]').addClass('selected');
+        $select.find('option').attr('selected', false);
+        $($select.find('option')[0]).attr('selected', true)
+    });
+
+    $('#minion .items').on('click', '.delete_btn', function(){
+        var value = $(this).parent('div').children('input[type="text"]').val();
+        console.log(value);
+        $('#minion .minion_search select[name="minion"]').find('option[value="'+value+'"]').removeClass('selected');
+        $(this).parent('div').remove();
     });
 
     $('#minion').on('click', '.search .search_btn', function(){
-        $('.mount_image.list_item').empty();
+        $('.mount_image.list_item').remove();
         $('.chara_name.list_item').each(function(){
             var chara_id = $(this).attr('id').split('_')[2];
             var $content = $('#ldst_main_'+chara_id);
@@ -72,7 +88,6 @@ $(function() {
                 $('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+tooltips[i]+'</span></span></li>');
                 $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
                 var $minion = $(minions[i]).clone();
-                console.log($minion.attr('data-tooltip'));
                 $minion.appendTo('#mount'+i+'_'+chara_id);
 			}
             sortByCharacterName();

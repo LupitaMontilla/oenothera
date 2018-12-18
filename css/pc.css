@@ -147,22 +147,14 @@
   .selectbox {
     display: inline-block;
     overflow: hidden;
-    width: 200px;
+    width: 250px;
     height: 32px;
-    /*margin: 2em auto;*/
     position: relative;
     border: solid 1px #bbb;
     border-radius: 2px;
     background: #fff;
     margin-bottom: 5px;
     vertical-align: top;
-    /*
-    width: 200px;
-    height: 32px;
-		background-color: #fff;
-		border: 1px solid silver;
-    margin-bottom: 5px;
-    */
 	}
 
   .selectbox::before {
@@ -177,34 +169,6 @@
     border-right: 6px solid transparent;
     border-top: 6px solid #028760;
   }
-
-  /*
-  .selectbox::before {
-    content: attr(data-text)"";
-    position: relative;
-    width: 200px;
-    display: inline-block;
-    text-indent: 0.5em;
-    text-align: left;
-    font-size: 14px;
-    padding: 5px;
-    background-color: #fff;
-    border: solid 1px silver;
-    margin-bottom: 5px;
-  }
-  */
-
-  /*
-	.selectbox::after {
-		position: absolute;
-		top: 35%;
-		right: 5%;
-		margin-top: -8px;
-		content: "▼";
-		color: #028760;
-		pointer-events: none;
-	}
-  */
 
   .selectbox select {
     position: absolute;
@@ -222,20 +186,17 @@
     background-image: none;
     box-shadow: none;
     -webkit-appearance: none;
-    /*padding: 8px 38px 8px 8px;*/
     color: #666;
     vertical-align: bottom;
-    /*
-    opacity: 0;
-    width: 200px;
-		height: 32px;
-		border: none;
-		-webkit-appearance: none;
-		text-indent: 1em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    */
+	}
+
+	.selectbox select option.selected,
+	.selectbox select option.searched {
+		display: none;
+	}
+
+	#minion .items .delete_btn {
+		vertical-align: middle;
 	}
 
   .move_in {
