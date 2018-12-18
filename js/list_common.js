@@ -1,5 +1,6 @@
 $(function() {
     addWorldNameList();
+    addMinionSelectList();
     $('.loading').addClass('is-hide');
 
     $('#freecompany').show();
@@ -28,17 +29,33 @@ $(function() {
         }
     });
 
-    $('#minion').on('click', '.search_btn', function(){
-        $('.mount_image.list_item').empty();
+    $('#minion .minion_search input[type="text"]').on('focusout', function(){
+        var search_string = $(this).val();
+        $('select[name="minion"] option').show();
+        $('select[name="minion"] option').filter(function(index){
+            if (index !== 0) {
+                var name = $(this).val();
+                return !name.match(search_string);
+            }
+            return false;
+        }).hide();
+    });
 
+    $('#minion .minion_search .add.search_btn').on('click', function(){
+        var selected = $('#minion .minion_search select[name="minion"]').val();
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly></div>');
+    });
+
+    $('#minion').on('click', '.search .search_btn', function(){
+        $('.mount_image.list_item').empty();
         $('.chara_name.list_item').each(function(){
             var chara_id = $(this).attr('id').split('_')[2];
             var $content = $('#ldst_main_'+chara_id);
 
-            var target_name = $('#minion').children('div').find('input[type="text"]');
+            var $minions = $('#minion').children('.items').find('input[type="text"]');
             var tooltips = new Array();
             var minions = new Array();
-            $(target_name).each(function(index){
+            $minions.each(function(index){
                 if ($(this).val().indexOf('job:') === 0) {
                     var job_name = $(this).val().split(':')[1];
                     tooltips.push(job_name);
@@ -50,11 +67,15 @@ $(function() {
                 }
             });
 
+            var key_number = 4;
             for (var i = 0; i < minions.length; i++) {
+                $('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+tooltips[i]+'</span></span></li>');
                 $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
                 var $minion = $(minions[i]).clone();
+                console.log($minion.attr('data-tooltip'));
                 $minion.appendTo('#mount'+i+'_'+chara_id);
 			}
+            sortByCharacterName();
         });
     });
 
@@ -335,93 +356,50 @@ function resetList() {
 }
 
 function addWorldNameList() {
-    var worldnames = {
-        'データセンター': {
-            'Elemental': '_dc_Elemental',
-            'Gaia': '_dc_Gaia',
-            'Mana': '_dc_Mana',
-            'Aether': '_dc_Aether',
-            'Primal': '_dc_Primal',
-            'Chaos': '_dc_Chaos'
+    $.ajax({
+        url: '/json/worldname.json',
+        datatype: 'json',
+        loadingHide: function(res){}
+    })
+    .then(
+        function(worldnames){
+            var $select_worldname = $('select[name="worldname"]');
+            $.each(worldnames, function(label, option_list){
+                $select_worldname.append('<optgroup label="'+label+'">');
+                $.each(option_list, function(key, val){
+                    $select_worldname.append('<option value="'+val+'">'+key+'</option>');
+                });
+                $select_worldname.append('</optgroup>');
+            });
+            //$('select[name="worldname"]').append(worldnames);
         },
-        'ワールド': {
-            'Adamantoise': 'Adamantoise',
-            'Aegis': 'Aegis',
-            'Alexander': 'Alexander',
-            'Anima': 'Anima',
-            'Asura': 'Asura',
-            'Atomos': 'Atomos',
-            'Bahamut': 'Bahamut',
-            'Balmung': 'Balmung',
-            'Behemoth': 'Behemoth',
-            'Belias': 'Belias',
-            'Brynhildr': 'Brynhildr',
-            'Cactuar': 'Cactuar',
-            'Carbuncle': 'Carbuncle',
-            'Cerberus': 'Cerberus',
-            'Chocobo': 'Chocobo',
-            'Coeurl': 'Coeurl',
-            'Diabolos': 'Diabolos',
-            'Durandal': 'Durandal',
-            'Excalibur': 'Excalibur',
-            'Exodus': 'Exodus',
-            'Faerie': 'Faerie',
-            'Famfrit': 'Famfrit',
-            'Fenrir': 'Fenrir',
-            'Garuda': 'Garuda',
-            'Gilgamesh': 'Gilgamesh',
-            'Goblin': 'Goblin',
-            'Gungnir': 'Gungnir',
-            'Hades': 'Hades',
-            'Hyperion': 'Hyperion',
-            'Ifrit': 'Ifrit',
-            'Ixion': 'Ixion',
-            'Jenova': 'Jenova',
-            'Kujata': 'Kujata',
-            'Lamia': 'Lamia',
-            'Leviathan': 'Leviathan',
-            'Lich': 'Lich',
-            'Louisoix': 'Louisoix',
-            'Malboro': 'Malboro',
-            'Mandragora': 'Mandragora',
-            'Masamune': 'Masamune',
-            'Mateus': 'Mateus',
-            'Midgardsormr': 'Midgardsormr',
-            'Moogle': 'Moogle',
-            'Odin': 'Odin',
-            'Omega': 'Omega',
-            'Pandaemonium': 'Pandaemonium',
-            'Phoenix': 'Phoenix',
-            'Ragnarok': 'Ragnarok',
-            'Ramuh': 'Ramuh',
-            'Ridill': 'Ridill',
-            'Sargatanas': 'Sargatanas',
-            'Shinryu': 'Shinryu',
-            'Shiva': 'Shiva',
-            'Siren': 'Siren',
-            'Tiamat': 'Tiamat',
-            'Titan': 'Titan',
-            'Tonberry': 'Tonberry',
-            'Typhon': 'Typhon',
-            'Ultima': 'Ultima',
-            'Ultros': 'Ultros',
-            'Unicorn': 'Unicorn',
-            'Valefor': 'Valefor',
-            'Yojimbo': 'Yojimbo',
-            'Zalera': 'Zalera',
-            'Zeromus': 'Zeromus'
+        function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
         }
-    };
+    );
+}
 
-    var $select_worldname = $('select[name="worldname"]');
-    $.each(worldnames, function(label, option_list){
-        $select_worldname.append('<optgroup label="'+label+'">');
-        $.each(option_list, function(key, val){
-            $select_worldname.append('<option value="'+val+'">'+key+'</option>');
-        });
-        $select_worldname.append('</optgroup>');
-    });
-    $('select[name="worldname"]').append(worldnames);
+function addMinionSelectList() {
+    $.ajax({
+        url: '/json/minion.json',
+        datatype: 'json',
+        loadingHide: function(res){}
+    })
+    .then(
+        function(minions){
+            var $select_minion = $('select[name="minion"]');
+            $.each(minions, function(key, val){
+                $select_minion.append('<option value="'+val+'">'+key+'</option>');
+            });
+        },
+        function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
+        }
+    );
 }
 
 var ldst = '';
