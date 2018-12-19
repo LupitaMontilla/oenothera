@@ -44,20 +44,6 @@ $(function() {
         sortMinionByName();
     });
 
-    /*
-    $('#minion .minion_search select[name="minion"]').on('ontouchstart', function(){
-        var search_string = $('#minion .minion_search input[type="text"]').val();
-        $('select[name="minion"] option').removeClass('searched');
-        $('select[name="minion"] option').filter(function(index){
-            if (index !== 0) {
-                var name = $(this).val();
-                return !name.match(search_string);
-            }
-            return false;
-        }).addClass('searched');
-    });
-    */
-
     $('#minion .minion_search .add.search_btn').on('click', function(){
         var selected = $('#minion .minion_search select[name="minion"]').val();
         if (selected == null || selected === '') {

@@ -26,94 +26,106 @@
 </div>
 <div class="bg">
     <div class="main">
-        <div id="minion">
-            <div class="minion_search">
-                <input type="text" placeholder='ミニオン名を絞り込み　e.g. "マメット"'>
-                <div class="selectbox">
-                    <select name="minion">
-                        <option value="">ミニオン名を選択</option>
-                    </select>
-                    <div class="hidden_option">
-                        <div class="searched_option"></div>
-                        <div class="selected_option"></div>
-                    </div>
-                </div>
-                <a href="javascript:void(0);" class="add search_btn button">ミニオンを追加</a>
-            </div>
-            <div class="items"></div>
-            <div class="search"><a href="javascript:void(0);" class="search_btn button">ミニオンの所持状況を一覧に表示</a></div>
-        </div>
-        <div id="search_means">
-            <div class="enclosure tabmenu">
-                <div class="caption">一覧の表示方法</div>
-                <label for="means0"><input type="radio" name="means" value="fc" id="means0" checked="checked"><em>フリーカンパニーで一覧を表示</em></label>
-                <label for="means1"><input type="radio" name="means" value="ls" id="means1"><em>リンクシェルで一覧を表示</em></label>
-                <label for="means2"><input type="radio" name="means" value="cr" id="means2"><em>キャラクターを一覧に追加</em></label>
-            </div>
-        </div>
-        <div id="freecompany" class="search_mean acordion">
-            <div class="search_mean_name trigger arrow active" data-shortname="FC">フリーカンパニー</div>
-            <div class="acordion_tree">
-                <div class="search_freecompany">
-                    <div class="search">
-                        <input type="text" class="freecompany_name character_name" placeholder="FC名、または所属キャラ名を入力">
+        <div class="menu_wrap">
+            <input type="checkbox" id="menu_2">
+            <label for="menu_2"><span></span></label>
+            <div class="menu">
+                <div id="minion">
+                    <div class="minion_search">
+                        <input type="text" placeholder='ミニオン名を絞り込み　e.g. "マメット"'>
                         <div class="selectbox">
-                            <select name="worldname">
-                                <option value="">DC/ワールドを選択</option>
+                            <select name="minion">
+                                <option value="">ミニオン名を選択</option>
                             </select>
+                            <div class="hidden_option">
+                                <div class="searched_option"></div>
+                                <div class="selected_option"></div>
+                            </div>
                         </div>
-                        <a href="javascript:void(0);" class="freecompany_search search_btn button">FCを検索</a>
-                        <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
+                        <a href="javascript:void(0);" class="add search_btn button">ミニオンを追加</a>
                     </div>
-                    <div class="result">
+                    <div class="items"></div>
+                    <div class="search"><a href="javascript:void(0);" class="search_btn button">ミニオンの所持状況を一覧に表示</a></div>
+                </div>
+            </div>
+            <input type="checkbox" id="menu_1">
+            <label for="menu_1"><span></span></label>
+            <div class="menu">
+                <div id="search_means">
+                    <div class="enclosure tabmenu">
+                        <div class="caption">一覧の表示方法</div>
+                        <label for="means0"><input type="radio" name="means" value="fc" id="means0" checked="checked"><em>フリーカンパニーで一覧を表示</em></label>
+                        <label for="means1"><input type="radio" name="means" value="ls" id="means1"><em>リンクシェルで一覧を表示</em></label>
+                        <label for="means2"><input type="radio" name="means" value="cr" id="means2"><em>キャラクターを一覧に追加</em></label>
                     </div>
                 </div>
-                <input type="text" id="freecompany_id" class="input_id" placeholder="FCのID、またはURLを直接入力"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
-            </div>
-        </div>
-        <div id="linkshell" class="search_mean acordion">
-            <div class="search_mean_name trigger arrow active" data-shortname="LS">リンクシェル</div>
-            <div class="acordion_tree">
-                <div class="search_linkshell">
-                    <div class="search">
-                        <input type="text" class="search_name" placeholder="取得したいLS名を入力">
-                        <div class="selectbox">
-                            <select name="worldname">
-                                <option value="">DC/ワールドを選択</option>
-                            </select>
+                <div id="freecompany" class="search_mean acordion">
+                    <div class="search_mean_name trigger arrow active" data-shortname="FC">フリーカンパニー</div>
+                    <div class="acordion_tree">
+                        <div class="search_freecompany">
+                            <div class="search">
+                                <input type="text" class="freecompany_name character_name" placeholder="FC名、または所属キャラ名を入力">
+                                <div class="selectbox">
+                                    <select name="worldname">
+                                        <option value="">DC/ワールドを選択</option>
+                                    </select>
+                                </div>
+                                <div class="buttons">
+                                    <a href="javascript:void(0);" class="freecompany_search search_btn button">FCを検索</a>
+                                    <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
+                                </div>
+                            </div>
+                            <div class="result">
+                            </div>
                         </div>
-                        <a href="javascript:void(0);" class="search_btn button">LSを検索</a>
-                    </div>
-                    <div class="result">
+                        <input type="text" id="freecompany_id" class="input_id" placeholder="FCのID、またはURLを直接入力"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
                     </div>
                 </div>
-                <input type="text" id="linkshell_id" class="input_id" placeholder="LSのID、またはURLを直接入力"><a href="javascript:void(0);" class="ls_search search_btn button">LSのIDで一覧を表示</a>
-            </div>
-        </div>
-        <div id="character" class="search_mean acordion">
-            <div class="search_mean_name trigger arrow active" data-shortname="キャラクター">キャラクター</div>
-            <div class="acordion_tree">
-                <div class="search_character">
-                    <div class="search">
-                        <input type="text" class="character_name" placeholder="IDを取得したいキャラクター名を入力">
-                        <div class="selectbox">
-                            <select name="worldname">
-                                <option value="">DC/ワールドを選択</option>
-                            </select>
+                <div id="linkshell" class="search_mean acordion">
+                    <div class="search_mean_name trigger arrow active" data-shortname="LS">リンクシェル</div>
+                    <div class="acordion_tree">
+                        <div class="search_linkshell">
+                            <div class="search">
+                                <input type="text" class="search_name" placeholder="取得したいLS名を入力">
+                                <div class="selectbox">
+                                    <select name="worldname">
+                                        <option value="">DC/ワールドを選択</option>
+                                    </select>
+                                </div>
+                                <a href="javascript:void(0);" class="search_btn button">LSを検索</a>
+                            </div>
+                            <div class="result">
+                            </div>
                         </div>
-                        <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
-                    </div>
-                    <div class="result">
+                        <input type="text" id="linkshell_id" class="input_id" placeholder="LSのID、またはURLを直接入力"><a href="javascript:void(0);" class="ls_search search_btn button">LSのIDで一覧を表示</a>
                     </div>
                 </div>
-                <input type="text" class="input_id" placeholder="キャラクターのID、またはURLを直接入力"><a href="javascript:void(0);" class="chara_search search_btn button">キャラクターのIDで一覧に追加</a>
+                <div id="character" class="search_mean acordion">
+                    <div class="search_mean_name trigger arrow active" data-shortname="キャラクター">キャラクター</div>
+                    <div class="acordion_tree">
+                        <div class="search_character">
+                            <div class="search">
+                                <input type="text" class="character_name" placeholder="IDを取得したいキャラクター名を入力">
+                                <div class="selectbox">
+                                    <select name="worldname">
+                                        <option value="">DC/ワールドを選択</option>
+                                    </select>
+                                </div>
+                                <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
+                            </div>
+                            <div class="result">
+                            </div>
+                        </div>
+                        <input type="text" class="input_id" placeholder="キャラクターのID、またはURLを直接入力"><a href="javascript:void(0);" class="chara_search search_btn button">キャラクターのIDで一覧に追加</a>
+                    </div>
+                </div>
+                <div id="reset">
+                    <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
+                </div>
+                <div id="other">
+                    <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
+                </div>
             </div>
-        </div>
-        <div id="reset">
-            <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
-        </div>
-        <div id="other">
-            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
         </div>
         <div id="mount_list">
             <div class="freecompany_title">

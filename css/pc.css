@@ -16,6 +16,11 @@
 		padding: 10px 2px;
 	}
 
+	.menu_wrap #menu_1,
+	.menu_wrap #menu_2 {
+		display: none;
+	}
+
 	header {
     background-color: #1b1b1b;
 	}
@@ -319,6 +324,10 @@
     font-weight: normal;
     font-size: 0.9em;
   }
+
+	.buttons {
+		display: inline-block;
+	}
 
 	.button {
 		color: #fff;

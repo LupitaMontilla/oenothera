@@ -2,6 +2,7 @@
 @media screen and (max-width: 640px){
 	body {
 		background-color: #bed3ca;
+		margin: 0;
 		font-family: "メイリオ", Meiryo, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "ＭＳ Ｐゴシック", Arial, Verdana, sans-serif;
 	}
 
@@ -10,9 +11,81 @@
 	}
 
 	.main {
+		position: relative;
 		margin: 10px 0 10px;
 		border-radius: 6px;
 		padding: 10px 2px;
+	}
+
+	.menu_wrap {
+		position: absolute;
+		display: inline-block;
+		z-index: 10;
+		top: 0;
+		right: 20px;
+		padding: 10px;
+		/*background: rgba(200,200,200,0.9);*/
+	}
+
+	.menu_wrap .menu {
+		position: fixed;
+		top: 0;
+		right: -100vw;
+		width: 90%;
+		height: 100%;
+		cursor: pointer;
+		transition: 0.53s transform;
+		transition-timing-function: cubic-bezier(.38,.52,.23,.99);
+		background: #ede4cd;
+		border-left: solid 2px #666;
+		opacity: 0.98;
+	}
+
+	.menu_wrap #menu_1,
+	.menu_wrap #menu_2 {
+		position: absolute;
+		/*display: none;*/
+		opacity: 0;
+	}
+
+	.menu_wrap #menu_1:checked ~ .menu,
+	.menu_wrap #menu_2:checked ~ .menu {
+		transform: translateX(-100vw);
+	}
+
+	.menu_wrap #menu_1 ~ label,
+	.menu_wrap #menu_2 ~ label {
+		position: fixed;
+		right: 10px;
+		display: block;
+		padding: 0.5em;
+		cursor: pointer;
+		transition: 0.5s transform;
+		transition-timing-function: cubic-bezier(.61,-0.38,.37,1.27);
+		text-align: center;
+		color: #333;
+		border: solid 2px silver;
+		border-radius: 4px;
+		background: silver;
+		opacity: 0.9;
+		z-index: 20;
+	}
+
+	.menu_wrap #menu_1:checked ~ label,
+	.menu_wrap #menu_2:checked ~ label {
+		transform: translateX(-90vw);
+	}
+
+	.menu_wrap #menu_1 ~ label::before,
+	.menu_wrap #menu_2 ~ label::before {
+		font-family: 'FontAwesome';
+		content: 'Menu';
+		font-size: 1em;
+	}
+
+	.menu_wrap #menu_1:checked ~ label::before,
+	.menu_wrap #menu_2:checked ~ label::before {
+		content: 'X';
 	}
 
   header {
@@ -82,6 +155,7 @@
   input[readonly="readonly"] {
     background-color: #fff1cf;
     color: #666;
+		border: solid 1px #bbb;
   }
 
   .tabmenu {
@@ -330,6 +404,21 @@
   .chara_name .character_world::after {
     content: ")";
   }
+
+	.buttons {
+		width: 95%;
+		margin: 10px auto;
+		text-align: center;
+	}
+
+	.buttons .button {
+		display: inline-block;
+		width: 42%;
+	}
+
+	.buttons .button:first-child {
+		margin-right: 6%;
+	}
 
 	.button {
 		display: block;
