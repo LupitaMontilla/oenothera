@@ -31,6 +31,22 @@ $(function() {
 
     $('#minion .minion_search input[type="text"]').on('focusout', function(){
         var search_string = $(this).val();
+        var $minion_select = $('#minion .minion_search .selectbox select[name="minion"]');
+        var $searched_option = $('#minion .minion_search .selectbox .hidden_option .searched_option');
+        $searched_option.find('option').appendTo($minion_select);
+        $minion_select.find('option').filter(function(index){
+            if (index !== 0) {
+                var name = $(this).val();
+                return !name.match(search_string);
+            }
+            return false;
+        }).appendTo($searched_option);
+        sortMinionByName();
+    });
+
+    /*
+    $('#minion .minion_search select[name="minion"]').on('ontouchstart', function(){
+        var search_string = $('#minion .minion_search input[type="text"]').val();
         $('select[name="minion"] option').removeClass('searched');
         $('select[name="minion"] option').filter(function(index){
             if (index !== 0) {
@@ -40,26 +56,29 @@ $(function() {
             return false;
         }).addClass('searched');
     });
+    */
 
     $('#minion .minion_search .add.search_btn').on('click', function(){
         var selected = $('#minion .minion_search select[name="minion"]').val();
-        console.log(selected);
         if (selected == null || selected === '') {
             alert('ミニオン名を選択してください。');
             return false;
         }
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly><a href="javascript:void(0);" class="delete_btn button">X</a></div>');
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">X</a></div>');
         var $select = $('#minion .minion_search select[name="minion"]');
-        $select.find('option[value="'+selected+'"]').addClass('selected');
+        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
+        $select.find('option[value="'+selected+'"]').appendTo($selected_option);
         $select.find('option').attr('selected', false);
         $($select.find('option')[0]).attr('selected', true)
     });
 
     $('#minion .items').on('click', '.delete_btn', function(){
+        var $minion_select = $('#minion .minion_search select[name="minion"]');
+        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
         var value = $(this).parent('div').children('input[type="text"]').val();
-        console.log(value);
-        $('#minion .minion_search select[name="minion"]').find('option[value="'+value+'"]').removeClass('selected');
+        $minion_select.append($selected_option.find('option[value="'+value+'"]'));
         $(this).parent('div').remove();
+        sortMinionByName();
     });
 
     $('#minion').on('click', '.search .search_btn', function(){
@@ -406,8 +425,11 @@ function addMinionSelectList() {
         function(minions){
             var $select_minion = $('select[name="minion"]');
             $.each(minions, function(key, val){
-                $select_minion.append('<option value="'+val+'">'+key+'</option>');
+                var value = val['value'];
+                var kana = val['kana'];
+                $select_minion.append('<option value="'+value+'" data-kana="'+kana+'">'+key+'</option>');
             });
+            sortMinionByName();
         },
         function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
@@ -429,6 +451,19 @@ function addCharacterData(chara_data) {
 function getCharacterData() {
     $('.back_list').append(ldst);
     $('.back_list').hide();
+}
+
+function sortMinionByName() {
+    var $minion_select = $('#minion .minion_search select[name="minion"]');
+    $minion_select.html(
+        $minion_select.find('option').sort(function(a, b){
+            if ($(a).attr('data-kana') > $(b).attr('data-kana')) return 1;
+            if ($(a).attr('data-kana') < $(b).attr('data-kana')) return -1;
+            return 0;
+        })
+    );
+    $minion_select.find('option').attr('selected', false);
+    $($minion_select.find('option')[0]).attr('selected', true)
 }
 
 function sortByCharacterName() {

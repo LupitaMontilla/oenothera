@@ -75,6 +75,15 @@
     display: inline-block;
   }
 
+  input[type="radio"] {
+    display: inline-block;
+  }
+
+  input[readonly="readonly"] {
+    background-color: #fff1cf;
+    color: #666;
+  }
+
   .tabmenu {
     position: relative;
     text-align: center;
@@ -113,6 +122,7 @@
     max-width: 33%;
   }
 
+  /*
 	.selectbox {
 		width: 92%;
 		background-color: #fff;
@@ -120,7 +130,9 @@
 		border: 1px solid #999;
 		margin: 10px auto;
 	}
+  */
 
+  /*
 	.selectbox::after {
 		position: absolute;
 		top: 35%;
@@ -130,10 +142,63 @@
 		color: #333;
 		pointer-events: none;
 	}
+  */
+
+  .selectbox {
+    display: block;
+    overflow: hidden;
+    width: 250px;
+    width: 92%;
+    height: 48px;
+    position: relative;
+    border: solid 1px #bbb;
+    border-radius: 2px;
+    background: #fff;
+    margin: 10px auto;
+    vertical-align: top;
+	}
+
+  .selectbox::before {
+    position: absolute;
+    top: 1.2em;
+    right: 1.2em;
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: "";
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #028760;
+  }
+
+  .selectbox select {
+    position: absolute;
+    top: 14px;
+    width: 100%;
+    height: 20px;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    cursor: pointer;
+    text-indent: 0.5em;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    color: #666;
+    font-size: 16px;
+    vertical-align: bottom;
+	}
+
+  .selectbox .hidden_option {
+    display: none;
+  }
 
 	#minion .items input[type="text"] {
 		display: inline-block;
-		width: 75%;
+		width: 72%;
 		margin: 10px 15px;
 	}
 

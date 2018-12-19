@@ -28,12 +28,16 @@
     <div class="main">
         <div id="minion">
             <div class="minion_search">
+                <input type="text" placeholder='ミニオン名を絞り込み　e.g. "マメット"'>
                 <div class="selectbox">
                     <select name="minion">
                         <option value="">ミニオン名を選択</option>
                     </select>
+                    <div class="hidden_option">
+                        <div class="searched_option"></div>
+                        <div class="selected_option"></div>
+                    </div>
                 </div>
-                <input type="text" placeholder="ミニオン名を絞り込み　e.g.マメット">
                 <a href="javascript:void(0);" class="add search_btn button">ミニオンを追加</a>
             </div>
             <div class="items"></div>

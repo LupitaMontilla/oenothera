@@ -80,6 +80,12 @@
     display: inline-block;
   }
 
+  input[readonly="readonly"] {
+    background-color: #fff1cf;
+    color: #666;
+    border: solid 1px silver;
+  }
+
   .tabmenu {
     position: relative;
     width: 80%;
@@ -190,10 +196,9 @@
     vertical-align: bottom;
 	}
 
-	.selectbox select option.selected,
-	.selectbox select option.searched {
-		display: none;
-	}
+  .selectbox .hidden_option {
+    display: none;
+  }
 
 	#minion .items .delete_btn {
 		vertical-align: middle;
