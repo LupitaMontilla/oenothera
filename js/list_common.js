@@ -3,28 +3,30 @@ $(function() {
     addMinionSelectList();
     $('.loading').addClass('is-hide');
 
-    $('#freecompany').show();
-    $('#linkshell').hide();
-    $('#character').hide();
+    if (!window.matchMedia('(max-width: 640px)').matches) {
+        $('#freecompany').parents('li').show();
+        $('#linkshell').parents('li').hide();
+        $('#character').parents('li').hide();
+    }
     $('.freecompany_title').hide();
     $('.linkshell_title').hide();
 
     $('input[name="means"]:radio').on('change', function(){
         switch ($(this).val()) {
             case 'fc':
-                $('#freecompany').show();
-                $('#linkshell').hide();
-                $('#character').hide();
+                $('#freecompany').parents('li').show();
+                $('#linkshell').parents('li').hide();
+                $('#character').parents('li').hide();
                 break;
             case 'ls':
-                $('#freecompany').hide();
-                $('#linkshell').show();
-                $('#character').hide();
+                $('#freecompany').parents('li').hide();
+                $('#linkshell').parents('li').show();
+                $('#character').parents('li').hide();
                 break;
             case 'cr':
-                $('#freecompany').hide();
-                $('#linkshell').hide();
-                $('#character').show();
+                $('#freecompany').parents('li').hide();
+                $('#linkshell').parents('li').hide();
+                $('#character').parents('li').show();
                 break;
         }
     });
@@ -50,7 +52,7 @@ $(function() {
             alert('ミニオン名を選択してください。');
             return false;
         }
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">X</a></div>');
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
         var $select = $('#minion .minion_search select[name="minion"]');
         var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
         $select.find('option[value="'+selected+'"]').appendTo($selected_option);
