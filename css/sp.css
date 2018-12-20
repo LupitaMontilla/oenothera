@@ -12,9 +12,9 @@
 
 	.main {
 		position: relative;
-		margin: 10px 0 10px;
+		margin: 10px 0 0;
 		border-radius: 6px;
-		padding: 10px 2px;
+		padding: 10px 2px 0;
 	}
 
 	.menu_wrap {
@@ -68,7 +68,7 @@
 	}
 
 	.menu_wrap #menu_1:checked ~ label {
-		transform: translateX(-90vw);
+		transform: translateX(-88vw);
     background-color: #e83929;
     border: solid 2px#8f2e14;
     color: #fdeff2;
@@ -381,7 +381,7 @@
 
   .freecompany_title,
   .linkshell_title {
-    margin-top: 20px;
+    margin-top: 0;
   }
 
   .freecompany_title .freecompany_name,
@@ -441,15 +441,16 @@
 	}
 
 	.chara_face {
-		width: 15%;
-		padding-left: 4px;
+		width: 40px;
+		height: 40px;
+		padding-left: 2px;
 	}
 
 	.chara_name {
 		vertical-align: top;
 		font-weight: bold;
-		width: 75%;
-        margin-left: 10px;
+		width: 85%;
+		margin-left: 10px;
 	}
 
 	.chara_name em {
@@ -533,17 +534,68 @@
 	}
 
 	#mount_list {
-		padding: 0 5px;
+		padding: 0 8px;
 	}
 
 	#mount_list .mount_image {
 		position: relative;
-		margin: 2px;
+		display: inline-block;
+		height: 40px;
+		width: 40px;
+		background-color: #92b5a9;
+		margin: 0 2px;
+		border-radius: 4px;
+	}
+
+	#mount_list .break {
+		display: block;
+	}
+
+	#mount_list .break::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		display: block;
+		width: 100vw;
+		border-top: 3px solid #bed3ca;
+	}
+
+	#mount_list .delete {
+		position: absolute;
+		right: 10px;
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		margin: 10px 2px 0;
+	}
+
+	#mount_list .delete .delete_btn {
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		vertical-align: baseline;
+	}
+
+	#mount_list .delete .delete_btn::after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: "×";
+		display: block;
+		width: 40px;
+		height: 40px;
+		background-color: #e83929;
+		font-size: 2em;
 	}
 
   .list {
     width: 100%;
-    margin-top: 0;
+    margin-top: 20px;
+		margin-bottom: 0;
   }
 
 	.list .delete.list_item {

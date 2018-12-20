@@ -43,6 +43,7 @@ function addCharaData(chara_id) {
 
 			$content.find('script').remove();
 			var chara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
+			setDeleteButtonRightPosition()
 			addCharacterData(chara_data);
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {

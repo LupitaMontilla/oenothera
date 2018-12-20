@@ -62,6 +62,7 @@ function addCharaData(chara_id) {
 
 			$content.find('script').remove();
 			var cahara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
+			setDeleteButtonRightPosition()
 			addCharacterData(cahara_data);
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {

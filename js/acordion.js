@@ -17,8 +17,6 @@ if (window.matchMedia('(max-width: 640px)').matches) {
             $this.parent().toggleClass('open');
 
             if (!e.data.multiple) {
-                console.log($this.html());
-                console.log($el.find('.submenu').not($next).html());
                 $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
             };
         }

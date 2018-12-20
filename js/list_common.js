@@ -441,6 +441,16 @@ function getCharacterData() {
     $('.back_list').hide();
 }
 
+function setDeleteButtonRightPosition() {
+    if (window.matchMedia('(max-width: 640px)').matches) {
+        var list_width = $('#mount_list').innerWidth();
+        var delete_btn_right = (list_width % (2 + 40 + 2)) - (8 - 2);
+        console.log(list_width);
+        console.log(delete_btn_right);
+        $('#mount_list .delete').css('right', delete_btn_right+'px');
+    }
+}
+
 function sortMinionByName() {
     var $minion_select = $('#minion .minion_search select[name="minion"]');
     $minion_select.html(
