@@ -37,7 +37,8 @@ function addCharaData(chara_id) {
 
 			var mount_names = new Array();
 			for (var i = 0; i < mounts.length; i++) {
-				mount_names.push($(mounts[i]).parent('.character__item_icon.js__tooltip').attr('data-tooltip'));
+				var tooltip = $(mounts[i]).parent('.character__item_icon.js__tooltip').attr('data-tooltip');
+				mount_names.push(tooltip);
 			}
 
 			var key_number = 0;
@@ -45,7 +46,11 @@ function addCharaData(chara_id) {
 			$('.list').append('<li id="delete_'+chara_id+'" class="delete list_item" data-sortkey="'+(key_number++)+'"><a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a></li>');
 			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face list_item" data-sortkey="'+(key_number++)+'"></li><li id="chara_name_'+chara_id+'" class="chara_name list_item" data-sortkey="'+(key_number++)+'"></li>');
 			for (i = 0; i < mounts.length; i++) {
-				$('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+mount_names[i]+'</span></span></li>');
+				var mount_id = 'mount'+i+'_'+chara_id;
+				$('.list').append('<li id="'+mount_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"></li>');
+				if (mount_names[i] != null) {
+					$('#'+mount_id).append('<span class="tooltip"><span class="text">'+mount_names[i]+'</span></span>');
+				}
 			}
 
 			var user_face_image = $content.find('.frame__chara__face').html();

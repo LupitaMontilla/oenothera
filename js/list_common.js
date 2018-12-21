@@ -31,6 +31,19 @@ $(function() {
         }
     });
 
+    $('#menu_1').on('change', function(){
+        //var is_check = $(this).prop('checked');
+        $('html').toggleClass('scroll-prevent');
+    });
+
+    $('#minion .minion_search select[name="minion"]').on('change', function(){
+        if ($(this).val() === '') {
+            $('#minion .minion_search .add.search_btn').addClass('disable');
+        } else {
+            $('#minion .minion_search .add.search_btn').removeClass('disable');
+        }
+    });
+
     $('#minion .minion_search input[type="text"]').on('focusout', function(){
         var search_string = $(this).val();
         var $minion_select = $('#minion .minion_search .selectbox select[name="minion"]');
@@ -57,7 +70,8 @@ $(function() {
         var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
         $select.find('option[value="'+selected+'"]').appendTo($selected_option);
         $select.find('option').attr('selected', false);
-        $($select.find('option')[0]).attr('selected', true)
+        $($select.find('option')[0]).attr('selected', true);
+        $(this).addClass('disable');
     });
 
     $('#minion .items').on('click', '.delete_btn', function(){
@@ -110,9 +124,11 @@ $(function() {
 
     $('#freecompany .result').on('change', 'select[name="freecompanys"]', function(){
         var freecompany_id = $(this).val();
-        if (!freecompany_id) {
+        if (freecompany_id === '') {
+            $('#freecompany .view .fc_search').addClass('disable');
+        } else {
             $(this).parents('.search_mean').find('.input_id').val('');
-            return false;
+            $('#freecompany .view .fc_search').removeClass('disable');
         }
         $(this).parents('.search_mean').find('.input_id').val(freecompany_id);
     });
@@ -126,11 +142,21 @@ $(function() {
 
     $('#freecompany .result').on('change', 'select[name="characters"]', function(){
         var character_id = $(this).val();
-        if (!character_id) {
+        if (character_id === '') {
             $('#freecompany_id').val('');
-            return false;
+            $('#freecompany .view .fc_search').addClass('disable');
+        } else {
+            getMyCharacterData(character_id);
+            $('#freecompany .view .fc_search').removeClass('disable');
         }
-        getMyCharacterData(character_id);
+    });
+
+    $('#freecompany .view .input_id').on('focusout', function(){
+        if ($(this).val() === '') {
+            $('#freecompany .view .fc_search').addClass('disable');
+        } else {
+            $('#freecompany .view .fc_search').removeClass('disable');
+        }
     });
 
 	$('#freecompany').on('click', '.fc_search.search_btn', function(){
@@ -216,10 +242,20 @@ $(function() {
 
     $('#linkshell .result').on('change', 'select[name="linkshells"]', function(){
         var linkshell_id = $(this).parents('.search_mean').find('select[name="linkshells"]').val();
-        if (!linkshell_id) {
-            $(this).parents('.search_mean').find('.input_id').val('');
+        if (linkshell_id === '') {
+            $('#linkshell .view .ls_search').addClass('disable');
+        } else {
+            $('#linkshell .view .ls_search').removeClass('disable');
         }
         $(this).parents('.search_mean').find('.input_id').val(linkshell_id);
+    });
+
+    $('#linkshell .view .input_id').on('focusout', function(){
+        if ($(this).val() === '') {
+            $('#linkshell .view .ls_search').addClass('disable');
+        } else {
+            $('#linkshell .view .ls_search').removeClass('disable');
+        }
     });
 
 	$('#linkshell').on('click', '.ls_search.search_btn', function(){
@@ -306,6 +342,19 @@ $(function() {
     $('#character .result').on('change', 'select[name="characters"]', function(){
         var character_id = $(this).val();
         $(this).parents('.search_mean').find('.input_id').val(character_id);
+        if (character_id === '') {
+            $('#character .view .chara_search').addClass('disable');
+        } else {
+            $('#character .view .chara_search').removeClass('disable');
+        }
+    });
+
+    $('#character .view .input_id').on('focusout', function(){
+        if ($(this).val() === '') {
+            $('#character .view .chara_search').addClass('disable');
+        } else {
+            $('#character .view .chara_search').removeClass('disable');
+        }
     });
 
 	$('#character').on('click', '.chara_search.search_btn', function(){
