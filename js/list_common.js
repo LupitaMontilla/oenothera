@@ -1,6 +1,8 @@
 $(function() {
     addWorldNameList();
     addMinionSelectList();
+    addMountSelectList();
+    addJobSelectList();
     $('.loading').addClass('is-hide');
 
     if (!window.matchMedia('(max-width: 640px)').matches) {
@@ -32,16 +34,30 @@ $(function() {
     });
 
     $('#menu_1').on('change', function(){
-        //var is_check = $(this).prop('checked');
         $('html').toggleClass('scroll-prevent');
     });
 
     $('#minion .minion_search select[name="minion"]').on('change', function(){
         if ($(this).val() === '') {
-            $('#minion .minion_search .add.search_btn').addClass('disable');
-        } else {
-            $('#minion .minion_search .add.search_btn').removeClass('disable');
+            return false;
         }
+        //$('#minion .minion_search .add.search_btn').addClass('disable');
+        //$('#minion .minion_search .add.search_btn').removeClass('disable');
+        //var selected = $('#minion .minion_search select[name="minion"]').val();
+        var selected = $(this).val();
+        /*
+        if (selected == null || selected === '') {
+            alert('ミニオン名を選択してください。');
+            return false;
+        }
+        */
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
+        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option').attr('selected', false);
+        //$(this).find('option')[0].attr('selected', true);
+        $($(this).find('option')[0]).attr('selected', true);
+        //$(this).addClass('disable');
     });
 
     $('#minion .minion_search input[type="text"]').on('focusout', function(){
@@ -59,6 +75,7 @@ $(function() {
         sortMinionByName();
     });
 
+    /*
     $('#minion .minion_search .add.search_btn').on('click', function(){
         var selected = $('#minion .minion_search select[name="minion"]').val();
         if (selected == null || selected === '') {
@@ -73,6 +90,52 @@ $(function() {
         $($select.find('option')[0]).attr('selected', true);
         $(this).addClass('disable');
     });
+    */
+
+    $('#minion .mount_search select[name="mount"]').on('change', function(){
+        if ($(this).val() === '') {
+            return false;
+        }
+        var selected = $(this).val();
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        var $selected_option = $('#minion .mount_search .selectbox .hidden_option .selected_option');
+        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option').attr('selected', false);
+        //$(this).find('option')[0].attr('selected', true);
+        $($(this).find('option')[0]).attr('selected', true);
+    });
+
+    $('#minion .mount_search input[type="text"]').on('focusout', function(){
+        var search_string = $(this).val();
+        var $mount_select = $('#minion .mount_search .selectbox select[name="mount"]');
+        var $searched_option = $('#minion .mount_search .selectbox .hidden_option .searched_option');
+        $searched_option.find('option').appendTo($mount_select);
+        $mount_select.find('option').filter(function(index){
+            if (index !== 0) {
+                var name = $(this).val();
+                return !name.match(search_string);
+            }
+            return false;
+        }).appendTo($searched_option);
+        sortMinionByName();
+    });
+
+    //$('#minion .job_search .add.search_btn').on('click', function(){
+    $('#minion .job_search select[name="job_class"]').on('change', function(){
+        //var selected = $('#minion .job_search select[name="job_class"]').val();
+        var selected = $(this).val();
+        if (selected == null || selected === '') {
+            //alert('ジョブ / クラスを選択してください。');
+            return false;
+        }
+        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        var $selected_option = $('#minion .job_search .selectbox .hidden_option .selected_option');
+        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option').attr('selected', false);
+        //$(this).find('option')[0].attr('selected', true);
+        $($(this).find('option')[0]).attr('selected', true);
+        //$(this).addClass('disable');
+    });
 
     $('#minion .items').on('click', '.delete_btn', function(){
         var $minion_select = $('#minion .minion_search select[name="minion"]');
@@ -85,6 +148,8 @@ $(function() {
 
     $('#minion').on('click', '.search .search_btn', function(){
         $('.mount_image.list_item').remove();
+        $('.job_icon.list_item').remove();
+        $('.job_level.list_item').remove();
         $('.chara_name.list_item').each(function(){
             var chara_id = $(this).attr('id').split('_')[2];
             var $content = $('#ldst_main_'+chara_id);
@@ -94,10 +159,22 @@ $(function() {
             var minions = new Array();
             $minions.each(function(index){
                 if ($(this).val().indexOf('job:') === 0) {
-                    var job_name = $(this).val().split(':')[1];
+                    var job_name;
+                    var job_names = $(this).val().split(':')[1].split(' / ');
+                    var $job_name;
+                    for (var i = 0; i < job_names.length; i++) {
+                        var $job = $content.find('.character__job__name:contains("'+job_names[i]+'")');
+                        if ($job.length) {
+                            job_name = job_names[i];
+                            $job_name = $job;
+                        }
+                    }
+                    var $job_icon = $job_name.siblings('.character__job__icon');
+                    var $job_level = $job_name.siblings('.character__job__level');
                     tooltips.push(job_name);
-                    var $job_name = $content.find('.character__job__name[data-tooltip="'+job_name+'"]');
-                    minions.push($job_name.siblings('.character__job__icon'));
+                    minions.push($job_icon);
+                    tooltips.push('');
+                    minions.push($job_level);
                 } else {
                     tooltips.push($(this).val());
                     minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).val()+'"]'));
@@ -106,9 +183,18 @@ $(function() {
 
             var key_number = 4;
             for (var i = 0; i < minions.length; i++) {
-                $('.list').append('<li id="mount'+i+'_'+chara_id+'" class="mount_image list_item" data-sortkey="'+(key_number++)+'"><span class="tooltip"><span class="text">'+tooltips[i]+'</span></span></li>');
-                $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
                 var $minion = $(minions[i]).clone();
+                var item_type = 'mount_image icon';
+                if ($minion.attr('class') === 'character__job__icon') {
+                    item_type = 'job_icon icon';
+                }
+                if ($minion.attr('class') === 'character__job__level') {
+                    item_type = 'job_level';
+                }
+                $('.list').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
+                if (tooltips[i] !== '') {
+                    $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
+                }
                 $minion.appendTo('#mount'+i+'_'+chara_id);
 			}
             sortByCharacterName();
@@ -442,7 +528,6 @@ function addWorldNameList() {
                 });
                 $select_worldname.append('</optgroup>');
             });
-            //$('select[name="worldname"]').append(worldnames);
         },
         function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
@@ -476,6 +561,53 @@ function addMinionSelectList() {
     );
 }
 
+function addMountSelectList() {
+    $.ajax({
+        url: '/json/mount.json',
+        datatype: 'json',
+        loadingHide: function(res){}
+    })
+    .then(
+        function(minions){
+            var $select_minion = $('select[name="mount"]');
+            $.each(minions, function(key, val){
+                $select_minion.append('<option value="'+val+'">'+val+'</option>');
+            });
+            sortMinionByName();
+        },
+        function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
+        }
+    );
+}
+
+function addJobSelectList() {
+    $.ajax({
+        url: '/json/class.json',
+        datatype: 'json',
+        loadingHide: function(res){}
+    })
+    .then(
+        function(jobs){
+            var $select_job_class = $('select[name="job_class"]');
+            $.each(jobs, function(label, option_list){
+                $select_job_class.append('<optgroup label="'+label+'">');
+                $.each(option_list, function(key, val){
+                    $select_job_class.append('<option value="job:'+val+'">'+val+'</option>');
+                });
+                $select_job_class.append('</optgroup>');
+            });
+        },
+        function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log("XMLHttpRequest: " + XMLHttpRequest.status);
+			console.log("textStatus: " + textStatus);
+			console.log("errorThrown: " + errorThrown.message);
+        }
+    );
+}
+
 var ldst = '';
 function resetCharacterData() {
     ldst = '';
@@ -494,8 +626,6 @@ function setDeleteButtonRightPosition() {
     if (window.matchMedia('(max-width: 640px)').matches) {
         var list_width = $('#mount_list').innerWidth();
         var delete_btn_right = (list_width % (2 + 40 + 2)) - (8 - 2);
-        console.log(list_width);
-        console.log(delete_btn_right);
         $('#mount_list .delete').css('right', delete_btn_right+'px');
     }
 }

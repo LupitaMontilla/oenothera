@@ -372,16 +372,31 @@
 		margin: 0;
 	}
 
-	#mount_list .mount_image {
+	#mount_list .mount_image,
+	#mount_list .job_icon,
+	#mount_list .job_level {
+		box-sizing: border-box;
 		position: relative;
 		width: 30px;
 		height: 30px;
-		background-color: #92b5a9;
 		margin: 5px 2px 5px 3px;
 		border-radius: 3px;
 	}
 
-	#mount_list .mount_image img {
+	#mount_list .mount_image {
+		background-color: #92b5a9;
+	}
+
+	#mount_list .job_icon,
+	#mount_list .job_level {
+		background-color: #95949a;
+	}
+
+	#mount_list .job_level {
+		border: 2px solid transparent;
+	}
+
+	#mount_list .list_item.icon img {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -389,10 +404,37 @@
 		height: 30px;
 	}
 
+	#mount_list .job_level div {
+		position: absolute;
+		width: 26px;
+		height: 26px;
+		line-height: 26px;
+		text-align: center;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		background-color: #5a5359;
+		font-style: normal;
+		color: #f8e58c;
+	}
+
+	#mount_list .job_level div::before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		top: 7px;
+		left: -2px;
+		border-left: 6px solid #f8f4e6;
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+	}
+
 	#mount_list .chara_face {
 		width: 40px;
 		height: 40px;
 		margin-left: 40px;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
 	}
 
 	#mount_list th {
@@ -496,7 +538,7 @@
 
 	.tooltip > .text::after {
 		content: " ";
-		postion: absolute;
+		position: absolute;
 		top: 100%;
 		left: 50%;
 		margin-left: -5px;
@@ -505,7 +547,7 @@
 		border-color: black transparent transparent transparent;
 	}
 
-	.mount_image:hover > .tooltip {
+	.list_item:hover > .tooltip {
 		visibility: visible;
 		opacity: 1;
 	}

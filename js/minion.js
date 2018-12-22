@@ -3,15 +3,13 @@ function addCharaData(chara_id) {
 		url: '/php/ldst_access.php?url='+LODESTONE_URL+'/character/'+chara_id,
 		type: 'GET',
 		dataType: 'json',
-		loadingHide: function(res){
-			//sortByCharacterName();
-		}
+		loadingHide: function(res){}
 	})
 	.then(
 		function(res){
 			$content = $(res.data);
 
-            var target_name = $('#minion').children('div').find('input[type="text"]');
+			var target_name = $('#minion').find('input[readonly="readonly"]');
             var tooltips = new Array();
 
             var minions = new Array();

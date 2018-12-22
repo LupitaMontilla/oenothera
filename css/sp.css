@@ -72,6 +72,7 @@
 
 	.menu_wrap #menu_1 ~ label {
 		position: fixed;
+		top: 10px;
 		right: 10px;
 		display: block;
 		padding: 0.5em;
@@ -175,6 +176,7 @@
 
   .submenu .subcontent {
     border-bottom: 1px solid #4b4a5e;
+		padding: 0 20px;
   }
 
   header {
@@ -224,10 +226,15 @@
 	}
 
 	input[type="text"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 		box-sizing: border-box;
 		display: block;
 		width: 100%;
 		height: 48px;
+		border: 1px solid #bbb;
+    border-radius: 2px;
 		margin: 10px auto 5px;
 		font-size: 16px;
     text-indent: 1em;
@@ -235,14 +242,16 @@
 	}
 
   input[type="radio"] {
-    display: inline-block;
-  }
-
-  input[type="radio"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
     display: inline-block;
   }
 
   input[readonly="readonly"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
     background-color: #fff1cf;
     color: #666;
 		border: solid 1px #bbb;
@@ -286,28 +295,6 @@
     max-width: 33%;
   }
 
-  /*
-	.selectbox {
-		width: 92%;
-		background-color: #fff;
-		position: relative;
-		border: 1px solid #999;
-		margin: 10px auto;
-	}
-  */
-
-  /*
-	.selectbox::after {
-		position: absolute;
-		top: 35%;
-		right: 3%;
-		margin-top: -8px;
-		content: "▼";
-		color: #333;
-		pointer-events: none;
-	}
-  */
-
   .selectbox {
 		box-sizing: border-box;
 		position: relative;
@@ -315,7 +302,7 @@
 		height: 48px;
     display: block;
     overflow: hidden;
-    border: solid 1px #bbb;
+    border: 1px solid #bbb;
     border-radius: 2px;
     background: #fff;
     margin: 10px auto;
@@ -323,23 +310,26 @@
 	}
 
   .selectbox::before {
+		content: "";
     position: absolute;
     top: 1.2em;
     right: 1.2em;
     width: 0;
     height: 0;
     padding: 0;
-    content: "";
+		border-top: 6px solid #028760;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #028760;
   }
 
   .selectbox select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
     position: absolute;
-    top: 14px;
+    top: 0;
     width: 100%;
-    height: 20px;
+    height: 48px;
     padding-left: 0.5em;
     padding-right: 1em;
     cursor: pointer;
@@ -350,24 +340,49 @@
     background: transparent;
     background-image: none;
     box-shadow: none;
-    -webkit-appearance: none;
     color: #666;
     font-size: 16px;
-    vertical-align: bottom;
+    vertical-align: baseline;
 	}
 
   .selectbox .hidden_option {
     display: none;
   }
 
-	#minion .minion_search {
-		padding: 0 20px;
+	#minion .minion_search,
+	#minion .mount_search,
+	#minion .job_search {
+		position: relative;
+		padding: 0;
+	}
+
+	#minion .minion_search input[type="text"],
+	#minion .mount_search input[type="text"] {
+		position: absolute;
+		/*width: 80%;*/
+		width: 30%;
+		top: 0;
+		left: 0;
+		margin: 0;
+		z-index: 1;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	#minion .minion_search input[type="text"]:focus,
+	#minion .mount_search input[type="text"]:focus {
+		width: 80%;
+	}
+
+	#minion .minion_search .selectbox select,
+	#minion .mount_search .selectbox select {
+		text-indent: 35%;
 	}
 
 	#minion .items {
 		margin-top: 20px;
 		margin-bottom: 20px;
-		padding: 0 20px;
+		padding: 0;
 	}
 
 	#minion .items div {
@@ -376,15 +391,18 @@
 	}
 
 	#minion .items div:first-child:last-child input[type="text"] {
+		-webkit-border-radius: 6px 6px 6px 6px;
 		border-radius: 6px 6px 6px 6px;
 	}
 
 	#minion .items div:first-child input[type="text"] {
 		border-top: 1px solid silver;
+		-webkit-border-radius: 6px 6px 0 0;
 		border-radius: 6px 6px 0 0;
 	}
 
 	#minion .items div:last-child input[type="text"] {
+		-webkit-border-radius: 0 0 6px 6px;
 		border-radius: 0 0 6px 6px;
 	}
 
@@ -408,6 +426,7 @@
 		padding: 0;
 		font-size: 1.8em;
 		font-weight: bold;
+		-webkit-border-radius: 22px;
 		border-radius: 22px;
 		background-color: #769164;
 	}
@@ -417,23 +436,26 @@
 	}
 
 	#minion .search {
-		padding: 0 20px;
+		/*padding: 0 20px;*/
+		padding: 0;
 		margin-bottom: 20px;
 	}
 
 	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 		width: 100%;
 		height: 48px;
 		border: none;
-		-webkit-appearance: none;
 		text-indent: 1em;
 	}
 
 	ul,
 	li {
 		list-style-type: none;
-		padding: 0;
 		display: inline-block;
+		padding: 0;
 	}
 
 	#freecompany,
@@ -457,28 +479,28 @@
 	}
 
   .freecompany_title .crest {
-    display: inline-block;
     position: relative;
+		display: inline-block;
     width: 68px;
     height: 68px;
-    margin: 20px 10px 0;
+    margin: 20px 2px 0;
     vertical-align: middle;
   }
 
   .freecompany_title .crest .entry__freecompany__crest__image {
     position: relative;
+		top: 2px;
+    left: 2px;
     width: 64px;
     height: 64px;
-    top: 2px;
-    left: 2px;
   }
 
   .freecompany_title .crest .entry__freecompany__crest__image img {
-    display: block;
-    margin: 0 auto;
-    position: absolute;
+		position: absolute;
+		display: block;
     top: 0;
     left: 0;
+    margin: 0 auto;
   }
 
   .freecompany_title .crest img {
@@ -488,7 +510,7 @@
 
 	.linkshell_title .icon {
 		display: inline-block;
-    margin: 20px 10px 0;
+    margin: 20px 2px 0;
 	}
 
 	.icon img {
@@ -499,13 +521,15 @@
 		width: 40px;
 		height: 40px;
 		padding-left: 2px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
 	}
 
 	.chara_name {
-		vertical-align: top;
-		font-weight: bold;
 		width: 85%;
 		margin-left: 10px;
+		vertical-align: top;
+		font-weight: bold;
 	}
 
 	.chara_name em {
@@ -533,6 +557,7 @@
 	.buttons {
 		width: 100%;
 		margin: 10px auto;
+		text-align: center;
 	}
 
 	.buttons .button {
@@ -542,7 +567,7 @@
 	}
 
 	.buttons .button:first-child {
-		margin-right: 8.5%;
+		margin-right: 8%;
 	}
 
 	.button {
@@ -597,14 +622,65 @@
 		padding: 0 8px;
 	}
 
-	#mount_list .mount_image {
+	#mount_list .mount_image,
+	#mount_list .job_icon,
+	#mount_list .job_level {
+		box-sizing: border-box;
 		position: relative;
 		display: inline-block;
 		height: 40px;
 		width: 40px;
-		background-color: #92b5a9;
 		margin: 0 2px;
+		-webkit-border-radius: 4px;
 		border-radius: 4px;
+	}
+
+	#mount_list .mount_image {
+		background-color: #92b5a9;
+	}
+
+	#mount_list .job_icon,
+	#mount_list .job_level {
+		background-color: #95949a;
+	}
+
+	#mount_list .job_level {
+		border: 2px solid transparent;
+	}
+
+	#mount_list .list_item.icon img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 40px;
+		height: 40px;
+	}
+
+	#mount_list .job_level div {
+		position: absolute;
+		width: 34px;
+		height: 34px;
+		top: 1px;
+		left: 1px;
+		line-height: 34px;
+		text-align: center;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		background-color: #5a5359;
+		font-style: normal;
+		color: #f8e58c;
+	}
+
+	#mount_list .job_level div::before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		top: 9px;
+		left: -3px;
+		border-left: 8px solid #f8f4e6;
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
 	}
 
 	#mount_list .break {
@@ -614,16 +690,16 @@
 	#mount_list .break::before {
 		content: "";
 		position: absolute;
-		left: 0;
 		display: block;
+		left: 0;
 		width: 100vw;
 		border-top: 3px solid #bed3ca;
 	}
 
 	#mount_list .delete {
 		position: absolute;
-		right: 10px;
 		display: inline-block;
+		right: 10px;
 		width: 40px;
 		height: 40px;
 		margin: 10px 2px 0;
@@ -641,11 +717,11 @@
 	}
 
 	#mount_list .delete .delete_btn::after {
+		content: "×";
 		position: absolute;
+		display: block;
 		top: 0;
 		left: 0;
-		content: "×";
-		display: block;
 		width: 40px;
 		height: 40px;
 		line-height: 40px;
@@ -669,14 +745,14 @@
 	}
 
   #change_log {
-      display :none;
+    display :none;
   }
 
   #notes {
-    font-size: 14px;
-    padding: 20px;
     border-top: 3px solid #bed3ca;
     border-bottom: 10px solid #bed3ca;
+		padding: 20px;
+		font-size: 14px;
   }
 
   #notes ul li {
@@ -692,9 +768,10 @@
 		opacity: 0;
 		transition: opacity 500ms;
 		width: 120px;
-		bottom: 125%;
-		left: 50%;
-		margin-left: -200px;
+		/*bottom: 125%;*/
+		top: -40px;
+		left: -40px;
+		/*margin-left: -200px;*/
 	}
 
 	.tooltip > .text {
@@ -708,7 +785,7 @@
 
 	.tooltip > .text::after {
 		content: " ";
-		postion: absolute;
+		position: absolute;
 		top: 100%;
 		left: 50%;
 		margin-left: -5px;
@@ -717,7 +794,7 @@
 		border-color: black transparent transparent transparent;
 	}
 
-	.mount_image:hover > .tooltip {
+	.list_item:hover > .tooltip {
 		visibility: visible;
 		opacity: 1;
 	}

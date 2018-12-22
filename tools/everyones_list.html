@@ -2,87 +2,234 @@
 <html lang="ja">
 <head>
 <title>みんな？</title>
-<meta charset="utf-8">
 <meta name="description" content="">
 <meta name="keywords" content="FF14,FFXIV">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
 <link href="/css/common.css" rel="stylesheet" type="text/css">
-<link href="/css/mobile.css" rel="stylesheet" type="text/css">
+<link href="/css/pc.css" rel="stylesheet" type="text/css">
+<link href="/css/sp.css" rel="stylesheet" type="text/css">
 <link href="/css/arrow.css" rel="stylesheet" type="text/css">
 <script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/jquery.xdomainajax.js"></script>
 <script src="/js/const.js"></script>
-<script src="/js/primals_mount.js"></script>
+<script src="/js/minion.js"></script>
 <script src="/js/list_common.js"></script>
 <script src="/js/acordion.js"></script>
 </head>
 <body>
 <header>
-<h1>みんな？</h1>
+    <h1><span class="meteor">O</span>enothera</h1>
+    <h2>みんな？</h2>
 </header>
+<div class="loading">
+    <div class="loading_icon"></div>
+</div>
 <div class="bg">
     <div class="main">
-        <!--
-        <div id="my_character">
-            <div class="search">
-                <input type="text" id="my_character_name" placeholder="キャラクター名を入力">
-                <select name="worldname">
-                    <option value="">DC/ワールドを選択</option>
-                </select>
-                <a href="javascript:void(0);" class="search_btn button">キャラクターを検索</a>
-            </div>
-            <div class="result">
-            </div>
-        </div>
-        -->
-        <div id="freecompany" class="acordion">
-            <div class="trigger arrow active">フリーカンパニー</div>
-            <div class="acordion_tree">
-                <div class="search">
-                    <input type="text" id="my_character_name" placeholder="キャラクター名を入力してください。">
-                    <div class="selectbox">
-                        <select name="worldname">
-                            <option value="">DC/ワールドを選択</option>
-                        </select>
+        <div class="menu_wrap">
+            <input type="checkbox" id="menu_1">
+            <label for="menu_1"><span></span></label>
+            <ul id="accordion" class="menu">
+                <li>
+                    <div class="link"><i></i>一覧に表示するミニオンを選択<i class="fa fa-chevron-down"></i></div>
+                    <div class="submenu">
+                        <div id="minion" class="acrodion subcontent">
+                            <div class="minion_search">
+                                <div class="selectbox">
+                                    <select name="minion">
+                                        <option value="">ミニオン名を選択</option>
+                                    </select>
+                                    <div class="hidden_option">
+                                        <div class="searched_option"></div>
+                                        <div class="selected_option"></div>
+                                    </div>
+                                </div>
+                                <input type="text" placeholder="検索">
+                            </div>
+                            <div class="mount_search">
+                                <div class="selectbox">
+                                    <select name="mount">
+                                        <option value="">マウント名を選択</option>
+                                    </select>
+                                    <div class="hidden_option">
+                                        <div class="searched_option"></div>
+                                        <div class="selected_option"></div>
+                                    </div>
+                                </div>
+                                <input type="text" placeholder="検索">
+                            </div>
+                            <div class="job_search">
+                                <div class="selectbox">
+                                    <select name="job_class">
+                                        <option value="">ジョブ / クラスを選択</option>
+                                    </select>
+                                </div>
+                                <div class="hidden_option">
+                                    <div class="selected_option"></div>
+                                </div>
+                            </div>
+                            <div class="items"></div>
+                            <div class="search"><a href="javascript:void(0);" class="search_btn button">ミニオンの所持状況を一覧に表示</a></div>
+                        </div>
                     </div>
-                    <a href="javascript:void(0);" class="chara_search search_btn button">キャラクターを検索</a>
+                </li>
+                <div id="search_means" class="hidden_menu">
+                    <div class="enclosure tabmenu">
+                        <div class="caption">一覧の表示方法</div>
+                        <label for="means0"><input type="radio" name="means" value="fc" id="means0" checked="checked"><em>フリーカンパニーで一覧を表示</em></label>
+                        <label for="means1"><input type="radio" name="means" value="ls" id="means1"><em>リンクシェルで一覧を表示</em></label>
+                        <label for="means2"><input type="radio" name="means" value="cr" id="means2"><em>キャラクターを一覧に追加</em></label>
+                    </div>
                 </div>
-                <div class="result">
+                <li>
+                    <div class="link"><i></i>フリーカンパニーで一覧を表示<i class="fa fa-chevron-down"></i></div>
+                    <div class="submenu">
+                        <div id="freecompany" class="search_mean acordion subcontent">
+                            <div class="acordion_tree">
+                                <div class="search_freecompany">
+                                    <div class="search">
+                                        <input type="text" class="freecompany_name character_name" placeholder="FC名、または所属キャラ名を入力">
+                                        <div class="selectbox">
+                                            <select name="worldname">
+                                                <option value="">DC/ワールドを選択</option>
+                                            </select>
+                                        </div>
+                                        <div class="buttons">
+                                            <a href="javascript:void(0);" class="freecompany_search search_btn button">FCを検索</a>
+                                            <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
+                                        </div>
+                                    </div>
+                                    <div class="result">
+                                    </div>
+                                </div>
+                                <div class="view">
+                                    <input type="text" id="freecompany_id" class="input_id" placeholder="FCのID、またはURLを直接入力"><a href="javascript:void(0);" class="fc_search search_btn button disable">FCのIDで一覧を表示</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="link"><i></i>リンクシェルで一覧を表示<i class="fa fa-chevron-down"></i></div>
+                    <div class="submenu">
+                        <div id="linkshell" class="search_mean acordion subcontent">
+                            <div class="acordion_tree">
+                                <div class="search_linkshell">
+                                    <div class="search">
+                                        <input type="text" class="search_name" placeholder="取得したいLS名を入力">
+                                        <div class="selectbox">
+                                            <select name="worldname">
+                                                <option value="">DC/ワールドを選択</option>
+                                            </select>
+                                        </div>
+                                        <a href="javascript:void(0);" class="search_btn button">LSを検索</a>
+                                    </div>
+                                    <div class="result">
+                                    </div>
+                                </div>
+                                <div class="view">
+                                    <input type="text" id="linkshell_id" class="input_id" placeholder="LSのID、またはURLを直接入力"><a href="javascript:void(0);" class="ls_search search_btn button disable">LSのIDで一覧を表示</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="link"><i class=""></i>キャラクターを一覧に追加<i class="fa fa-chevron-down"></i></div>
+                    <div class="submenu">
+                        <div id="character" class="search_mean acordion subcontent">
+                            <div class="acordion_tree">
+                                <div class="search_character">
+                                    <div class="search">
+                                        <input type="text" class="character_name" placeholder="IDを取得したいキャラクター名を入力">
+                                        <div class="selectbox">
+                                            <select name="worldname">
+                                                <option value="">DC/ワールドを選択</option>
+                                            </select>
+                                        </div>
+                                        <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
+                                    </div>
+                                    <div class="result">
+                                    </div>
+                                </div>
+                                <div class="view">
+                                    <input type="text" class="input_id" placeholder="キャラクターのID、またはURLを直接入力"><a href="javascript:void(0);" class="chara_search search_btn button disable">キャラクターのIDで一覧に追加</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <div id="reset">
+                    <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
                 </div>
-                <input type="text" id="freecompany_id" placeholder="FCのID、またはURLを入力してください。"><a href="javascript:void(0);" class="fc_search search_btn button">FCのIDで一覧を表示</a>
-                <span id="freecompany_name"></span>
-            </div>
-        </div>
-        <div id="linkshell" class="acordion">
-            <div class="trigger arrow active">リンクシェル</div>
-            <div class="acordion_tree">
-                <input type="text" id="linkshell_id" placeholder="LSのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">LSのIDで一覧を表示</a>
-                <div class="icon"></div><span id="linkshell_name"></span>
-            </div>
-        </div>
-        <div id="character" class="acordion">
-            <div class="trigger arrow active">キャラクター</div>
-            <div class="acordion_tree">
-                <input type="text" class="chara_id" placeholder="キャラのID、またはURLを入力してください。"><a href="javascript:void(0);" class="search_btn button">キャラクターのIDで一覧に追加</a>
-            </div>
-        </div>
-        <div id="reset">
-            <a href="javascript:void(0);" class="reset_btn button">一覧をリセット</a>
-        </div>
-        <div id="other">
-            <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
-        </div>
-        <div id="mount_list">
-            <ul class="list">
+                <div id="other">
+                    <label for="delete_confirm"><input type="checkbox" id="delete_confirm" checked="checked">キャラクターを一覧から消す際に確認を表示する</label>
+                </div>
             </ul>
         </div>
+        <div id="mount_list">
+            <div class="freecompany_title">
+                <div class="crest"></div>
+                <span class="freecompany_name"></span>
+            </div>
+            <div class="linkshell_title">
+                <div class="icon"></div>
+                <span class="linkshell_name"></span>
+            </div>
+            <ul class="list"></ul>
+            <ul class="back_list"></ul>
+        </div>
+    </div>
+    <div id="notes">
+        <h3>使い方</h3>
+        <ul>
+            <li>フリーカンパニー、リンクシェルを指定してキャラクターの一覧を表示し、所属メンバーのミニオン取得状況をまとめて確認できるツールです。</li>
+            <li>取得状況を表示するミニオンは、ミニオン名のリストから複数選択できます。</li>
+        </ul>
+        <ul>
+            <li>フリーカンパニーで一覧を表示する場合は、フリーカンパニー名、または所属しているキャラクター名から検索できます。</li>
+            <li>リンクシェルで一覧を表示する場合は、リンクシェル名から検索できます。</li>
+            <li>キャラクター単位で検索して、1人ずつ一覧に追加することもできます。</li>
+            <li>検索する際は、名前（一部でも可）とデータセンター/ワールドが指定できます。名前未入力、データセンター/ワールド未指定でも検索できますが、該当件数が多いと50件までしか表示されません。</li>
+        </ul>
+        <ul>
+            <li>ミニオン名をリストから選択して追加し「ミニオンの所持状況を一覧に表示」ボタンを押すことで、指定したミニオンの所持状況がキャラクターの一覧にアイコンで表示されます。</li>
+            <li>ミニオンをリストから選ぶ前に、ミニオン名の一部をテキストボックスに入力しておくと、該当するミニオンだけのリストから選択できます。</li>
+        </ul>
     </div>
     <div id="change_log">
-        <h2>更新履歴</h2>
+        <h3>更新履歴</h3>
         <ul>
             <li>
                 <dl>
-                    <dt>2018/12/01:</dt>
+                    <dt>2018/12/18:</dt>
+                    <dd>ミニオン名を文字入力する形式から、セレクトボックスからの選択式に変更。</dd>
+                    <dd>ミニオン名の一部を入力するとセレクトボックスを絞り込む機能を追加。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>2018/12/16:</dt>
+                    <dd>キャラクターの一覧が、毎回並び順がバラバラになっていたので、表示時に名前の昇順に並べるよう修正。</dd>
+                    <dd>ミニオンの所持状況の再表示を、キャラクターの再読込なしでできるように改良。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>2018/12/15:</dt>
+                    <dd>FC、LS、キャラクターのIDを名前とワールドで検索結果する機能を追加。</dd>
+                    <dd>一覧のキャラクター名にワールド名を表示するよう修正。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>2018/12/13:</dt>
+                    <dd>キャラクター検索結果からFCのIDを入力する機能を追加。</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>2018/12/12:</dt>
                     <dd>ツールを公開。</dd>
                 </dl>
             </li>
