@@ -16,10 +16,14 @@
 <script src="/js/acordion.js"></script>
 </head>
 <body>
-<header>
-    <h1><span class="meteor">O</span>enothera</h1>
-    <h2>みんな極蛮神マウント取れた？</h2>
-</header>
+    <header>
+        <div class="header_logo">
+            <h1><span class="meteor">O</span>enothera</h1>
+        </div>
+        <div class="header_title">
+            <h2>みんな極蛮神マウント取れた？</h2>
+        </div>
+    </header>
 <div class="loading">
     <div class="loading_icon"></div>
 </div>
@@ -30,29 +34,31 @@
             <label for="menu_1"><span></span></label>
             <ul id="accordion" class="menu">
                 <div id="minion" style="display: none;">
-                    <!-- 新生極蛮神マウント -->
-                    <div class="items"><div><input type="text" value="ナイトメア" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="アイトーン" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="クサントス" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="グルファクシ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="エンバール" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="マルカブ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ボレアス" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <!-- 蒼天極蛮神マウント -->
-                    <div class="items"><div><input type="text" value="ホワイトラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ラースラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ラナー・オブ・ラウンド" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ウォーリングラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ゴッデスラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="ダークラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="デモンラナー" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <!-- 紅蓮極蛮神マウント -->
-                    <div class="items"><div><input type="text" value="美のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="豪のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="龍のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="白のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="夜のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
-                    <div class="items"><div><input type="text" value="朱のカムイ" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div></div>
+                    <ul class="items">
+                        <!-- 新生極蛮神マウント -->
+                        <div class="tag" data-text="ナイトメア">ナイトメア</div>
+                        <div class="tag" data-text="アイトーン">アイトーン</div>
+                        <div class="tag" data-text="クサントス">クサントス</div>
+                        <div class="tag" data-text="グルファクシ">グルファクシ</div>
+                        <div class="tag" data-text="エンバール">エンバール</div>
+                        <div class="tag" data-text="マルカブ">マルカブ</div>
+                        <div class="tag" data-text="ボレアス">ボレアス</div>
+                        <!-- 蒼天極蛮神マウント -->
+                        <div class="tag" data-text="ホワイトラナー">ホワイトラナー</div>
+                        <div class="tag" data-text="ラースラナー">ラースラナー</div>
+                        <div class="tag" data-text="ラナー・オブ・ラウンド">ラナー・オブ・ラウンド</div>
+                        <div class="tag" data-text="ウォーリングラナー">ウォーリングラナー</div>
+                        <div class="tag" data-text="ゴッデスラナー">ゴッデスラナー</div>
+                        <div class="tag" data-text="ダークラナー">ダークラナー</div>
+                        <div class="tag" data-text="デモンラナー">デモンラナー</div>
+                        <!-- 紅蓮極蛮神マウント -->
+                        <div class="tag" data-text="美のカムイ">美のカムイ</div>
+                        <div class="tag" data-text="豪のカムイ">豪のカムイ</div>
+                        <div class="tag" data-text="龍のカムイ">龍のカムイ</div>
+                        <div class="tag" data-text="白のカムイ">白のカムイ</div>
+                        <div class="tag" data-text="夜のカムイ">夜のカムイ</div>
+                        <div class="tag" data-text="朱のカムイ">朱のカムイ</div>
+                    </ul>
                 </div>
                 <div id="search_means" class="hidden_menu">
                     <div class="enclosure tabmenu">
@@ -62,7 +68,7 @@
                         <label for="means2"><input type="radio" name="means" value="cr" id="means2"><em>キャラクターを一覧に追加</em></label>
                     </div>
                 </div>
-                <li>
+                <li class="group freecompany">
                     <div class="link"><i></i>フリーカンパニーで一覧を表示<i class="fa fa-chevron-down"></i></div>
                     <div class="submenu">
                         <div id="freecompany" class="search_mean acordion subcontent">
@@ -81,16 +87,17 @@
                                         </div>
                                     </div>
                                     <div class="result">
+                                        <input type="text" id="freecompany_id" class="input_id" placeholder="FCのID、またはURLを直接入力">
                                     </div>
                                 </div>
                                 <div class="view">
-                                    <input type="text" id="freecompany_id" class="input_id" placeholder="FCのID、またはURLを直接入力"><a href="javascript:void(0);" class="fc_search search_btn button disable">FCのIDで一覧を表示</a>
+                                    <a href="javascript:void(0);" class="fc_search search_btn button disable">フリーカンパニーで一覧を表示</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="group linkshell">
                     <div class="link"><i></i>リンクシェルで一覧を表示<i class="fa fa-chevron-down"></i></div>
                     <div class="submenu">
                         <div id="linkshell" class="search_mean acordion subcontent">
@@ -106,16 +113,17 @@
                                         <a href="javascript:void(0);" class="search_btn button">LSを検索</a>
                                     </div>
                                     <div class="result">
+                                        <input type="text" id="linkshell_id" class="input_id" placeholder="LSのID、またはURLを直接入力">
                                     </div>
                                 </div>
                                 <div class="view">
-                                    <input type="text" id="linkshell_id" class="input_id" placeholder="LSのID、またはURLを直接入力"><a href="javascript:void(0);" class="ls_search search_btn button disable">LSのIDで一覧を表示</a>
+                                    <a href="javascript:void(0);" class="ls_search search_btn button disable">リンクシェルで一覧を表示</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="group character">
                     <div class="link"><i class=""></i>キャラクターを一覧に追加<i class="fa fa-chevron-down"></i></div>
                     <div class="submenu">
                         <div id="character" class="search_mean acordion subcontent">
@@ -131,10 +139,11 @@
                                         <a href="javascript:void(0);" class="character_search search_btn button">キャラクターを検索</a>
                                     </div>
                                     <div class="result">
+                                        <input type="text" id="character_id" class="input_id" placeholder="キャラクターのID、またはURLを直接入力">
                                     </div>
                                 </div>
                                 <div class="view">
-                                    <input type="text" class="input_id" placeholder="キャラクターのID、またはURLを直接入力"><a href="javascript:void(0);" class="chara_search search_btn button disable">キャラクターのIDで一覧に追加</a>
+                                    <a href="javascript:void(0);" class="chara_search search_btn button disable">キャラクターを一覧に追加</a>
                                 </div>
                             </div>
                         </div>
@@ -227,11 +236,11 @@
         </ul>
     </div>
 </div>
-
 <footer>
-(C) 2010 - 2018 SQUARE ENIX CO., LTD.<br>
-(C) 2018 oenothera.jp
+    <div class="copyright">
+    (C) 2010 - 2018 SQUARE ENIX CO., LTD.<br>
+    (C) 2018 oenothera.jp
+    </div>
 </footer>
-
 </body>
 </html>

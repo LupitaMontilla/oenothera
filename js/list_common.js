@@ -37,27 +37,24 @@ $(function() {
         $('html').toggleClass('scroll-prevent');
     });
 
+    $('#search_means input[name="means"]').on('change', function(){
+        $('#freecompany').find('.move_in').removeClass('move_in');
+        $('#linkshell').find('.move_in').removeClass('move_in');
+        $('#character').find('.move_in').removeClass('move_in');
+    });
+
     $('#minion .minion_search select[name="minion"]').on('change', function(){
         if ($(this).val() === '') {
             return false;
         }
-        //$('#minion .minion_search .add.search_btn').addClass('disable');
-        //$('#minion .minion_search .add.search_btn').removeClass('disable');
-        //var selected = $('#minion .minion_search select[name="minion"]').val();
         var selected = $(this).val();
-        /*
-        if (selected == null || selected === '') {
-            alert('ミニオン名を選択してください。');
-            return false;
-        }
-        */
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        //$('#minion .items').append('<div class="item tag_minion"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        $('#minion .items').append('<li class="item tag_minion move_in"><div class="tag" data-text="'+selected+'">'+selected+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
+        $('#minion .search .search_btn').removeClass('disable');
         var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
         $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
         $(this).find('option').attr('selected', false);
-        //$(this).find('option')[0].attr('selected', true);
         $($(this).find('option')[0]).attr('selected', true);
-        //$(this).addClass('disable');
     });
 
     $('#minion .minion_search input[type="text"]').on('focusout', function(){
@@ -75,33 +72,17 @@ $(function() {
         sortMinionByName();
     });
 
-    /*
-    $('#minion .minion_search .add.search_btn').on('click', function(){
-        var selected = $('#minion .minion_search select[name="minion"]').val();
-        if (selected == null || selected === '') {
-            alert('ミニオン名を選択してください。');
-            return false;
-        }
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
-        var $select = $('#minion .minion_search select[name="minion"]');
-        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
-        $select.find('option[value="'+selected+'"]').appendTo($selected_option);
-        $select.find('option').attr('selected', false);
-        $($select.find('option')[0]).attr('selected', true);
-        $(this).addClass('disable');
-    });
-    */
-
     $('#minion .mount_search select[name="mount"]').on('change', function(){
         if ($(this).val() === '') {
             return false;
         }
         var selected = $(this).val();
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        //$('#minion .items').append('<div class="item tag_mount"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        $('#minion .items').append('<li class="item tag_mount move_in"><div class="tag" data-text="'+selected+'">'+selected+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
+        $('#minion .search .search_btn').removeClass('disable');
         var $selected_option = $('#minion .mount_search .selectbox .hidden_option .selected_option');
         $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
         $(this).find('option').attr('selected', false);
-        //$(this).find('option')[0].attr('selected', true);
         $($(this).find('option')[0]).attr('selected', true);
     });
 
@@ -120,42 +101,55 @@ $(function() {
         sortMinionByName();
     });
 
-    //$('#minion .job_search .add.search_btn').on('click', function(){
     $('#minion .job_search select[name="job_class"]').on('change', function(){
-        //var selected = $('#minion .job_search select[name="job_class"]').val();
         var selected = $(this).val();
+        var selected_text = $(this).children('option:selected').text();
         if (selected == null || selected === '') {
-            //alert('ジョブ / クラスを選択してください。');
             return false;
         }
-        $('#minion .items').append('<div><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        //$('#minion .items').append('<div class="item tag_job_class"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        $('#minion .items').append('<li class="item tag_job_class move_in"><div class="tag" data-text="'+selected+'">'+selected_text+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
+        $('#minion .search .search_btn').removeClass('disable');
         var $selected_option = $('#minion .job_search .selectbox .hidden_option .selected_option');
         $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
         $(this).find('option').attr('selected', false);
-        //$(this).find('option')[0].attr('selected', true);
         $($(this).find('option')[0]).attr('selected', true);
-        //$(this).addClass('disable');
     });
 
     $('#minion .items').on('click', '.delete_btn', function(){
         var $minion_select = $('#minion .minion_search select[name="minion"]');
-        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
-        var value = $(this).parent('div').children('input[type="text"]').val();
-        $minion_select.append($selected_option.find('option[value="'+value+'"]'));
-        $(this).parent('div').remove();
+        var $mount_select = $('#minion .mount_search select[name="mount"]');
+        var $selected_minion = $('#minion .minion_search .selectbox .hidden_option .selected_option');
+        var $selected_mount = $('#minion .mount_search .selectbox .hidden_option .selected_option');
+        var value = $(this).parent('.item').children('input[type="text"]').val();
+        $minion_select.append($selected_minion.find('option[value="'+value+'"]'));
+        $mount_select.append($selected_mount.find('option[value="'+value+'"]'));
+        $(this).parent('.item').addClass('move_out');
+        $('.move_out').on('webkitAnimationEnd', function(){
+            //$(this).parent('.item').remove();
+            $(this).remove();
+            if (!$('#minion .items .item').length) {
+                $('#minion .search .search_btn').addClass('disable');
+            }
+        });
         sortMinionByName();
     });
 
     $('#minion').on('click', '.search .search_btn', function(){
+        if (!$('#minion .items .item').length) {
+            alert('リストが空です。');
+            return false;
+        }
+        if (!$('#mount_list .list .character_info').length) {
+            alert('キャラクターがいません。');
+            return false;
+        }
         $('.mount_image.list_item').remove();
         $('.job_icon.list_item').remove();
         $('.job_level.list_item').remove();
         $('.chara_name.list_item').each(function(){
             var chara_id = $(this).attr('id').split('_')[2];
             var $content = $('#ldst_main_'+chara_id);
-
-            //var $minions = $('#minion').children('.items').find('input[type="text"]');
-
             var key_number = 4;
             addListItems($content, chara_id, key_number);
             sortByCharacterName();
@@ -184,7 +178,8 @@ $(function() {
         var charactername = $('#freecompany .search_freecompany .character_name').val();
         var worldname = $('#freecompany select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean').find('.search_freecompany');
-        searchCharacterList($area, charactername.trim(), worldname);
+        var option_text = ' の FC';
+        searchCharacterList($area, charactername.trim(), worldname, option_text);
     });
 
     $('#freecompany .result').on('change', 'select[name="characters"]', function(){
@@ -198,7 +193,7 @@ $(function() {
         }
     });
 
-    $('#freecompany .view .input_id').on('focusout', function(){
+    $('#freecompany_id').on('focusout', function(){
         if ($(this).val() === '') {
             $('#freecompany .view .fc_search').addClass('disable');
         } else {
@@ -297,7 +292,7 @@ $(function() {
         $(this).parents('.search_mean').find('.input_id').val(linkshell_id);
     });
 
-    $('#linkshell .view .input_id').on('focusout', function(){
+    $('#linkshell_id').on('focusout', function(){
         if ($(this).val() === '') {
             $('#linkshell .view .ls_search').addClass('disable');
         } else {
@@ -383,7 +378,7 @@ $(function() {
         var charactername = $('#character .character_name').val();
         var worldname = $('#character select[name="worldname"]').val();
         var $area = $(this).parents('.search_mean').find('.search_character');
-        searchCharacterList($area, charactername.trim(), worldname);
+        searchCharacterList($area, charactername.trim(), worldname, '');
     });
 
     $('#character .result').on('change', 'select[name="characters"]', function(){
@@ -396,7 +391,7 @@ $(function() {
         }
     });
 
-    $('#character .view .input_id').on('focusout', function(){
+    $('#character_id').on('focusout', function(){
         if ($(this).val() === '') {
             $('#character .view .chara_search').addClass('disable');
         } else {
@@ -421,6 +416,7 @@ $(function() {
         }
         $ajax = addCharaData(chara_id);
         $ajax.done(function(){
+            sortByCharacterName();
             getCharacterData();
         });
 	});
@@ -434,6 +430,7 @@ $(function() {
 	$('#mount_list').on('click', '.list .delete_btn', function(){
 		if (!$('#delete_confirm').prop('checked') || confirm('選択したキャラクターを一覧から削除しますか？')) {
 			chara_id = $(this).attr('data-id');
+            /*
 			$('#break_'+chara_id).remove();
 			$('#chara_face_'+chara_id).remove();
 			$('#chara_name_'+chara_id).remove();
@@ -441,6 +438,8 @@ $(function() {
 				$('#mount'+i+'_'+chara_id).remove();
 			}
 			$(this).remove();
+            */
+            $('#character_'+chara_id).remove();
 		}
 	});
 });
@@ -606,7 +605,7 @@ function sortMinionByName() {
 
 function sortByCharacterName() {
     $('#mount_list .list').html(
-        $('li.list_item').sort(function(a, b){
+        $('li.character_info').sort(function(a, b){
             var id_string_a = $(a).attr('id');
             var id_a_array = id_string_a.split('_');
             var id_a = id_a_array[id_a_array.length-1];
@@ -629,8 +628,6 @@ function sortByCharacterName() {
             if (last_name_a < last_name_b) return -1;
             if (world_a > world_b) return 1;
             if (world_a < world_b) return -1;
-            if (Number($(a).attr('data-sortkey')) > Number($(b).attr('data-sortkey'))) return 1;
-            if (Number($(a).attr('data-sortkey')) < Number($(b).attr('data-sortkey'))) return -1;
             return 0;
         })
     );
@@ -648,8 +645,10 @@ function searchFreecompanyList($area, name, world) {
 	.then(
 		function(res){
 			var $content = $(res.data);
-            var $result = $area.find('.result').empty();
+            //var $result = $area.find('.result').empty();
+            var $result = $area.find('.result');
             var area_name = $area.find('.search_mean_name').attr('data-shortname');
+            $result.children('.selectbox').remove();
 
             var freecompany_names = $content.find('.ldst__main').find('.entry__name');
             if (freecompany_names.length <= 0) {
@@ -659,7 +658,8 @@ function searchFreecompanyList($area, name, world) {
 
             var freecompany_ids = $content.find('.ldst__main').find('.entry__block');
             var freecompany_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox move_in"><select name="freecompanys"><option value="">フリーカンパニーを選択</option></select></div>');
+            //$result.append('<div class="selectbox move_in"><select name="freecompanys"><option value="">フリーカンパニーを選択</option></select></div>');
+            $result.prepend('<div class="selectbox move_in"><select name="freecompanys"><option value="">フリーカンパニーを選択</option></select></div>');
             $.each(freecompany_names, function(index, val){
                 var id = $(freecompany_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
@@ -688,8 +688,10 @@ function searchLinkshellList($area, name, world) {
 	.then(
 		function(res){
 			var $content = $(res.data);
-            var $result = $area.find('.result').empty();
+            //var $result = $area.find('.result').empty();
+            var $result = $area.find('.result');
             var area_name = $area.find('.search_mean_name').attr('data-shortname');
+            $result.children('.selectbox').remove();
 
             var linkshell_names = $content.find('.ldst__main').find('.entry__name');
             if (linkshell_names.length <= 0) {
@@ -699,7 +701,8 @@ function searchLinkshellList($area, name, world) {
 
             var linkshell_ids = $content.find('.ldst__main').find('.entry__link--line');
             var linkshell_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox move_in"><select name="linkshells"><option value="">リンクシェルを選択</option></select></div>');
+            //$result.append('<div class="selectbox move_in"><select name="linkshells"><option value="">リンクシェルを選択</option></select></div>');
+            $result.prepend('<div class="selectbox move_in"><select name="linkshells"><option value="">リンクシェルを選択</option></select></div>');
             $.each(linkshell_names, function(index, val){
                 var id = $(linkshell_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
@@ -716,7 +719,7 @@ function searchLinkshellList($area, name, world) {
 	);
 }
 
-function searchCharacterList($area, name, world) {
+function searchCharacterList($area, name, world, option_text) {
     var name_string = name.replace(' ', '+');
     var encoded_url = encodeURIComponent(LODESTONE_URL+'/character/?q='+name_string+'&worldname='+world+'&blog_lang=ja');
 	$.ajax({
@@ -728,8 +731,10 @@ function searchCharacterList($area, name, world) {
 	.then(
 		function(res){
 			var $content = $(res.data);
-            var $result = $area.find('.result').empty();
+            //var $result = $area.find('.result').empty();
+            var $result = $area.find('.result');
             var area_name = $area.parents('.search_mean').find('.search_mean_name').attr('data-shortname');
+            $result.children('.selectbox').remove();
 
             var character_names = $content.find('.ldst__main').find('.entry__name');
             if (character_names.length <= 0) {
@@ -739,12 +744,13 @@ function searchCharacterList($area, name, world) {
 
             var character_ids = $content.find('.ldst__main').find('.entry__link');
             var character_worlds = $content.find('.ldst__main').find('.entry__world');
-            $result.append('<div class="selectbox move_in"><select name="characters"><option value="">キャラクターを選択</option></select></div>');
+            //$result.append('<div class="selectbox move_in"><select name="characters"><option value="">キャラクターを選択</option></select></div>');
+            $result.prepend('<div class="selectbox move_in"><select name="characters"><option value="">キャラクターを選択</option></select></div>');
             $.each(character_names, function(index, val){
                 var id = $(character_ids[index]).attr('href').split('/')[3];
                 var name = $(val).text();
                 var world = $(character_worlds[index]).text();
-                $result.find('select[name="characters"]').append('<option value="'+id+'">'+name+' ('+world+')</option>');
+                $result.find('select[name="characters"]').append('<option value="'+id+'">'+name+' ('+world+')'+option_text+'</option>');
             });
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
@@ -767,16 +773,6 @@ function getMyCharacterData(character_id) {
 		function(res){
 			$content = $(res.data);
             var freecompany_name = $content.find('.character__freecompany__name h4 a');
-            //var linkshell_names = $content.find('.character__linkshell__name ul li a');
-
-            /*
-            $('#my_character .result').append('<select name="group">');
-            $('#my_character .result select[name="group"]').append('<option value="'+$(freecompany_name).attr('href')+'">'+$(freecompany_name).text()+'</option>');
-            $.each(linkshell_names, function(index, val){
-                $('#my_character .result select[name="group"]').append('<option value="'+$(val).attr('href')+'">'+$(val).text()+'</option>');
-            });
-            $('#my_character .result').append('</select>');
-            */
             var freecompany_path = $(freecompany_name).attr('href');
             if (freecompany_path == null) {
                 alert('フリーカンパニー未所属のキャラクターです。');
@@ -801,9 +797,11 @@ function addCharaData(chara_id) {
 			$content = $(res.data);
 
 			var key_number = 0;
-			$('.list').append('<li id="break_'+chara_id+'" class="break list_item" data-sortkey="'+(key_number++)+'"></li>');
-			$('.list').append('<li id="delete_'+chara_id+'" class="delete list_item" data-sortkey="'+(key_number++)+'"><a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a></li>');
-			$('.list').append('<li id="chara_face_'+chara_id+'" class="chara_face list_item" data-sortkey="'+(key_number++)+'"></li><li id="chara_name_'+chara_id+'" class="chara_name list_item" data-sortkey="'+(key_number++)+'"></li>');
+            $('.list').append('<li id="character_'+chara_id+'" class="character_info"><div class="character_profile"></div></li>');
+            $('#character_'+chara_id+' .character_profile').append('<li id="break_'+chara_id+'" class="break list_item" data-sortkey="'+(key_number++)+'"></li>');
+			$('#character_'+chara_id+' .character_profile').append('<li id="delete_'+chara_id+'" class="delete list_item" data-sortkey="'+(key_number++)+'"><a href="javascript:void(0);" class="delete_btn button" data-id="'+chara_id+'">一覧から消す</a></li>');
+			$('#character_'+chara_id+' .character_profile').append('<li id="chara_face_'+chara_id+'" class="chara_face list_item" data-sortkey="'+(key_number++)+'"></li><li id="chara_name_'+chara_id+'" class="chara_name list_item" data-sortkey="'+(key_number++)+'"></li>');
+            $('#character_'+chara_id).append('<div class="icon_list"></div>');
 
 			var user_face_image = $content.find('.frame__chara__face').html();
 			var user_name_text  = $content.find('.frame__chara__name').text();
@@ -817,7 +815,7 @@ function addCharaData(chara_id) {
 
 			$content.find('script').remove();
 			var chara_data = '<li id="ldst_main_'+chara_id+'" class="ldst_main" data-sortkey="">'+$content.find('.ldst__main').html()+'</li>';
-			setDeleteButtonRightPosition()
+			setDeleteButtonRightPosition();
 			addCharacterData(chara_data);
 		},
 		function(XMLHttpRequest, textStatus, errorThrown) {
@@ -830,15 +828,17 @@ function addCharaData(chara_id) {
 }
 
 function addListItems($content, chara_id, key_number) {
-	var $items = $('#minion .items').find('input[readonly="readonly"]');
+	//var $items = $('#minion .items').find('input[readonly="readonly"]');
+    var $items = $('#minion .items').find('.tag');
 	var tooltips = new Array();
 	var minions = new Array();
 	$items.each(function(index){
-		console.log(index);
-		console.log($(this).val());
-		if ($(this).val().indexOf('job:') === 0) {
+		//if ($(this).val().indexOf('job:') === 0) {
+        if ($(this).attr('data-text').indexOf('job:') === 0) {
 			var job_name;
-			var job_names = $(this).val().split(':')[1].split(' / ');
+			//var job_names = $(this).val().split(':')[1].split(' / ');
+            //var job_names = $(this).attr('data-text').split(':')[1].split(' / ');
+            var job_names = $(this).text().split(' / ');
 			var $job_name;
 			for (var i = 0; i < job_names.length; i++) {
 				var $job = $content.find('.character__job__name:contains("'+job_names[i]+'")');
@@ -847,6 +847,7 @@ function addListItems($content, chara_id, key_number) {
 					$job_name = $job;
 				}
 			}
+            console.log($job_name.html());
 			var $job_icon = $job_name.siblings('.character__job__icon');
 			var $job_level = $job_name.siblings('.character__job__level');
 			tooltips.push(job_name);
@@ -854,8 +855,9 @@ function addListItems($content, chara_id, key_number) {
 			tooltips.push('');
 			minions.push($job_level);
 		} else {
-			tooltips.push($(this).val());
-			minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).val()+'"]'));
+			//tooltips.push($(this).val());
+            tooltips.push($(this).text());
+			minions.push($content.find('.character__item_icon[data-tooltip="'+$(this).text()+'"]'));
 		}
 	});
 
@@ -868,7 +870,13 @@ function addListItems($content, chara_id, key_number) {
         if ($minion.attr('class') === 'character__job__level') {
             item_type = 'job_level';
         }
-        $('.list').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
+        if (item_type === 'job_icon icon') {
+            $('#character_'+chara_id+' .icon_list').append('<div class="job_info"><li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li></div>');
+        } else if (item_type === 'job_level') {
+            $('#character_'+chara_id+' .icon_list .job_info:last-child').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
+        } else {
+            $('#character_'+chara_id+' .icon_list').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
+        }
         if (tooltips[i] !== '') {
             $('#mount'+i+'_'+chara_id).append('<span class="tooltip"><span class="text">'+tooltips[i]+'</span></span>');
         }

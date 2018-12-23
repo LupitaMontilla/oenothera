@@ -248,15 +248,6 @@
     display: inline-block;
   }
 
-  input[readonly="readonly"] {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-    background-color: #fff1cf;
-    color: #666;
-		border: solid 1px #bbb;
-  }
-
   .tabmenu {
     position: relative;
     text-align: center;
@@ -305,7 +296,7 @@
     border: 1px solid #bbb;
     border-radius: 2px;
     background: #fff;
-    margin: 10px auto;
+    margin: 10px auto 0;
     vertical-align: top;
 	}
 
@@ -369,6 +360,20 @@
 		border-bottom-right-radius: 0;
 	}
 
+	#minion .minion_search .selectbox,
+	#minion .minion_search input[type="text"] {
+		background-color: #ebf6f7;
+	}
+
+	#minion .mount_search .selectbox,
+	#minion .mount_search input[type="text"] {
+		background-color: #d6e9ca;
+	}
+
+	#minion .job_search .selectbox {
+		background-color: #fdeff2;
+	}
+
 	#minion .minion_search input[type="text"]:focus,
 	#minion .mount_search input[type="text"]:focus {
 		width: 80%;
@@ -380,30 +385,74 @@
 	}
 
 	#minion .items {
+		display: block;
+		width: 100%;
 		margin-top: 20px;
 		margin-bottom: 20px;
 		padding: 0;
 	}
 
-	#minion .items div {
+	#minion .items .item {
 		position: relative;
+		display: inline-block;
+		width: 100%;
+		height: 49px;
+	}
+
+	input[readonly="readonly"],
+	#minion .items .item .tag {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		box-sizing: border-box;
+		/*display: block;*/
+		display: inline-block;
+		width: 100%;
 		height: 50px;
+		line-height: 50px;
+		/*height: 48px;*/
+		/*margin: 10px auto 5px;*/
+		margin: 0;
+		border-top: none;
+		border: 1px solid #bbb;
+		-webkit-border-radius: 2px;
+    border-radius: 2px;
+		font-size: 16px;
+    text-indent: 1em;
+		box-shadow: none;
+    background-color: #fff1cf;
+    color: #666;
+  }
+
+	#minion .items .item.tag_minion .tag {
+		background-color: #c1e4e9;
 	}
 
-	#minion .items div:first-child:last-child input[type="text"] {
-		-webkit-border-radius: 6px 6px 6px 6px;
-		border-radius: 6px 6px 6px 6px;
+	#minion .items .item.tag_mount .tag {
+		background-color: #badcad;
 	}
 
-	#minion .items div:first-child input[type="text"] {
+	#minion .items .item.tag_job_class .tag {
+		background-color: #f6bfbc;
+	}
+
+	#minion .items .item:first-child:last-child input[type="text"],
+	#minion .items .item:first-child:last-child .tag {
+		-webkit-border-radius: 10px 10px 10px 10px;
+		border-radius: 10px 10px 10px 10px;
+	}
+
+	#minion .items .item:first-child input[type="text"],
+	#minion .items .item:first-child .tag {
 		border-top: 1px solid silver;
-		-webkit-border-radius: 6px 6px 0 0;
-		border-radius: 6px 6px 0 0;
+		-webkit-border-radius: 10px 10px 0 0;
+		border-radius: 10px 10px 0 0;
 	}
 
-	#minion .items div:last-child input[type="text"] {
-		-webkit-border-radius: 0 0 6px 6px;
-		border-radius: 0 0 6px 6px;
+	#minion .items .item:last-child input[type="text"],
+	#minion .items .item:last-child .tag {
+		-webkit-border-radius: 0 0 10px 10px;
+		border-radius: 0 0 10px 10px;
 	}
 
 	#minion .items input[type="text"] {
@@ -429,16 +478,46 @@
 		-webkit-border-radius: 22px;
 		border-radius: 22px;
 		background-color: #769164;
+		cursor: pointer;
 	}
 
 	#minion .items .delete_btn::before {
 		display: none;
 	}
 
+	.move_in {
+    /* openSpace -> moveIn */
+    -webkit-transform: translateX(-320px);
+    -webkit-animation: moveIn 0.2s ease forwards;
+  }
+
+	.move_out {
+		-webkit-transform: translateX(0);
+    -webkit-animation: moveOut 0.2s ease forwards;
+	}
+
+  @-webkit-keyframes moveIn {
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+    }
+  }
+
+	@-webkit-keyframes moveOut {
+    to {
+      opacity: 0;
+      -webkit-transform: translateX(-320px);
+    }
+  }
+
 	#minion .search {
 		/*padding: 0 20px;*/
 		padding: 0;
 		margin-bottom: 20px;
+	}
+
+	#minion .search .search_btn {
+		margin: 0;
 	}
 
 	select {
@@ -515,6 +594,10 @@
 
 	.icon img {
 		vertical-align: middle;
+	}
+
+	.character_info {
+		width: 101%;
 	}
 
 	.chara_face {
@@ -622,6 +705,11 @@
 		padding: 0 8px;
 	}
 
+	#mount_list .chara_face img {
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+	}
+
 	#mount_list .mount_image,
 	#mount_list .job_icon,
 	#mount_list .job_level {
@@ -637,6 +725,10 @@
 
 	#mount_list .mount_image {
 		background-color: #92b5a9;
+	}
+
+	#mount_list .job_info {
+		display: inline-block;
 	}
 
 	#mount_list .job_icon,
