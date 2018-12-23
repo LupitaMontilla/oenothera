@@ -403,7 +403,6 @@
 		height: 49px;
 	}
 
-	input[readonly="readonly"],
 	#minion .items .item .tag {
 		-webkit-appearance: none;
 		-moz-appearance: none;
@@ -419,8 +418,12 @@
 		margin: 0;
 		border-top: none;
 		border: 1px solid #bbb;
+		/*
 		-webkit-border-radius: 2px;
     border-radius: 2px;
+		*/
+		-webkit-border-radius: 0 15px 15px 0;
+    border-radius: 0 15px 15px 0;
 		font-size: 16px;
     text-indent: 1em;
 		box-shadow: none;
@@ -440,23 +443,26 @@
 		background-color: #f6bfbc;
 	}
 
-	#minion .items .item:first-child:last-child input[type="text"],
 	#minion .items .item:first-child:last-child .tag {
+		/*
 		-webkit-border-radius: 10px 10px 10px 10px;
 		border-radius: 10px 10px 10px 10px;
+		*/
 	}
 
-	#minion .items .item:first-child input[type="text"],
 	#minion .items .item:first-child .tag {
 		border-top: 1px solid silver;
+		/*
 		-webkit-border-radius: 10px 10px 0 0;
 		border-radius: 10px 10px 0 0;
+		*/
 	}
 
-	#minion .items .item:last-child input[type="text"],
 	#minion .items .item:last-child .tag {
+		/*
 		-webkit-border-radius: 0 0 10px 10px;
 		border-radius: 0 0 10px 10px;
+		*/
 	}
 
 	#minion .items input[type="text"] {
@@ -769,6 +775,10 @@
 		color: #f8e58c;
 	}
 
+	#mount_list .job_level.meister div {
+		color: #f08300;
+	}
+
 	#mount_list .job_level div::before {
 		content: "";
 		position: absolute;
@@ -906,6 +916,10 @@
 		border-style: solid;
 		/*border-color: black transparent transparent transparent;*/
 		border-color: transparent transparent #d0576b transparent;
+	}
+
+	.tooltip .text br {
+	    display: none;
 	}
 
 	.list_item:hover > .tooltip {

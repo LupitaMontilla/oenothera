@@ -847,12 +847,13 @@ function addListItems($content, chara_id, key_number) {
 					$job_name = $job;
 				}
 			}
-            console.log($job_name.html());
 			var $job_icon = $job_name.siblings('.character__job__icon');
 			var $job_level = $job_name.siblings('.character__job__level');
-			tooltips.push(job_name);
+            var text_meister = $job_name.hasClass('character__job__name--meister') ? '<br>(マイスター)' : '';
+            var class_meister = $job_name.hasClass('character__job__name--meister') ? 'meister' : '';
+			tooltips.push(job_name+text_meister);
 			minions.push($job_icon);
-			tooltips.push('');
+			tooltips.push(class_meister);
 			minions.push($job_level);
 		} else {
 			//tooltips.push($(this).val());
@@ -873,7 +874,12 @@ function addListItems($content, chara_id, key_number) {
         if (item_type === 'job_icon icon') {
             $('#character_'+chara_id+' .icon_list').append('<div class="job_info"><li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li></div>');
         } else if (item_type === 'job_level') {
-            $('#character_'+chara_id+' .icon_list .job_info:last-child').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
+            var class_meister = '';
+            if (tooltips[i] === 'meister') {
+                class_meister = ' meister';
+                tooltips[i] = '';
+            }
+            $('#character_'+chara_id+' .icon_list .job_info:last-child').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+class_meister+' list_item" data-sortkey="'+(key_number++)+'"></li>');
         } else {
             $('#character_'+chara_id+' .icon_list').append('<li id="mount'+i+'_'+chara_id+'" class="'+item_type+' list_item" data-sortkey="'+(key_number++)+'"></li>');
         }
