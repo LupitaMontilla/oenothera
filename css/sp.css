@@ -96,13 +96,16 @@
 	}
 
 	.menu_wrap #menu_1 ~ label::before {
-		content: 'Menu';
+		content: attr(data-text);
 		font-size: 1em;
+		font-family: "Eofont R";
 	}
 
 	.menu_wrap #menu_1:checked ~ label::before {
-    font-weight: bold;
-		content: '×';
+    /*font-weight: bold;*/
+		/*content: '×';*/
+		content: attr(data-text2);
+		font-size: 24px;
 	}
 
   .menu .link {
@@ -184,7 +187,7 @@
 	}
 
   header h1 {
-    font-family: Eofont R;
+    font-family: "Eofont R";
     font-weight: normal;
 		color: #f8e58c;
 		font-size: 30px;
@@ -196,7 +199,8 @@
   header h2 {
     background-color: #028760;
 		color: #fff;
-		font-size: 16px;
+		font-family: "Eofont R";
+		font-size: 18px;
 		padding: 10px;
 		text-align: center;
     margin-top: 0;
@@ -214,7 +218,7 @@
   .meteor::after {
     content: "*";
     color: #f39800;
-    font-size: 36px;
+    font-size: 38px;
   }
 
 	footer {
@@ -477,7 +481,7 @@
 		font-weight: bold;
 		-webkit-border-radius: 22px;
 		border-radius: 22px;
-		background-color: #769164;
+		/*background-color: #769164;*/
 		cursor: pointer;
 	}
 
@@ -695,7 +699,8 @@
 
 	.delete_btn,
 	.reset_btn {
-		background-color: #769164;
+		/*background-color: #769164;*/
+		background-color: #84a2d4;
 	}
 
 	#other {
@@ -807,10 +812,11 @@
 		margin: 0;
 		overflow: hidden;
 		vertical-align: baseline;
+		text-indent: 100%;
 	}
 
 	#mount_list .delete .delete_btn::after {
-		content: "×";
+		content: "－";
 		position: absolute;
 		display: block;
 		top: 0;
@@ -818,9 +824,10 @@
 		width: 40px;
 		height: 40px;
 		line-height: 40px;
-		background-color: #ee827c;
+		/*background-color: #ee827c;*/
 		font-size: 1.8em;
 		font-weight: bold;
+		text-indent: 0;
 	}
 
 	.search_mean .view {
@@ -857,8 +864,8 @@
 		visibility: hidden;
 		/*text-align: center;*/
 		position: absolute;
-		width: 40px;
-		min-height: 200px;
+		width: 44px;
+		min-height: 300px;
 		margin: 0;
 		z-index: 1;
 		opacity: 0;
@@ -868,7 +875,7 @@
 		/*top: -40px;*/
 		top: 50px;
 		/*left: -40px;*/
-		right: 0;
+		right: -2px;
 		/*margin-left: -200px;*/
 		-webkit-writing-mode: vertical-lr;
 		-ms-writing-mode: tb-rl;
@@ -880,10 +887,12 @@
 		padding: 5px 10px;
 		-webkit-border-radius: 6px;
 		border-radius: 6px;
-		background-color: black;
+		background-color: #d0576b;
 		color: #fff;
-		font-size: 12px;
+		font-size: 16px;
 		letter-spacing: 0.3em;
+		padding-top: 10px;
+		padding-bottom: 10px;
 	}
 
 	.tooltip > .text::after {
@@ -896,7 +905,7 @@
 		border-width: 5px;
 		border-style: solid;
 		/*border-color: black transparent transparent transparent;*/
-		border-color: transparent transparent black transparent;
+		border-color: transparent transparent #d0576b transparent;
 	}
 
 	.list_item:hover > .tooltip {
