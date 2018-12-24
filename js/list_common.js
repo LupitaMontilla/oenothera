@@ -13,6 +13,46 @@ $(function() {
     $('.freecompany_title').hide();
     $('.linkshell_title').hide();
 
+    var x;
+    var y;
+
+    var mdn = function(e) {
+        $(this).addClass('drag');
+        x = event.pageX - this.offsetLeft;
+        y = event.pageY - this.offsetTop;
+
+        $('body').on('mousemove touchmove', mmv);
+    }
+
+    var mmv = function(e) {
+        var drag = $('.drag')[0];
+        if (drag == null) {
+            return false;
+        };
+
+        e.preventDefault();
+
+        drag.style.top = event.pageY - y + 'px';
+        drag.style.left = event.pageX - x + 'px';
+
+        $(drag).on('mouseup touchend', mup);
+        $('body').on('mouseleave touchleave', mup);
+        $(drag).on('focusin', 'input[type="text"]', mup);
+    }
+
+    var mup = function() {
+        var drag = $('.drag')[0];
+        if (drag == null) {
+            return false;
+        };
+        $('body').off('mousemove touchmove', mmv);
+        $(drag).off('mouseup touchend', mup);
+
+        $(drag).removeClass('drag');
+    }
+
+    $('#menu__items').on('mousedown touchstart', mdn);
+
     $('input[name="means"]:radio').on('change', function(){
         switch ($(this).val()) {
             case 'fc':
@@ -43,96 +83,89 @@ $(function() {
         $('#character').find('.move_in').removeClass('move_in');
     });
 
-    $('#minion .minion_search select[name="minion"]').on('change', function(){
-        if ($(this).val() === '') {
+    $('#minion__item_select').on('change', function(){
+        var selected = $(this).val();
+        if (selected === '') {
             return false;
         }
-        var selected = $(this).val();
-        //$('#minion .items').append('<div class="item tag_minion"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
         $('#minion .items').append('<li class="item tag_minion move_in"><div class="tag" data-text="'+selected+'">'+selected+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
         $('#minion .search .search_btn').removeClass('disable');
-        var $selected_option = $('#minion .minion_search .selectbox .hidden_option .selected_option');
-        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option[value="'+selected+'"]').appendTo('#minion__selected_options');
         $(this).find('option').attr('selected', false);
         $($(this).find('option')[0]).attr('selected', true);
     });
 
-    $('#minion .minion_search input[type="text"]').on('focusout', function(){
+    $('#minion__item_search').on('focusout', function(){
         var search_string = $(this).val();
-        var $minion_select = $('#minion .minion_search .selectbox select[name="minion"]');
-        var $searched_option = $('#minion .minion_search .selectbox .hidden_option .searched_option');
-        $searched_option.find('option').appendTo($minion_select);
-        $minion_select.find('option').filter(function(index){
+        var $minion_item_select = $('#minion__item_select');
+        var $minion_searched_options = $('#minion__searched_options');
+        $minion_searched_options.find('option').appendTo($minion_item_select);
+        $minion_item_select.find('option').filter(function(index){
             if (index !== 0) {
                 var name = $(this).val();
                 return !name.match(search_string);
             }
             return false;
-        }).appendTo($searched_option);
+        }).appendTo($minion_searched_options);
         sortMinionByName();
     });
 
-    $('#minion .mount_search select[name="mount"]').on('change', function(){
-        if ($(this).val() === '') {
+    $('#mount__item_select').on('change', function(){
+        var selected = $(this).val();
+        if (selected === '') {
             return false;
         }
-        var selected = $(this).val();
-        //$('#minion .items').append('<div class="item tag_mount"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
         $('#minion .items').append('<li class="item tag_mount move_in"><div class="tag" data-text="'+selected+'">'+selected+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
         $('#minion .search .search_btn').removeClass('disable');
-        var $selected_option = $('#minion .mount_search .selectbox .hidden_option .selected_option');
-        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option[value="'+selected+'"]').appendTo('#mount__selected_options');
         $(this).find('option').attr('selected', false);
         $($(this).find('option')[0]).attr('selected', true);
     });
 
-    $('#minion .mount_search input[type="text"]').on('focusout', function(){
+    $('#mount__item_search').on('focusout', function(){
         var search_string = $(this).val();
-        var $mount_select = $('#minion .mount_search .selectbox select[name="mount"]');
-        var $searched_option = $('#minion .mount_search .selectbox .hidden_option .searched_option');
-        $searched_option.find('option').appendTo($mount_select);
-        $mount_select.find('option').filter(function(index){
+        var $mount_item_select = $('#mount__item_select');
+        var $mount_searched_options = $('#mount__searched_options');
+        $mount_searched_options.find('option').appendTo($mount_item_select);
+        $mount_item_select.find('option').filter(function(index){
             if (index !== 0) {
                 var name = $(this).val();
                 return !name.match(search_string);
             }
             return false;
-        }).appendTo($searched_option);
+        }).appendTo($mount_searched_options);
         sortMinionByName();
     });
 
-    $('#minion .job_search select[name="job_class"]').on('change', function(){
+    //$('#minion .job_search select[name="job_class"]').on('change', function(){
+    $('#job_class__item_select').on('change', function(){
         var selected = $(this).val();
-        var selected_text = $(this).children('option:selected').text();
         if (selected == null || selected === '') {
             return false;
         }
-        //$('#minion .items').append('<div class="item tag_job_class"><input type="text" value="'+selected+'" readonly="readonly"><a href="javascript:void(0);" class="delete_btn button">×</a></div>');
+        var selected_text = $(this).find('option:selected').text();
         $('#minion .items').append('<li class="item tag_job_class move_in"><div class="tag" data-text="'+selected+'">'+selected_text+'</div><a href="javascript:void(0);" class="delete_btn button">×</a></li>');
         $('#minion .search .search_btn').removeClass('disable');
-        var $selected_option = $('#minion .job_search .selectbox .hidden_option .selected_option');
-        $(this).find('option[value="'+selected+'"]').appendTo($selected_option);
+        $(this).find('option[value="'+selected+'"]').appendTo('#job_class__selected_options');
         $(this).find('option').attr('selected', false);
         $($(this).find('option')[0]).attr('selected', true);
     });
 
     $('#minion .items').on('click', '.delete_btn', function(){
-        var $minion_select = $('#minion .minion_search select[name="minion"]');
-        var $mount_select = $('#minion .mount_search select[name="mount"]');
-        var $selected_minion = $('#minion .minion_search .selectbox .hidden_option .selected_option');
-        var $selected_mount = $('#minion .mount_search .selectbox .hidden_option .selected_option');
-        var value = $(this).parent('.item').children('input[type="text"]').val();
-        $minion_select.append($selected_minion.find('option[value="'+value+'"]'));
-        $mount_select.append($selected_mount.find('option[value="'+value+'"]'));
+        var item_name = $(this).siblings('.tag').attr('data-text');
+        $('#minion__item_select').append($('#minion__selected_options').find('option[value="'+item_name+'"]'));
+        $('#mount__item_select').append($('#mount__selected_options').find('option[value="'+item_name+'"]'));
+        $('#job_class__item_select').append($('#job_class__selected_options').find('option[value="'+item_name+'"]'));
         $(this).parent('.item').addClass('move_out');
         $('.move_out').on('webkitAnimationEnd', function(){
-            //$(this).parent('.item').remove();
             $(this).remove();
             if (!$('#minion .items .item').length) {
                 $('#minion .search .search_btn').addClass('disable');
             }
         });
         sortMinionByName();
+        sortMountByName();
+        sortJobClassByOrder();
     });
 
     $('#minion').on('click', '.search .search_btn', function(){
@@ -484,9 +517,8 @@ function addWorldNameList() {
             $.each(worldnames, function(label, option_list){
                 $select_worldname.append('<optgroup label="'+label+'">');
                 $.each(option_list, function(key, val){
-                    $select_worldname.append('<option value="'+val+'">'+key+'</option>');
+                    $select_worldname.children('optgroup[label="'+label+'"]').append('<option value="'+val+'">'+key+'</option>');
                 });
-                $select_worldname.append('</optgroup>');
             });
         },
         function(XMLHttpRequest, textStatus, errorThrown) {
@@ -545,19 +577,20 @@ function addMountSelectList() {
 
 function addJobSelectList() {
     $.ajax({
-        url: '/json/class.json',
+        url: '/json/job_class.json',
         datatype: 'json',
         loadingHide: function(res){}
     })
     .then(
         function(jobs){
             var $select_job_class = $('select[name="job_class"]');
+            var index = 0;
             $.each(jobs, function(label, option_list){
-                $select_job_class.append('<optgroup label="'+label+'">');
+                $select_job_class.append('<optgroup label="'+label+'" data-groupkey="'+index+'">');
                 $.each(option_list, function(key, val){
-                    $select_job_class.append('<option value="job:'+val+'">'+val+'</option>');
+                    $select_job_class.children('optgroup[label="'+label+'"]').append('<option value="job:'+val+'" data-groupkey="'+index+'" data-sortkey="'+key+'">'+val+'</option>');
                 });
-                $select_job_class.append('</optgroup>');
+                index++;
             });
         },
         function(XMLHttpRequest, textStatus, errorThrown) {
@@ -591,16 +624,47 @@ function setDeleteButtonRightPosition() {
 }
 
 function sortMinionByName() {
-    var $minion_select = $('#minion .minion_search select[name="minion"]');
-    $minion_select.html(
-        $minion_select.find('option').sort(function(a, b){
+    var $minion_item_select = $('#minion__item_select');
+    $minion_item_select.html(
+        $minion_item_select.find('option').sort(function(a, b){
             if ($(a).attr('data-kana') > $(b).attr('data-kana')) return 1;
             if ($(a).attr('data-kana') < $(b).attr('data-kana')) return -1;
             return 0;
         })
     );
-    $minion_select.find('option').attr('selected', false);
-    $($minion_select.find('option')[0]).attr('selected', true)
+    $minion_item_select.find('option').attr('selected', false);
+    $($minion_item_select.find('option')[0]).attr('selected', true)
+}
+
+function sortMountByName() {
+    var $mount_item_select = $('#mount__item_select');
+    /*
+    $mount_item_select.html(
+        $mount_item_select.find('option').sort(function(a, b){
+            if ($(a).attr('data-kana') > $(b).attr('data-kana')) return 1;
+            if ($(a).attr('data-kana') < $(b).attr('data-kana')) return -1;
+            return 0;
+        })
+    );
+    */
+    $mount_item_select.find('option').attr('selected', false);
+    $($mount_item_select.find('option')[0]).attr('selected', true)
+}
+
+function sortJobClassByOrder() {
+    var $job_class_item_select = $('#job_class__item_select');
+    $job_class_item_select.find('optgroup').each(function(){
+        var groupkey = $(this).attr('data-groupkey');
+        $(this).html(
+            $job_class_item_select.find('option[data-groupkey="'+groupkey+'"]').sort(function(a, b){
+                if ($(a).attr('data-sortkey') > $(b).attr('data-sortkey')) return 1;
+                if ($(a).attr('data-sortkey') < $(b).attr('data-sortkey')) return -1;
+                return 0;
+            })
+        );
+    });
+    $job_class_item_select.find('option').attr('selected', false);
+    $($job_class_item_select.find('option')[0]).attr('selected', true)
 }
 
 function sortByCharacterName() {

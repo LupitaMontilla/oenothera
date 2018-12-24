@@ -67,6 +67,7 @@
 		color: #fff;
 		font-family: "Eofont R";
 		font-size: 18px;
+		font-weight: normal;
 		/*padding: 10px;*/
 		text-align: center;
 	}
@@ -125,6 +126,53 @@
 
 	#menu_1 {
 		display: none;
+	}
+
+	#menu__items {
+		position: absolute;
+		top: 300px;
+		left: 700px;
+		width: auto;
+		z-index: 20;
+		cursor: move;
+		/*background-color: rgba(248,251,248,0.8);*/
+		background-color: rgba(47, 93, 80, 0.7);
+		border: 1px solid #666;
+		border-radius: 16px;
+	}
+
+	#menu__items .link {
+		position: absolute;
+		display: block;
+		top: -1px;
+		left: -1px;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		background-color: #e5e4e6;
+		background-color: rgb(126, 190, 171, 0.7);
+		color: #666;
+		border-bottom: 1px solid #666;
+		border-radius: 16px 16px 0 0;
+		margin: 1px;
+		/*font-weight: bold;*/
+		font-size: 17px;
+		color: #ebf6f7;
+	}
+
+	.drag {
+		z-index: 21;
+	}
+
+	#menu__items .subcontent {
+		margin: 0;
+		padding: 70px 30px 20px;
+		/*border: 2px solid #666;*/
+    /*opacity: 0.9;*/
+    /*background: #f8fbf8;*/
+		/*background: rgba(248,251,248,0.8);*/
+    /*border-radius: 25px;*/
 	}
 
   .menu .link {
@@ -188,7 +236,7 @@
 		/*min-width: 80px;*/
 		width: 330px;
 		line-height: 30px;
-    z-index: 100;
+    z-index: 10;
     margin: 0 5px 0 0;
     padding: 4px 0 0;
     -webkit-border-radius: 6px 6px 0 0;
@@ -285,7 +333,7 @@
 
 	#minion {
 		margin-bottom: 20px;
-		background-color: #ede4cd;
+		/*background-color: #ede4cd;*/
 		padding: 10px;
 		border-radius: 4px;
 	}
@@ -458,8 +506,27 @@
 		vertical-align: text-bottom;
 	}
 
+	#minion .minion_search,
+	#minion .mount_search {
+		position: relative;
+	}
+
+	#minion .minion_search .selectbox,
+	#minion .mount_search .selectbox {
+		text-indent: 70px;
+	}
+
 	#minion .minion_search input[type="text"],
 	#minion .mount_search input[type="text"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		/*width: 200px;*/
+		width: 70px;
+	}
+
+	#minion .minion_search input[type="text"]:focus,
+	#minion .mount_search input[type="text"]:focus {
 		width: 200px;
 	}
 
