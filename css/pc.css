@@ -233,7 +233,6 @@
   .tabmenu input[type="radio"] + em {
     position: relative;
 		display: inline-block;
-		/*min-width: 80px;*/
 		width: 330px;
 		line-height: 30px;
     z-index: 10;
@@ -242,10 +241,11 @@
     -webkit-border-radius: 6px 6px 0 0;
     border-radius: 6px 6px 0 0;
     background: #97a791;
-    color: #000;
+    color: #fff;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
+		font-weight: bold;
     cursor: pointer;
   }
 
@@ -614,6 +614,7 @@
 	.linkshell_title .linkshell_name {
 		font-weight: bold;
     font-size: 1.5em;
+		color: #028760;
 	}
 
 	.freecompany_title .crest,
@@ -900,6 +901,7 @@
 
 	#notes h3 {
 		margin-bottom: 10px;
+		color: #028760;
 	}
 
 	#notes ul {
@@ -907,7 +909,7 @@
 		display: block;
 		margin: 10px 20px;
 		padding: 0.5em;
-		border: 1px solid #007b43;
+		border: 1px solid #028760;
 		border-radius: 4px;
 		list-style-type: none;
 		background-color: #f8fbf8;
@@ -919,7 +921,7 @@
 		/*display: block;*/
     /*text-indent: 1em;*/
 		line-height: 1.5;
-		border-bottom: 1px dashed #007b43;
+		border-bottom: 1px dashed #028760;
 		padding: 0.5em 0 0.5em 1.4em;
   }
 
@@ -930,7 +932,7 @@
 	#notes ul li::before {
 		position: absolute;
 		content: "\002713";
-		color: #007b43;
+		color: #028760;
 		font-weight: bold;
 		left: 0.5em;
 	}
@@ -953,6 +955,7 @@
 
   #change_log h3 {
       margin-bottom: 0;
+			color: #028760;
   }
 
   #change_log ul {
