@@ -39,37 +39,37 @@
                             <div id="minion" class="acrodion subcontent">
                                 <div class="job_search">
                                     <div class="selectbox">
-                                        <select name="job_class">
+                                        <select id="job_class__item_select" name="job_class">
                                             <option value="">ジョブ / クラスを選択</option>
                                         </select>
-                                    </div>
-                                    <div class="hidden_option">
-                                        <div class="selected_option"></div>
+                                        <div class="hidden_option">
+                                            <div id="job_class__selected_options" class="selected_option"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mount_search">
                                     <div class="selectbox">
-                                        <select name="mount">
+                                        <select id="mount__item_select" name="mount">
                                             <option value="">マウント名を選択</option>
                                         </select>
                                         <div class="hidden_option">
-                                            <div class="searched_option"></div>
-                                            <div class="selected_option"></div>
+                                            <div id="mount__searched_options" class="searched_option"></div>
+                                            <div id="mount__selected_options" class="selected_option"></div>
                                         </div>
                                     </div>
-                                    <input type="text" placeholder="検索">
+                                    <input type="text" id="mount__item_search" placeholder="検索">
                                 </div>
                                 <div class="minion_search">
                                     <div class="selectbox">
-                                        <select name="minion">
+                                        <select id="minion__item_select" name="minion">
                                             <option value="">ミニオン名を選択</option>
                                         </select>
                                         <div class="hidden_option">
-                                            <div class="searched_option"></div>
-                                            <div class="selected_option"></div>
+                                            <div id="minion__searched_options" class="searched_option"></div>
+                                            <div id="minion__selected_options" class="selected_option"></div>
                                         </div>
                                     </div>
-                                    <input type="text" placeholder="検索">
+                                    <input type="text" id="minion__item_search" placeholder="検索">
                                 </div>
                                 <ul class="items" data-title="表示したい項目を追加"></ul>
                                 <div class="search"><a href="javascript:void(0);" class="search_btn button disable">追加した項目を一覧に表示</a></div>
