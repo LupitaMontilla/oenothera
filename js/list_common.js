@@ -17,9 +17,10 @@ $(function() {
     var y;
 
     var mdn = function(e) {
-        $(this).addClass('drag');
-        x = event.pageX - this.offsetLeft;
-        y = event.pageY - this.offsetTop;
+        var drag_menu = $(this).parent('.drag_menu');
+        $(drag_menu).addClass('drag');
+        x = event.pageX - $(drag_menu).offset().left;
+        y = event.pageY - $(drag_menu).offset().top;
 
         $('body').on('mousemove touchmove', mmv);
     }
@@ -37,7 +38,6 @@ $(function() {
 
         $(drag).on('mouseup touchend', mup);
         $('body').on('mouseleave touchleave', mup);
-        $(drag).on('focusin', 'input[type="text"]', mup);
     }
 
     var mup = function() {
@@ -51,7 +51,7 @@ $(function() {
         $(drag).removeClass('drag');
     }
 
-    $('#menu__items').on('mousedown touchstart', mdn);
+    $('#menu__items .link').on('mousedown touchstart', mdn);
 
     $('input[name="means"]:radio').on('change', function(){
         switch ($(this).val()) {
