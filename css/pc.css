@@ -130,6 +130,7 @@
 
 	#menu__items {
 		position: absolute;
+		position: fixed;
 		top: 270px;
 		left: 740px;
 		width: auto;
@@ -155,8 +156,8 @@
 		border-bottom: 1px solid #666;
 		border-radius: 16px 16px 0 0;
 		margin: 1px;
-		/*font-weight: bold;*/
-		font-size: 17px;
+		font-size: 16px;
+		font-weight: bold;
 		color: #ebf6f7;
 		cursor: move;
 	}
@@ -168,11 +169,6 @@
 	#menu__items .subcontent {
 		margin: 0;
 		padding: 70px 30px 20px;
-		/*border: 2px solid #666;*/
-    /*opacity: 0.9;*/
-    /*background: #f8fbf8;*/
-		/*background: rgba(248,251,248,0.8);*/
-    /*border-radius: 25px;*/
 	}
 
   .menu .link {
@@ -182,6 +178,53 @@
   .menu li {
     width: 1000px;
   }
+
+	#menu_2 {
+		position: absolute;
+		opacity: 0;
+	}
+
+	#menu_2 ~ label {
+		box-sizing: border-box;
+		position: absolute;
+		display: block;
+		width: 40px;
+		height: 40px;
+		top: 5px;
+		right: 5px;
+		z-index: 30;
+		border: 1px solid #999;
+		background-color: silver;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+
+	#menu_2 ~ label span {
+		box-sizing: border-box;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		line-height: 38px;
+		font-size: 30px;
+		text-align: center;
+	}
+
+	#menu_2:checked ~ .submenu .job_search,
+	#menu_2:checked ~ .submenu .mount_search,
+	#menu_2:checked ~ .submenu .minion_search,
+	#menu_2:checked ~ .submenu .items {
+    display: none;
+	}
+
+	#menu_2:checked ~ .submenu .search {
+    visibility: hidden;
+	}
+
+	#menu_2:checked ~ .submenu {
+		-webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+	}
 
 	label {
 		font-size: 12px;
@@ -195,7 +238,6 @@
 	}
 
 	ul {
-		/*margin-left: 10px;*/
 		margin: 0 10px;
 	}
 
@@ -222,7 +264,6 @@
 
   .tabmenu {
     position: relative;
-    /*width: 80%;*/
     font-size: 0;
   }
 
@@ -273,7 +314,6 @@
   }
 
   .search_mean {
-    /*height: 155px;*/
     padding: 4px;
     background-color: #ede4cd;
     border: solid 6px #ede4cd;
@@ -310,6 +350,7 @@
   .selectbox select {
     position: absolute;
     top: 6px;
+		left: 0;
     width: 100%;
     height: 20px;
     padding-left: 0.5em;
@@ -333,7 +374,6 @@
 
 	#minion {
 		margin-bottom: 20px;
-		/*background-color: #ede4cd;*/
 		padding: 10px;
 		border-radius: 4px;
 	}
@@ -341,7 +381,6 @@
 	#minion .items {
 		display: block;
 		width: 250px;
-		/*margin-top: 10px;*/
 		margin: 10px 0 0;
 	}
 
@@ -352,15 +391,16 @@
 		height: 20px;
 		margin: 0;
 		padding: 4px;
-		background-color: #ebe1a9;
+		background-color: rgb(126, 190, 171, 1);
 		border: 1px solid silver;
-		font-size: 14px;
+		font-size: 13px;
+		font-weight: bold;
+		color: #fff;
 		text-align: center;
 	}
 
 	#minion .items::before {
 		content: attr(data-title);
-		/*border-bottom: none;*/
 		-webkit-border-radius: 0 15px 15px 0;
 		border-radius: 0 15px 15px 0;
 	}
@@ -398,15 +438,12 @@
 		margin: 0;
 		border: solid 1px silver;
 		border-top: none;
-		/*border-bottom: none;*/
 		border-radius: 0 15px 15px 0;
 		text-indent: 1em;
 		-webkit-border-radius: 0 15px 15px 0;
     background-color: #fff1cf;
     color: #666;
 		font-size: 14px;
-		/*margin-bottom: 5px;*/
-    /*text-indent: 0.5em;*/
   }
 
 	#minion .items .item.tag_minion .tag {
@@ -458,8 +495,6 @@
 		font-weight: bold;
 		-webkit-border-radius: 12px;
 		border-radius: 12px;
-		/*background-color: #95949a;*/
-		/*background-color: #9ba88d;*/
 		text-indent: 0;
 	}
 
@@ -511,8 +546,8 @@
 		position: relative;
 	}
 
-	#minion .minion_search .selectbox,
-	#minion .mount_search .selectbox {
+	#minion .minion_search .selectbox select ,
+	#minion .mount_search .selectbox select {
 		text-indent: 70px;
 	}
 
@@ -521,7 +556,6 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		/*width: 200px;*/
 		width: 70px;
 	}
 

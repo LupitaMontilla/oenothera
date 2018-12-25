@@ -1,4 +1,6 @@
                     <li id="menu__items" class="drag_menu">
+                        <input type="checkbox" id="menu_2">
+                        <label for="menu_2"><span>⇕</span></label>
                         <div class="link"><i></i>一覧に表示する項目を選択<i class="fa fa-chevron-down"></i></div>
                         <div class="submenu">
                             <div id="minion" class="acrodion subcontent">

@@ -23,6 +23,7 @@ $(function() {
         y = event.pageY - $(drag_menu).offset().top;
 
         $('body').on('mousemove touchmove', mmv);
+        $(this).on('mouseup touchend', mup);
     }
 
     var mmv = function(e) {
@@ -33,8 +34,11 @@ $(function() {
 
         e.preventDefault();
 
-        drag.style.top = event.pageY - y + 'px';
-        drag.style.left = event.pageX - x + 'px';
+        var scrollTop = $(window).scrollTop();
+        var scrollLeft = $(window).scrollLeft();
+
+        drag.style.top = event.pageY - scrollTop - y + 'px';
+        drag.style.left = event.pageX - scrollLeft - x + 'px';
 
         $(drag).on('mouseup touchend', mup);
         $('body').on('mouseleave touchleave', mup);
