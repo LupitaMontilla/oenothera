@@ -151,7 +151,8 @@
 		line-height: 50px;
 		text-align: center;
 		background-color: #e5e4e6;
-		background-color: rgb(126, 190, 171, 0.7);
+		background-color: #00a497;
+		/*background-color: rgb(126, 190, 171, 0.7);*/
 		color: #666;
 		border-bottom: 1px solid #666;
 		border-radius: 16px 16px 0 0;
@@ -387,12 +388,12 @@
 	#minion .items::before,
 	#minion .items::after {
 		display: block;
-		width: 242px;
+		width: 240px;
 		height: 20px;
 		margin: 0;
 		padding: 4px;
-		background-color: rgb(126, 190, 171, 1);
-		border: 1px solid silver;
+		/*background-color: rgb(126, 190, 171, 1);*/
+		border: 2px solid silver;
 		font-size: 13px;
 		font-weight: bold;
 		color: #fff;
@@ -548,7 +549,16 @@
 
 	#minion .minion_search .selectbox select ,
 	#minion .mount_search .selectbox select {
-		text-indent: 70px;
+		display: block;
+		/*text-indent: 70px;*/
+		text-align: unset;
+		/*padding-left: 70px;*/
+		border-left: 70px solid transparent;
+	}
+
+	#minion .minion_search .selectbox select option ,
+	#minion .mount_search .selectbox select option {
+		border-left: none;
 	}
 
 	#minion .minion_search input[type="text"],
