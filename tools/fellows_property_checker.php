@@ -16,6 +16,7 @@ $checker_kind = 'property';
     <link href="/css/sp.css" rel="stylesheet" type="text/css">
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/const.js"></script>
+    <script src="/js/function.js"></script>
     <script src="/js/list_common.js"></script>
     <script src="/js/acordion.js"></script>
 </head>

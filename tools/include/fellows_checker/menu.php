@@ -79,9 +79,9 @@ if ($checker_kind == 'primalsmount') {
                                 <div class="acordion_tree">
                                     <div class="search_character">
                                         <div class="search">
-                                            <input type="text" class="character_name" placeholder="IDを取得したいキャラクター名を入力">
+                                            <input type="text" id="character_name" class="character_name" placeholder="IDを取得したいキャラクター名を入力">
                                             <div class="selectbox">
-                                                <select name="worldname">
+                                                <select id="character_worldname" name="worldname">
                                                     <option value="">DC/ワールドを選択</option>
                                                 </select>
                                             </div>
