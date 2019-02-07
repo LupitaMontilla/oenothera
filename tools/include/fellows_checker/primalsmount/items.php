@@ -8,6 +8,7 @@
                             <div class="tag" data-text="エンバール">エンバール</div>
                             <div class="tag" data-text="マルカブ">マルカブ</div>
                             <div class="tag" data-text="ボレアス">ボレアス</div>
+                            <div class="tag" data-text="麒麟">麒麟</div>
                             <!-- 蒼天極蛮神マウント -->
                             <div class="tag" data-text="ホワイトラナー">ホワイトラナー</div>
                             <div class="tag" data-text="ラースラナー">ラースラナー</div>
@@ -16,6 +17,7 @@
                             <div class="tag" data-text="ゴッデスラナー">ゴッデスラナー</div>
                             <div class="tag" data-text="ダークラナー">ダークラナー</div>
                             <div class="tag" data-text="デモンラナー">デモンラナー</div>
+                            <div class="tag" data-text="鳳凰">鳳凰</div>
                             <!-- 紅蓮極蛮神マウント -->
                             <div class="tag" data-text="美のカムイ">美のカムイ</div>
                             <div class="tag" data-text="豪のカムイ">豪のカムイ</div>
@@ -23,5 +25,7 @@
                             <div class="tag" data-text="白のカムイ">白のカムイ</div>
                             <div class="tag" data-text="夜のカムイ">夜のカムイ</div>
                             <div class="tag" data-text="朱のカムイ">朱のカムイ</div>
+                            <div class="tag" data-text="青のカムイ">青のカムイ</div>
+                            <div class="tag" data-text="九尾">九尾</div>
                         </ul>
                     </div>
